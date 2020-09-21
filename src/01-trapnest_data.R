@@ -78,6 +78,7 @@ hist_bees <- int_tidy %>%
   geom_histogram(binwidth = 1) + 
   facet_wrap(~year) + 
   labs(
+    title = "A)",
     x = "Number of occupied brood cells (for bees)",
     y = "Count"
   ) + 
@@ -89,9 +90,13 @@ hist_wasp <- int_tidy %>%
   geom_histogram(binwidth = 1) + 
   facet_wrap(~year) + 
   labs(
+    title = "B)",
     x = "Number of occupied brood cells (for wasps)",
-    y = "Count") + 
+    y = NULL) + 
   theme_bw()
+
+# multi-panel histograms
+hist_all <- hist_bees + hist_wasp
 
 # data cleaning: bees ----------------------------------------------------------
 
@@ -124,25 +129,14 @@ write.csv(
   )
 
 ggsave(
-  plot = hist_wasp, 
+  plot = hist_all, 
   filename = here(
     "output/figures/supp", 
-    "fig-supp-histogram-wasp.png"
+    "fig-supp-histogram.png"
   ),
   device = "png", 
   height = 3, 
-  width  = 6
-)
-
-ggsave(
-  plot = hist_bees, 
-  filename = here(
-    "output/figures/supp", 
-    "fig-supp-histogram-bees.png"
-  ),
-  device = "png", 
-  height = 3, 
-  width  = 6
+  width  = 7
 )
 
 
