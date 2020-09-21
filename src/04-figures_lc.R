@@ -3,7 +3,7 @@
 #   No environmental filtering of wasps and bees during urbanization
 #
 # Paper authors: 
-#   Garland Xie (1), 
+#   Garland Xie      (1), 
 #   Nicholas Sookhan (1), 
 #   Kelly Carscadden (2), 
 #   and Scott MacIvor (1)
@@ -24,14 +24,14 @@
 # Purpose of this R script: to create a figure of the land cover map
 
 # library ----------------------------------------------------------------------
-library(here)
-library(vegan)
-library(dplyr)
-library(tibble)
-library(ggplot2)
-library(sf)
-library(ggsn)
-library(patchwork)
+library(here)      # for creating relative file-paths
+library(vegan)     # for analyzing ecological community data
+library(dplyr)     # for manipulating data
+library(tibble)    # for manipulating data frames
+library(ggplot2)   # for visualizing data
+library(sf)        # for manipulating geospatial data
+library(ggsn)      # for adding cartographical elements
+library(patchwork) # for creating multi-panel figures
 
 # site -------------------------------------------------------------------------
 site <- read.csv(
