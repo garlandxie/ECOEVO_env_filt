@@ -235,7 +235,15 @@ eigs_500 <- data.frame(
 
 scree_250 <- 
   ggplot(data = eigs_250, aes(x = Axes, y = Projected.Inertia)) +
-  geom_bar(colour = "black", stat = "identity") + 
+  geom_point() + 
+  geom_segment(
+    aes(
+      x = Axes, 
+      xend = Axes,
+      y = 0, 
+      yend = Projected.Inertia) 
+  ) + 
+  ylim(0, 100) + 
   labs(title = "A) 250m spatial scale",
        x = "RLQ Axes", 
        y = "Projected Inertia (%)") + 
@@ -248,7 +256,15 @@ scree_250 <-
 
 scree_500 <- 
   ggplot(data = eigs_500, aes(x = Axes, y = Projected.Inertia)) +
-  geom_bar(colour = "black", stat = "identity") + 
+  geom_point() + 
+  geom_segment(
+    aes(
+      x = Axes, 
+      xend = Axes,
+      y = 0, 
+      yend = Projected.Inertia) 
+  ) + 
+  ylim(0, 100) + 
   labs(title = "B) 500m spatial scale",
        x = "RLQ Axes", 
        y = "Projected Inertia (%)") + 
