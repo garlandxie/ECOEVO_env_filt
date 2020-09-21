@@ -32,7 +32,6 @@ library(ggplot2)   # for visualizing data
 library(sf)        # for manipulating geospatial data
 library(ggsn)      # for adding cartographical elements
 library(patchwork) # for creating multi-panel figures
-library(ggrepel)
 
 # site -------------------------------------------------------------------------
 site <- read.csv(
@@ -101,7 +100,7 @@ tidy_500 <- site %>%
 
 # plot: 250m -------------------------------------------------------------------
 
-lc_map_250 <- ggplot(data = bound) + 
+(lc_map_250 <- ggplot(data = bound) + 
   geom_sf(fill = NA) + 
   geom_point(
     data = tidy_250, 
@@ -139,6 +138,7 @@ lc_map_250 <- ggplot(data = bound) +
     st.size = 2) +
   
   theme_bw()
+)
 
 (ugs_map_250 <- ggplot(data = bound) + 
     
@@ -170,7 +170,7 @@ lc_map_250 <- ggplot(data = bound) +
   labs(
     title = "B)",
     x = "Longitude",
-    y = NULL
+    y = "Latitude"
   ) + 
     
   # legend
@@ -182,9 +182,8 @@ lc_map_250 <- ggplot(data = bound) +
   
 # plot: 500m -------------------------------------------------------------------
 
-lc_map_500 <- ggplot(data = bound) + 
+(lc_map_500 <- ggplot(data = bound) + 
   geom_sf(fill = NA) + 
-  geom_label_repel() + 
   geom_point(
     data = tidy_500, 
     aes(
@@ -205,12 +204,11 @@ lc_map_500 <- ggplot(data = bound) +
   scale_colour_gradientn(
     colours = terrain.colors(10), 
     name = "% Urban") + 
-  labs(x = "Longitude", 
-       y = "Latitude",
-       title = "500m buffer radii") + 
+  labs(title = "A)",
+       x = "Longitude", 
+       y = "Latitude") + 
 
   # north arrow
-  blank() +
    
   north(bound, symbol = 9) +
   
@@ -220,7 +218,11 @@ lc_map_500 <- ggplot(data = bound) +
     dist = 10 ,
     transform = TRUE, 
     dist_unit = "km",
-    st.size = 2)
+    st.size = 2) + 
+  
+  # theme 
+  theme_bw()
+)
 
 (ugs_map_500 <- ggplot(data = bound) + 
     
@@ -233,7 +235,7 @@ lc_map_500 <- ggplot(data = bound) +
         y = latitude, 
         color = habitat_type
       ),
-      size = 3,
+      size = 2,
       width = 0.01
     ) + 
     
@@ -250,8 +252,9 @@ lc_map_500 <- ggplot(data = bound) +
     
     # labels
     labs(
+      title = "B)",
       x = "Longitude",
-      y = NULL
+      y = "Latitude"
     ) + 
     
     # legend
@@ -265,6 +268,8 @@ lc_map_500 <- ggplot(data = bound) +
 
 lc_250 <- lc_map_250 / ugs_map_250
 
+lc_500 <- lc_map_500 / ugs_map_500
+
 # save to disk -----------------------------------------------------------------
 
 ggsave(
@@ -277,3 +282,14 @@ ggsave(
   width = 10, 
   height = 10
   )
+
+ggsave(
+  plot = lc_500, 
+  here(
+    "output/figures/main", 
+    "fig-lc-map_500.png"
+  ),
+  device = "png",
+  width = 10, 
+  height = 10
+)
