@@ -76,6 +76,7 @@ hist_bees <- int_tidy %>%
   filter(taxa_ls == "Bee") %>%
   ggplot(aes(x = no_broodcells)) + 
   geom_histogram(binwidth = 1) + 
+  ylim(0, 200) + 
   facet_wrap(~year) + 
   labs(
     title = "A)",
@@ -89,6 +90,7 @@ hist_wasp <- int_tidy %>%
   ggplot(aes(x = no_broodcells)) + 
   geom_histogram(binwidth = 1) + 
   facet_wrap(~year) + 
+  ylim(0, 200) + 
   labs(
     title = "B)",
     x = "Number of occupied brood cells (for wasps)",
