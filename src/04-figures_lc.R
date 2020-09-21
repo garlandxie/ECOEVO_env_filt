@@ -32,6 +32,7 @@ library(ggplot2)   # for visualizing data
 library(sf)        # for manipulating geospatial data
 library(ggsn)      # for adding cartographical elements
 library(patchwork) # for creating multi-panel figures
+library(ggrepel)
 
 # site -------------------------------------------------------------------------
 site <- read.csv(
@@ -82,7 +83,8 @@ tidy_250 <- site %>%
          latitude, 
          longitude, 
          prop_urb_250, 
-         ntaxa) %>%
+         ntaxa,
+         habitat_type) %>%
   filter(!(site_id %in% c("Dumesh", "Kavanah", "Lynott", "RangersGround")))
 
 # all relevant info for 500m
@@ -93,7 +95,9 @@ tidy_500 <- site %>%
          latitude, 
          longitude, 
          prop_urb_500, 
-         ntaxa)
+         ntaxa,
+         habitat_type) %>%
+  filter(!(site_id %in% c("Dumesh", "Kavanah", "Lynott", "RangersGround")))
 
 # plot: 250m -------------------------------------------------------------------
 
@@ -115,8 +119,7 @@ lc_map_250 <- ggplot(data = bound) +
     name = "% Urban") + 
   labs(x = "Longitude", 
        y = "Latitude",
-       title = "250m buffer radii") + 
-  blank() +
+       title = "A)") + 
   
   # species richness
   scale_size_continuous(
@@ -133,14 +136,55 @@ lc_map_250 <- ggplot(data = bound) +
     dist = 10 ,
     transform = TRUE, 
     dist_unit = "km",
-    st.size = 2) + 
+    st.size = 2) +
   
-  theme(legend.position = "none")
+  theme_bw()
+
+(ugs_map_250 <- ggplot(data = bound) + 
+    
+  # geometry
+  geom_sf(fill = NA) + 
+  geom_jitter(
+    data = tidy_250, 
+    aes(
+      x = longitude, 
+      y = latitude, 
+      color = habitat_type
+      ),
+    size = 2,
+    width = 0.01
+  ) + 
+    
+  # north arrow
+  north(bound, symbol = 9) +
+  
+  # scale-bar
+  scalebar(
+    data = bound, 
+    dist = 10 ,
+    transform = TRUE, 
+    dist_unit = "km",
+    st.size = 2)  +
+    
+  # labels
+  labs(
+    title = "B)",
+    x = "Longitude",
+    y = NULL
+  ) + 
+    
+  # legend
+  scale_color_discrete(name = "UGS type") + 
+    
+  # theme
+  theme_bw() 
+  )
   
 # plot: 500m -------------------------------------------------------------------
 
 lc_map_500 <- ggplot(data = bound) + 
   geom_sf(fill = NA) + 
+  geom_label_repel() + 
   geom_point(
     data = tidy_500, 
     aes(
@@ -178,18 +222,58 @@ lc_map_500 <- ggplot(data = bound) +
     dist_unit = "km",
     st.size = 2)
 
+(ugs_map_500 <- ggplot(data = bound) + 
+    
+    # geometry
+    geom_sf(fill = NA) + 
+    geom_jitter(
+      data = tidy_500, 
+      aes(
+        x = longitude, 
+        y = latitude, 
+        color = habitat_type
+      ),
+      size = 3,
+      width = 0.01
+    ) + 
+    
+    # north arrow
+    north(bound, symbol = 9) +
+    
+    # scale-bar
+    scalebar(
+      data = bound, 
+      dist = 10 ,
+      transform = TRUE, 
+      dist_unit = "km",
+      st.size = 2)  +
+    
+    # labels
+    labs(
+      x = "Longitude",
+      y = NULL
+    ) + 
+    
+    # legend
+    scale_color_discrete(name = "UGS type") + 
+    
+    # theme
+    theme_bw()
+)
+
 # multi-panel figure -----------------------------------------------------------
 
-multi_map <- lc_map_250 + lc_map_500
+lc_250 <- lc_map_250 / ugs_map_250
 
 # save to disk -----------------------------------------------------------------
 
 ggsave(
-  plot = multi_map, 
+  plot = lc_250, 
   here(
   "output/figures/main", 
-  "fig-lc-map.png"
+  "fig-lc-map_250.png"
   ),
   device = "png",
   width = 10, 
-  height = 10)
+  height = 10
+  )
