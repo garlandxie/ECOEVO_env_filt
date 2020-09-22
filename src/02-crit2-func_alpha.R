@@ -70,6 +70,7 @@ reg_250 <-  ses_mfd %>%
   full_join(site, by = c("id" = "site_id")) %>%
   select(site  = id, 
          sr    = ntaxa, 
+         habitat_type,
          longs = longitude, 
          lats  = latitude, 
          ntaxa,
@@ -101,6 +102,7 @@ reg_500 <- ses_mfd %>%
   full_join(site, by = c("id" = "site_id")) %>%
   select(site  = id, 
          sr    = ntaxa, 
+         habitat_type, 
          longs = longitude, 
          lats  = latitude, 
          ntaxa,
@@ -267,14 +269,16 @@ rq_lab_500 <- bquote("Adj-R"^2: .(format(rq_500, digits = 2)))
 (part_urb_250 <- reg_250 %>%
   select(site, 
          ses_mfd, 
+         habitat_type,
          p_value, 
          prop_urb_250) %>%
   mutate(pred_urb_250 = predict(lm_250, terms = "prop_urb_250"),
          part_urb_250 = pred_urb_250 + resid(lm_250)) %>%
-  ggplot(aes(x = prop_urb_250, y = part_urb_250)) + 
+  ggplot(aes(x = prop_urb_250, y = part_urb_250, shape = habitat_type)) + 
   geom_point() + 
-  gghighlight(p_value < 0.05) + 
+  gghighlight(p_value < 0.05, use_direct_label = FALSE) + 
   geom_hline(yintercept = 0) + 
+  scale_shape_discrete(name = "UGS type") + 
   annotate(
     "text",
     x = 75, 
@@ -286,17 +290,25 @@ rq_lab_500 <- bquote("Adj-R"^2: .(format(rq_500, digits = 2)))
   theme_bw()
   )
 
-part_urb_500 <- reg_500 %>%
+(part_urb_500 <- reg_500 %>%
   select(
          ses_mfd, 
          p_value, 
-         prop_urb_500) %>%
+         habitat_type,
+         prop_urb_500
+         ) %>%
   mutate(pred_urb_500 = predict(lm_500, terms = "prop_urb_500"),
          part_urb_500 = pred_urb_500 + resid(lm_500)) %>%
-  ggplot(aes(x = prop_urb_500, y = part_urb_500)) + 
+  ggplot(
+    aes(
+      x = prop_urb_500, 
+      y = part_urb_500,
+      shape = habitat_type)
+    ) + 
   geom_point() + 
-  gghighlight(p_value < 0.05) + 
+  gghighlight(p_value < 0.05, use_direct_label = FALSE) +
   geom_hline(yintercept = 0) + 
+  scale_shape_discrete(name = "UGS type") + 
   annotate(
     "text",
     x = 75, 
@@ -306,6 +318,7 @@ part_urb_500 <- reg_500 %>%
   labs(y = "ses.MFD (partial residuals)",
        x = "% Impervious surface (500m spatial scale)") + 
   theme_bw()
+)
 
 # other linear regresson models ------------------------------------------------
 
