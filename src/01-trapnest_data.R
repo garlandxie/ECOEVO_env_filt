@@ -61,13 +61,23 @@ int_tidy <- int_raw %>%
       TRUE ~ lower_species)
   )
 
-# get sites that were sampled across 2011-2013
-# includes bees and wasps
-# remove green roof sites
+# get sites that outside the TO boundary
+outside_TO <- c(
+  "Dumesh", 
+  "Kavanah",
+  "Lynott", 
+  "RangersGround", 
+  "RangersRoof",
+  "Chute"
+)
+
+# get sites that were sampled across 2011-2013 within TO
+
 all_years <- site %>%
+  filter(!Site_ID %in% outside_TO) %>%
   filter(Year_2011  == "Y" &
-         Year_2012 == "Y" & 
-         Year_2013 == "Y") %>%
+         Year_2012 ==  "Y" & 
+         Year_2013 ==  "Y") %>%
   pull(Site_ID)
 
 # plot: histograms -------------------------------------------------------------
@@ -116,14 +126,15 @@ broods <- int_tidy %>%
 b3 <- broods$site_id[broods$site_id %in% all_years]
 
 # subset accordingly
-broods <- broods %>% 
+broods_tidy <- broods %>% 
   filter(site_id %in% b3) %>%
+  filter(!(site_id %in% outside_TO)) %>%
   column_to_rownames(var = "site_id")
 
 # save to disk -----------------------------------------------------------------
 
 write.csv(
-  broods, 
+  broods_tidy, 
   file = here(
     "data/final", 
     "comm_matrix_B.csv"
