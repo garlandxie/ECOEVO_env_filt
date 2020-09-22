@@ -115,7 +115,7 @@ tidy_500 <- site %>%
   # environmental gradient
   scale_colour_gradientn(
     colours = terrain.colors(10), 
-    name = "% Urban") + 
+    name = "% Impervious Surface") + 
   labs(x = "Longitude", 
        y = "Latitude",
        title = "A)") + 
@@ -203,7 +203,7 @@ tidy_500 <- site %>%
   # environmental gradient
   scale_colour_gradientn(
     colours = terrain.colors(10), 
-    name = "% Urban") + 
+    name = "% Impervious Surface") + 
   labs(title = "A)",
        x = "Longitude", 
        y = "Latitude") + 
@@ -286,7 +286,7 @@ ggsave(
 ggsave(
   plot = lc_500, 
   here(
-    "output/figures/main", 
+    "output/figures/supp", 
     "fig-lc-map_500.png"
   ),
   device = "png",
