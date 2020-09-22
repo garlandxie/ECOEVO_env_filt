@@ -375,7 +375,7 @@ ggsave(filename =
          ),
        plot = part_urb_500, 
        device = "png", 
-       width = 4, 
+       width = 5, 
        height = 4
 )
 
