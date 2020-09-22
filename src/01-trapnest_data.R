@@ -128,7 +128,6 @@ b3 <- broods$site_id[broods$site_id %in% all_years]
 # subset accordingly
 broods_tidy <- broods %>% 
   filter(site_id %in% b3) %>%
-  filter(!(site_id %in% outside_TO)) %>%
   column_to_rownames(var = "site_id")
 
 # save to disk -----------------------------------------------------------------
