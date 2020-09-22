@@ -91,6 +91,9 @@ colnames(ses_mfd) <-
     "mfd"
   )
 
+# how many sites have 1 species?
+sum(ses_mfd$ntaxa != 1)
+
 # plots ------------------------------------------------------------------------
 
 ses_mfd_tidy <- ses_mfd %>%
