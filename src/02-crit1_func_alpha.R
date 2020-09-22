@@ -91,14 +91,6 @@ colnames(ses_mfd) <-
     "mfd"
   )
 
-# linear models ----------------------------------------------------------------
-
-summary(
-  lm(data = ses_mfd,  
-     formula = mfd.obs.z ~ ntaxa
-     )
-  )
-
 # plots ------------------------------------------------------------------------
 
 ses_mfd_tidy <- ses_mfd %>%
