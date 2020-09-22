@@ -194,20 +194,21 @@ tidy_500 <- site %>%
     )
   ) +
   
+   
+   # environmental gradient
+   scale_colour_gradientn(
+     colours = terrain.colors(10), 
+     name = "% Impervious Surface") + 
+   labs(title = "A)",
+        x = "Longitude", 
+        y = "Latitude") + 
+   
   #
   scale_size_continuous(
     name   = "Species Richness",
     breaks = c(2, 5, 8, 10, 13)
   ) +
   
-  # environmental gradient
-  scale_colour_gradientn(
-    colours = terrain.colors(10), 
-    name = "% Impervious Surface") + 
-  labs(title = "A)",
-       x = "Longitude", 
-       y = "Latitude") + 
-
   # north arrow
    
   north(bound, symbol = 9) +
