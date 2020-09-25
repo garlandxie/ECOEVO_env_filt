@@ -65,10 +65,9 @@ l_500 <- read.csv(
 
 # 250m 
 reg_250 <-  ses_mfd %>%
-  tibble::rownames_to_column(var = "id") %>%
-  full_join(l_250, by = c("id" = "site")) %>%
-  full_join(site, by = c("id" = "site_id")) %>%
-  select(site  = id, 
+  full_join(l_250, by = c("site_id" = "site")) %>%
+  full_join(site, by = c("site_id")) %>%
+  select(site  = site_id, 
          sr    = ntaxa, 
          habitat_type,
          longs = longitude, 
@@ -83,24 +82,19 @@ reg_250 <-  ses_mfd %>%
   
   filter(
     
-    # remove sites that are outside TO boundary
-    prop_tree_250  > 0 &&
-    prop_grass_250 > 0 && 
-    prop_urb_250   > 0,
- 
     # remove sites that have only 1 species
     !is.na(ses_mfd),
     
+    # remove sites that are outside TO boundary
     !is.na(prop_tree_250)  &
     !is.na(prop_grass_250) & 
     !is.na(prop_urb_250)  
   )
 
 reg_500 <- ses_mfd %>%
-  tibble::rownames_to_column(var = "id") %>%
-  full_join(l_500, by = c("id" = "site")) %>%
-  full_join(site, by = c("id" = "site_id")) %>%
-  select(site  = id, 
+  full_join(l_500, by = c("site_id" = "site")) %>%
+  full_join(site, by = c("site_id")) %>%
+  select(site  = site_id, 
          sr    = ntaxa, 
          habitat_type, 
          longs = longitude, 
@@ -114,15 +108,11 @@ reg_500 <- ses_mfd %>%
          prop_urb_500) %>%
   
   filter(
-    
-    # remove sites outside TO boundary
-    prop_tree_500  > 0 &&
-    prop_grass_500 > 0 && 
-    prop_urb_500   > 0,
-    
+  
     # remove sites with only 1 species
     !is.na(ses_mfd),
     
+    # remove sites outside TO boundary
     !is.na(prop_tree_500)  &
     !is.na(prop_grass_500) & 
     !is.na(prop_urb_500)  
