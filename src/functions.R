@@ -34,7 +34,7 @@ calc_Stats <- function(l, buffer) {
   clip2 <- raster::rasterize(buffer, clip1, mask = TRUE)
   
   metrics_pland    <- landscapemetrics::lsm_c_pland(clip2)
-  metrics_pland$id <- buffer$Site_ID
+  metrics_pland$id <- buffer$ID
   
   return(metrics_pland)
 }
