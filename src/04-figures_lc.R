@@ -98,7 +98,7 @@ tidy_500 <- site %>%
          habitat_type) %>%
   filter(!(site_id %in% c("Dumesh", "Kavanah", "Lynott", "RangersGround")))
 
-# plot: 250m -------------------------------------------------------------------
+# land cover map: 250m -------------------------------------------------------------------
 
 (lc_map_250 <- ggplot(data = bound) + 
   geom_sf(fill = NA) + 
@@ -140,6 +140,7 @@ tidy_500 <- site %>%
   theme_bw()
 )
 
+# UGS map ----------------------------------------------------------------------
 (ugs_map_250 <- ggplot(data = bound) + 
     
   # geometry
@@ -180,7 +181,7 @@ tidy_500 <- site %>%
   theme_bw() 
   )
   
-# plot: 500m -------------------------------------------------------------------
+# land cover map: 500m ---------------------------------------------------------
 
 (lc_map_500 <- ggplot(data = bound) + 
   geom_sf(fill = NA) + 
