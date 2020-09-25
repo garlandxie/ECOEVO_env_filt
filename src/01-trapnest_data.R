@@ -188,6 +188,16 @@ ggsave(
   width  = 7
 )
 
+ggsave(
+  plot = hist_SR, 
+  filename = here(
+    "output/figures/supp", 
+    "fig-supp-histogram_SR.png"
+  ),
+  device = "png", 
+  height = 3, 
+  width  = 7
+)
 
 
 
