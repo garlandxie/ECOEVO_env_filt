@@ -32,6 +32,7 @@ library(ggplot2)   # for visualizing data
 library(sf)        # for manipulating geospatial data
 library(ggsn)      # for adding cartographical elements
 library(patchwork) # for creating multi-panel figures
+library(opendatatoronto)
 
 # site -------------------------------------------------------------------------
 site <- read.csv(
@@ -58,10 +59,19 @@ l_500 <- read.csv(
   )
 
 # TO boundary 
-bound <- read_sf(
-  here("data/original",
-       "citygcs_regional_mun_wgs84.shp")
+if(!file.exists(
+  here(
+    "data/original",
+    "citygcs_regional_mun_wgs84.shp"
+    )
   )
+) {
+  reg_bound_ID <- "841fb820-46d0-46ac-8dcb-d20f27e57bcc"
+  packages <- show_package(reg_bound_ID)
+  resources <- list_package_resources(packages)
+  bound <- get_resource(resources)
+}
+
 
 # clean ------------------------------------------------------------------------
 
