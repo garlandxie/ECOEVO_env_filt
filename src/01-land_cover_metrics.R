@@ -67,7 +67,7 @@ buffer_250 <- st_buffer(point, 250)
 # convert from a data frame to a list 
 buffer_250 <- split(buffer_250[,1], f = buffer_250[,1,drop = T])
 
-# only retain buffers which intersect lc 
+#only retain buffers which intersect lc 
 overl_250 <- unlist(
   lapply(
     buffer_250, 
@@ -75,7 +75,7 @@ overl_250 <- unlist(
       class(raster::intersect(
         extent(lc),
         x)) == "Extent"
-    )
+   )  
   )
 
 # get insersecting buffers
@@ -93,7 +93,7 @@ buffer_500 <- split(buffer_500[,1], f = buffer_500[,1,drop=T])
 overl_500 <- unlist(lapply(buffer_500, 
                            function(x) class(raster::intersect(extent(lc),x))=="Extent"
                            )
-                    )
+                   )
 # get insersecting buffers
 buffer_500 <- buffer_500[overl_500]
 
@@ -130,7 +130,7 @@ lw_250 <- land_use_250 %>%
   select(class, id, prop_land_use) %>%
   pivot_wider(names_from = class, values_from = prop_land_use) %>% 
   select(site = `id`,
-         prop_tree_250 = `1`,
+         prop_tree_250   = `1`,
          prop_grass_250  = `2`,
          prop_earth_250  = `3`,
          prop_water_250  = `4`,
