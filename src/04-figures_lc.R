@@ -290,3 +290,27 @@ ggsave(
   width = 10, 
   height = 10
 )
+
+# note sure if UGS 250 and 500 differ so just plot both
+
+ggsave(
+  plot = ugs_map_250, 
+  here(
+    "output/figures/supp", 
+    "fig-ugs-map_250.png"
+  ),
+  device = "png",
+  width = 10, 
+  height = 10
+)
+
+ggsave(
+  plot = ugs_map_500, 
+  here(
+    "output/figures/supp", 
+    "fig-ugs-map_500.png"
+  ),
+  device = "png",
+  width = 10, 
+  height = 10
+)
