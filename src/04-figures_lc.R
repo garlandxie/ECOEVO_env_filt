@@ -140,47 +140,6 @@ tidy_500 <- site %>%
   theme_bw()
 )
 
-# UGS map ----------------------------------------------------------------------
-(ugs_map_250 <- ggplot(data = bound) + 
-    
-  # geometry
-  geom_sf(fill = NA) + 
-  geom_jitter(
-    data = tidy_250, 
-    aes(
-      x = longitude, 
-      y = latitude, 
-      color = habitat_type
-      ),
-    size = 2,
-    width = 0.01
-  ) + 
-    
-  # north arrow
-  north(bound, symbol = 9) +
-  
-  # scale-bar
-  scalebar(
-    data = bound, 
-    dist = 10 ,
-    transform = TRUE, 
-    dist_unit = "km",
-    st.size = 2)  +
-    
-  # labels
-  labs(
-    title = "B)",
-    x = "Longitude",
-    y = "Latitude"
-  ) + 
-    
-  # legend
-  scale_color_discrete(name = "UGS type") + 
-    
-  # theme
-  theme_bw() 
-  )
-  
 # land cover map: 500m ---------------------------------------------------------
 
 (lc_map_500 <- ggplot(data = bound) + 
@@ -226,6 +185,47 @@ tidy_500 <- site %>%
   theme_bw()
 )
 
+# UGS map ----------------------------------------------------------------------
+(ugs_map_250 <- ggplot(data = bound) + 
+   
+   # geometry
+   geom_sf(fill = NA) + 
+   geom_jitter(
+     data = tidy_250, 
+     aes(
+       x = longitude, 
+       y = latitude, 
+       color = habitat_type
+     ),
+     size = 2,
+     width = 0.01
+   ) + 
+   
+   # north arrow
+   north(bound, symbol = 9) +
+   
+   # scale-bar
+   scalebar(
+     data = bound, 
+     dist = 10 ,
+     transform = TRUE, 
+     dist_unit = "km",
+     st.size = 2)  +
+   
+   # labels
+   labs(
+     title = "B)",
+     x = "Longitude",
+     y = "Latitude"
+   ) + 
+   
+   # legend
+   scale_color_discrete(name = "UGS type") + 
+   
+   # theme
+   theme_bw() 
+)
+
 (ugs_map_500 <- ggplot(data = bound) + 
     
     # geometry
@@ -265,7 +265,6 @@ tidy_500 <- site %>%
     # theme
     theme_bw()
 )
-
 
 # save to disk -----------------------------------------------------------------
 
