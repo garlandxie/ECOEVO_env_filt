@@ -44,4 +44,19 @@ int_tidy <- int_raw %>%
   
   select(ID, colnames(int_raw)[2:17])
 
+# clean more for sites
+site_tidy <- site_tidy %>%
+  select(2:9) %>%
+  relocate(ID)
+
 # save to disk -----------------------------------------------------------------
+
+write.csv(
+  x = int_tidy, 
+  file = here("data/original", "trap_nest.csv")
+)
+
+write.csv(
+  x = site_tidy, 
+  file = here("data/original", "site.csv")
+)
