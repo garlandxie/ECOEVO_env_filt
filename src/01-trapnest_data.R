@@ -80,7 +80,7 @@ all_years <- site %>%
          Year_2013 ==  "Y") %>%
   pull(Site_ID)
 
-# plot: histograms -------------------------------------------------------------
+# plot: histograms for abundance -----------------------------------------------
 
 hist_bees <- int_tidy %>%
   filter(taxa_ls == "Bee") %>%
@@ -109,6 +109,43 @@ hist_wasp <- int_tidy %>%
 
 # multi-panel histograms
 hist_all <- hist_bees + hist_wasp
+
+# plot: histograms for species richness ----------------------------------------
+
+(hist_sr_bees <- int_tidy %>%
+  filter(taxa_ls == "Bee") %>%
+  group_by(site_id, year) %>%
+  summarize(species_richness = length(unique(lower_species))) %>%
+  ggplot(aes(x = species_richness)) + 
+  geom_histogram(binwidth = 1) + 
+  ylim(0, 200) + 
+  facet_wrap(~year) + 
+  labs(
+    title = "A)",
+    x = "Speciess richness (bees)",
+    y = "Count"
+  ) + 
+  theme_bw()
+)
+
+(hist_sr_wasps <- int_tidy %>%
+    filter(taxa_ls == "Wasp") %>%
+    group_by(site_id, year) %>%
+    summarize(species_richness = length(unique(lower_species))) %>%
+    ggplot(aes(x = species_richness)) + 
+    geom_histogram(binwidth = 1) + 
+    ylim(0, 200) + 
+    facet_wrap(~year) + 
+    labs(
+      title = "B)",
+      x = "Speciess richness (wasps)",
+      y = "Count"
+    ) + 
+    theme_bw()
+)
+
+# multi-panel histograms
+hist_SR <- hist_sr_bees + hist_sr_wasps
 
 # data cleaning: bees ----------------------------------------------------------
 
