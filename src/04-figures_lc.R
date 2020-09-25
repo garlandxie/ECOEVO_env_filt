@@ -116,9 +116,10 @@ tidy_500 <- site %>%
   scale_colour_gradientn(
     colours = terrain.colors(10), 
     name = "% Impervious Surface") + 
-  labs(x = "Longitude", 
-       y = "Latitude",
-       title = "A)") + 
+  labs(title = NULL,
+       x = "Longitude", 
+       y = "Latitude"
+       ) + 
   
   # species richness
   scale_size_continuous(
@@ -159,7 +160,7 @@ tidy_500 <- site %>%
    scale_colour_gradientn(
      colours = terrain.colors(10), 
      name = "% Impervious Surface") + 
-   labs(title = "A)",
+   labs(
         x = "Longitude", 
         y = "Latitude") + 
    
@@ -214,7 +215,7 @@ tidy_500 <- site %>%
    
    # labels
    labs(
-     title = "B)",
+     title = NULL,
      x = "Longitude",
      y = "Latitude"
    ) + 
@@ -254,7 +255,7 @@ tidy_500 <- site %>%
     
     # labels
     labs(
-      title = "B)",
+      title = NULL,
       x = "Longitude",
       y = "Latitude"
     ) + 
@@ -269,7 +270,7 @@ tidy_500 <- site %>%
 # save to disk -----------------------------------------------------------------
 
 ggsave(
-  plot = lc_250, 
+  plot = lc_map_250, 
   here(
   "output/figures/main", 
   "fig-lc-map_250.png"
@@ -280,7 +281,7 @@ ggsave(
   )
 
 ggsave(
-  plot = lc_500, 
+  plot = lc_map_500, 
   here(
     "output/figures/supp", 
     "fig-lc-map_500.png"
