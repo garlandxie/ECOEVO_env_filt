@@ -187,6 +187,23 @@ tidy_500 <- site %>%
 )
 
 # UGS map ----------------------------------------------------------------------
+
+tidy_250 <- tidy_250 %>%
+  mutate(habitat_type = case_when(
+    habitat_type == "Communty" ~ "Community Garden",
+    habitat_type == "Roof"     ~ "Green Roof",
+    habitat_type == "Garden"   ~ "Home Garden",
+    TRUE ~ habitat_type 
+  ))
+
+tidy_500 <- tidy_500 %>%
+  mutate(habitat_type = case_when(
+    habitat_type == "Communty" ~ "Community Garden",
+    habitat_type == "Roof"     ~ "Green Roof",
+    habitat_type == "Garden"   ~ "Home Garden",
+    TRUE ~ habitat_type 
+  ))
+
 (ugs_map_250 <- ggplot(data = bound) + 
    
    # geometry
