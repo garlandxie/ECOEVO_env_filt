@@ -34,6 +34,8 @@ random_ID <- stringi::stri_rand_strings(
 site_tidy <- site
 site_tidy$ID <- random_ID
 
+site2 <- site_tidy[,c("ID", "Site_ID")]
+
 # trap nests
 int_tidy <- int_raw %>%
   
@@ -59,4 +61,9 @@ write.csv(
 write.csv(
   x = site_tidy, 
   file = here("data/original", "site.csv")
+)
+
+write.csv(
+  x = site2, 
+  file = here("data/original", "site_IDs.csv")
 )
