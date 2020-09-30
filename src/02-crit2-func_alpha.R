@@ -69,9 +69,9 @@ reg_250 <-  ses_mfd %>%
   full_join(site, by = c("site_id" = "ID")) %>%
   select(site  = site_id, 
          sr    = ntaxa, 
-         habitat_type,
-         longs = longitude, 
-         lats  = latitude, 
+         Habitat_type,
+         longs = Longitude, 
+         lats  = Latitude, 
          ntaxa,
          mfd.obs,
          ses_mfd, 
