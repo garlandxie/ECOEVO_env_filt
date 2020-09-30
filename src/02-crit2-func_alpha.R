@@ -66,7 +66,7 @@ l_500 <- read.csv(
 # 250m 
 reg_250 <-  ses_mfd %>%
   full_join(l_250, by = c("site_id" = "site")) %>%
-  full_join(site, by = c("site_id")) %>%
+  full_join(site, by = c("site_id" = "ID")) %>%
   select(site  = site_id, 
          sr    = ntaxa, 
          habitat_type,
