@@ -110,22 +110,21 @@ ses_mfd_tidy <- ses_mfd %>%
                         "RangersRoof",
                         "Chute")))
 
-  
-
-crit1_mfd <- ses_mfd_tidy %>%
+(crit1_mfd <- ses_mfd_tidy %>%
   ggplot(aes(x = p_value, y = ses_mfd)) +
   geom_point() + 
   gghighlight(p_value < 0.05) + 
   geom_hline(yintercept = 0, linetype = "dashed") + 
   geom_vline(xintercept = 0.05, linetype = "dashed") +
-  geom_rect(ymin = -3, ymax = 0,
+  geom_rect(ymin = -4, ymax = 0,
             xmin = 0, xmax = 0.05,
             alpha = 0.01,
             fill = "red") + 
-  ylim(-3, 2) + 
+  ylim(-4, 2) + 
   labs(x = "p-value", 
        y= "ses.MFD") + 
   theme_bw()
+)
 
 # save to disk -----------------------------------------------------------------
 
