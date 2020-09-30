@@ -203,8 +203,13 @@ vif(lm_500)
 # get summary
 summary(lm_500)
 
-# model diagnostics
-plot(lm_500)
+# show model diagnostics in a non-interactive manner 
+plot(lm_500, which = c(1))
+plot(lm_500, which = c(2))
+plot(lm_500, which = c(3))
+plot(lm_500, which = c(4))
+plot(lm_500, which = c(5))
+plot(lm_500, which = c(6))
 
 # spatial autocorrelaton tests -------------------------------------------------
 
