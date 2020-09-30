@@ -101,8 +101,16 @@ ses_mfd_tidy <- ses_mfd %>%
          p_value = mfd.obs.p) %>%
   filter(ntaxa != 1 & 
          ntaxa != 0 & 
-         !is.na(p_value)
-         ) 
+         !is.na(p_value)) %>% 
+  rownames_to_column(var = "site_id") %>%
+  filter(!(site_id %in% c("Dumesh",
+                        "Kavanah", 
+                        "Lynott", 
+                        "RangersGround", 
+                        "RangersRoof",
+                        "Chute")))
+
+  
 
 crit1_mfd <- ses_mfd_tidy %>%
   ggplot(aes(x = p_value, y = ses_mfd)) +
@@ -128,7 +136,6 @@ saveRDS(
        "ses_mfd.rds"
   )
 )
-
 
 write.csv(
   ses_mfd_tidy, 
