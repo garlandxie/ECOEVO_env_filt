@@ -47,7 +47,7 @@ site <- read.csv(
 # some prep
 int_tidy <- int_raw %>%
   janitor::clean_names() %>%
-  filter(!is.na(site_id)) %>%
+  filter(!is.na(id)) %>%
   mutate(
     
     lower_species = case_when(
@@ -68,11 +68,11 @@ outside_TO <- c(
 # get sites that were sampled across 2011-2013 within TO
 
 all_years <- site %>%
-  filter(!Site_ID %in% outside_TO) %>%
+  filter(!ID %in% outside_TO) %>%
   filter(Year_2011  == "Y" &
          Year_2012 ==  "Y" & 
          Year_2013 ==  "Y") %>%
-  pull(Site_ID)
+  pull(ID)
 
 # plot: histograms for abundance -----------------------------------------------
 
