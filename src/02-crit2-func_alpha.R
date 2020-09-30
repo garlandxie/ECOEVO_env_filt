@@ -40,8 +40,8 @@ library(tibble)
 
 # site info
 site <- read.csv(
-  here("data/working", 
-       "site_tidy.csv")
+  here("data/original", 
+       "site.csv")
   )
 
 # ses mfd
