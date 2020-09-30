@@ -31,21 +31,15 @@ library(patchwork) # for creating multi-panel figures
 # import -----------------------------------------------------------------------
 
 # abundance per site 
-int_raw <- readxl::read_excel(
-  here(
-    "data/original", 
-    "JSM_Data_TrapnestSynthesis2020_FINAL.xlsx"
-    ), 
-  sheet = "B-interactiondata(per-nest)"
-  )
+int_raw <- read.csv(
+  here("data/original", "trap_nest.csv"),
+  row.names = 1
+)
 
 # site data
-site <- readxl::read_excel(
-  here(
-    "data/original", 
-    "JSM_Data_TrapnestSynthesis2020_FINAL.xlsx"
-  ), 
-  sheet = "A-metadata(per-site)"
+site <- read.csv(
+  here("data/original", "site.csv"),
+  row.names = 1
 )
 
 # data cleaning: sites ---------------------------------------------------------
