@@ -76,7 +76,7 @@ all_years <- site %>%
 
 # plot: histograms for abundance -----------------------------------------------
 
-hist_bees_ab <- int_tidy %>%
+(hist_bees_ab <- int_tidy %>%
   filter(taxa_ls == "Bee") %>%
   ggplot(aes(x = no_broodcells)) + 
   geom_histogram(binwidth = 1) + 
@@ -88,8 +88,9 @@ hist_bees_ab <- int_tidy %>%
     y = "Count"
   ) + 
   theme_bw()
+)
 
-hist_wasp_ab <- int_tidy %>%
+(hist_wasp_ab <- int_tidy %>%
   filter(taxa_ls == "Wasp") %>%
   ggplot(aes(x = no_broodcells)) + 
   geom_histogram(binwidth = 1) + 
@@ -100,9 +101,10 @@ hist_wasp_ab <- int_tidy %>%
     x = "Number of occupied brood cells (wasps)",
     y = NULL) + 
   theme_bw()
+)
 
 # multi-panel histograms
-hist_ab <- hist_bees_ab + hist_wasp_ab
+(hist_ab <- hist_bees_ab + hist_wasp_ab)
 
 # plot: histograms for species richness ----------------------------------------
 
@@ -139,7 +141,7 @@ hist_ab <- hist_bees_ab + hist_wasp_ab
 )
 
 # multi-panel histograms
-hist_SR <- hist_sr_bees + hist_sr_wasps
+(hist_SR <- hist_sr_bees + hist_sr_wasps)
 
 # data cleaning: bees ----------------------------------------------------------
 
