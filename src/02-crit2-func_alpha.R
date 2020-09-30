@@ -189,6 +189,19 @@ vif(lm_250)
 lm_250 <- update(lm_250, ~. -prop_tree_250)
 vif(lm_250)
 
+# get summary
+summary(lm_250)
+
+# show model diagnostics in a non-interactive manner 
+plot(lm_250, which = c(1))
+plot(lm_250, which = c(2))
+plot(lm_250, which = c(3))
+plot(lm_250, which = c(4))
+plot(lm_250, which = c(5))
+plot(lm_250, which = c(6))
+
+
+
 # hypothesis testing: multiple regression (500m) -------------------------------
 
 # first fit
