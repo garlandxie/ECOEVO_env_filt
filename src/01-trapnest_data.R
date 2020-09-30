@@ -110,7 +110,7 @@ all_years <- site %>%
 
 (hist_sr_bees <- int_tidy %>%
   filter(taxa_ls == "Bee") %>%
-  group_by(site_id, year) %>%
+  group_by(id, year) %>%
   summarize(species_richness = length(unique(lower_species))) %>%
   ggplot(aes(x = species_richness)) + 
   geom_histogram(binwidth = 1) + 
@@ -126,7 +126,7 @@ all_years <- site %>%
 
 (hist_sr_wasps <- int_tidy %>%
     filter(taxa_ls == "Wasp") %>%
-    group_by(site_id, year) %>%
+    group_by(id, year) %>%
     summarize(species_richness = length(unique(lower_species))) %>%
     ggplot(aes(x = species_richness)) + 
     geom_histogram(binwidth = 1) + 
@@ -149,19 +149,19 @@ all_years <- site %>%
 # proxy of abundance: number of brood cells
 # aggregrated across all years (2011-2013)
 broods <- int_tidy %>%
-  group_by(site_id, lower_species) %>%
+  group_by(id, lower_species) %>%
   summarize(total_alive = sum(no_broodcells)) %>%
   pivot_wider(names_from = lower_species, values_from = total_alive) %>%
   ungroup() %>%
   mutate(across(everything(), ~replace_na(., 0)))
    
 # get sites that were sampled in all three years
-b3 <- broods$site_id[broods$site_id %in% all_years]
+b3 <- broods$id[broods$id %in% all_years]
 
 # subset accordingly
 broods_tidy <- broods %>% 
-  filter(site_id %in% b3) %>%
-  column_to_rownames(var = "site_id")
+  filter(id %in% b3) %>%
+  column_to_rownames(var = "id")
 
 # save to disk -----------------------------------------------------------------
 
