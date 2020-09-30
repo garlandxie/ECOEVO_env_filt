@@ -42,9 +42,9 @@ lc <- raster(
 )
 
 # abundance per site 
-site_raw <- read_excel(
-  here("data/original", "JSM_Data_TrapnestSynthesis2020_FINAL.xlsx"), 
-  sheet = "A-metadata(per-site)"
+site<- read.csv(
+  here("data/original", "site.csv"), 
+  row.names = 1
 )
 
 # functions
@@ -56,7 +56,7 @@ source(here("src", "functions.R"))
 lc_proj <- proj4string(lc)
 
 # ensure that site data is in the same coordinate system as the raster data
-point <- st_as_sf(site_raw, coords = c("Longitude", "Latitude"), crs = 4326)
+point <- st_as_sf(site, coords = c("Longitude", "Latitude"), crs = 4326)
 point <- st_transform(point,lc_proj)
 
 # buffers: 250 spatial scale ---------------------------------------------------
