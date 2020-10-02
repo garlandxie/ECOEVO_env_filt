@@ -97,15 +97,14 @@ tidy_250 <- site %>%
 
 # all relevant info for 500m
 tidy_500 <- site %>%
-  inner_join(l_500, by = c("site_id" = "site")) %>%
-  inner_join(SR, by = "site_id") %>%
-  select(site_id, 
-         latitude, 
-         longitude, 
+  inner_join(l_500, by = c("ID" = "site")) %>%
+  inner_join(SR, by = c("ID" = "site_id")) %>%
+  select(ID, 
+         Latitude, 
+         Longitude, 
          prop_urb_500, 
          ntaxa,
-         habitat_type) %>%
-  filter(!(site_id %in% c("Dumesh", "Kavanah", "Lynott", "RangersGround")))
+         Habitat_type) 
 
 # land cover map: 250m -------------------------------------------------------------------
 
