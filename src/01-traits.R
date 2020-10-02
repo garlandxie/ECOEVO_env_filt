@@ -27,6 +27,8 @@
 library(here)     # for creating relative file-paths
 library(dplyr)    # for manipulating data 
 library(readxl)   # for reading excel files
+library(flextable)
+library(officer)
 
 # import -----------------------------------------------------------------------
 
@@ -39,7 +41,7 @@ traits <- read_excel(
 # data cleaning: ---------------------------------------------------------------
 
 traits_tidy <- traits %>%
-  clean_names() %>%
+  janitor::clean_names() %>%
   
   # insert missing values
   mutate(
@@ -97,6 +99,23 @@ table_S1 <-
          "Body size (ITD)"  = itd
   ) 
 
+flextable_S1 <- table_S1 %>%
+  flextable() %>%
+  autofit()
+
+doc <- read_docx()
+doc <- body_add_flextable(doc, value = flextable_S1)
+doc <- body_end_section_landscape(doc)
+
+print(
+  doc, 
+  target = 
+    here(
+      "output/tables/supp", 
+      "table_S1.docx"
+      )
+  )
+
 # save to disk -----------------------------------------------------------------
 
 saveRDS(
@@ -105,4 +124,5 @@ saveRDS(
     "data/final", 
     "traits.rds")
   )
+
 
