@@ -86,8 +86,8 @@ colnames(SR) <- c("ntaxa", "site_id")
 
 # all relevant info for 250m
 tidy_250 <- site %>%
-  inner_join(l_250, by = c("site_id" = "site")) %>%
-  inner_join(SR, by = "site_id") %>%
+  inner_join(l_250, by = c("ID" = "site")) %>%
+  inner_join(SR, by = c("ID" = "site_id")) %>%
   select(site_id, 
          latitude, 
          longitude, 
