@@ -88,13 +88,12 @@ colnames(SR) <- c("ntaxa", "site_id")
 tidy_250 <- site %>%
   inner_join(l_250, by = c("ID" = "site")) %>%
   inner_join(SR, by = c("ID" = "site_id")) %>%
-  select(site_id, 
-         latitude, 
-         longitude, 
+  select(ID, 
+         Latitude, 
+         Longitude, 
          prop_urb_250, 
          ntaxa,
-         habitat_type) %>%
-  filter(!(site_id %in% c("Dumesh", "Kavanah", "Lynott", "RangersGround")))
+         Habitat_type) 
 
 # all relevant info for 500m
 tidy_500 <- site %>%
