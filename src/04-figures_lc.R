@@ -113,8 +113,8 @@ tidy_500 <- site %>%
   geom_point(
     data = tidy_250, 
     aes(
-      x = longitude, 
-      y = latitude, 
+      x = Longitude, 
+      y = Latitude, 
       colour = prop_urb_250,
       size = ntaxa
       )
@@ -156,8 +156,8 @@ tidy_500 <- site %>%
   geom_point(
     data = tidy_500, 
     aes(
-      x = longitude, 
-      y = latitude, 
+      x = Longitude, 
+      y = Latitude, 
       colour = prop_urb_500,
       size = ntaxa
     )
@@ -219,9 +219,9 @@ tidy_500 <- tidy_500 %>%
    geom_jitter(
      data = tidy_250, 
      aes(
-       x = longitude, 
-       y = latitude, 
-       color = habitat_type
+       x = Longitude, 
+       y = Latitude, 
+       color = Habitat_type
      ),
      size = 2,
      width = 0.01
