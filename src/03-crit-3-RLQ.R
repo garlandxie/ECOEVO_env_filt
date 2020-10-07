@@ -65,20 +65,6 @@ keep_spp <- traits %>%
   filter(!is.na(itd)) %>%
   pull(spp)
 
-env_250 <- env_250 %>%
-  
-  # remove sites outside the TO boundary
-  filter(prop_urb_250     > 0 &
-           prop_tree_250  > 0 &
-           prop_grass_250 > 0)
-
-env_500 <- env_500 %>%
-  
-  # remove sites outside the TO boundary
-  filter(prop_urb_500     > 0 &
-           prop_tree_500  > 0 &
-           prop_grass_500 > 0)
-
 # Procedure of RLQ follows closely to:
 # Dray et al. 2014. Ecology. 
 # https://doi.org/10.1890/13-0196.1
