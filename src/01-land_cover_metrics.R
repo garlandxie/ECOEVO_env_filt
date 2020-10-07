@@ -160,23 +160,21 @@ lw_500 <- land_use_500 %>%
          across(where(is.numeric), ~replace_na(., 0)))
 
 # clean: remove sites  ---------------------------------------------------------
+outside_TO <- c(
+  "GAJVv", 
+  "SQWq3",
+  "N53op", 
+  "auCMf", 
+  "lWpWV",
+  "Z42dv"
+)
 
 # remove sites that are outside raster boundaries 
 l_250 <- lw_250 %>%
-    filter(!site %in% c("Dumesh",
-                      "Kavanah", 
-                      "Lynott", 
-                      "RangersGround", 
-                      "RangersRoof",
-                      "Chute"))
+    filter(!site %in% outside_TO)
 
 l_500 <- lw_500 %>%
-    filter(!site %in% c("Dumesh",
-                      "Kavanah", 
-                      "Lynott", 
-                      "RangersGround", 
-                      "RangersRoof",
-                      "Chute"))
+    filter(!site %in% outside_TO)
 
 # save to disk -----------------------------------------------------------------
 write.csv(l_250, 
