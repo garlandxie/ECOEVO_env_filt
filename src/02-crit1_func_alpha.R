@@ -48,6 +48,13 @@ trait <- readRDS(
        )
   )
 
+site <- read.csv(
+  here(
+    "data/original", 
+    "site.csv"
+    )
+)
+
 # functional distance matrix  --------------------------------------------------
 
 keep_spp <- trait %>%
@@ -102,7 +109,20 @@ ses_mfd_tidy <- ses_mfd %>%
   filter(ntaxa != 1 & 
          ntaxa != 0 & 
          !is.na(p_value)) %>% 
-  rownames_to_column(var = "site_id") 
+  rownames_to_column(var = "site_id")  
+
+ses_mfd_habitat <- ses_mfd_tidy %>%
+  inner_join(site, by = c("site_id" = "ID")) %>%
+  select(
+    site_id, 
+    ntaxa,
+    mfd.obs, 
+    mfd.rand.mean,
+    mfd.rand.sd,
+    mfd.obs.rank, 
+    ses_mfd, 
+    p_value, 
+    Habitat_type)
 
 (crit1_mfd <- ses_mfd_tidy %>%
   ggplot(aes(x = p_value, y = ses_mfd)) +
@@ -118,6 +138,23 @@ ses_mfd_tidy <- ses_mfd %>%
   labs(x = "p-value", 
        y= "ses.MFD") + 
   theme_bw()
+)
+
+(ses_mfd_ugs <- ses_mfd_habitat %>%
+  ggplot(aes(x = Habitat_type, y = ses_mfd)) + 
+  geom_point() + 
+  gghighlight(
+    p_value < 0.05, 
+    use_direct_label = TRUE,
+    use_group_by = FALSE
+    ) + 
+  labs(
+    x = "UGS Type",
+    y = "ses.MFD"
+  ) + 
+  geom_hline(yintercept = 0, linetype = "dashed") + 
+  coord_flip() + 
+  theme_bw() 
 )
 
 # save to disk -----------------------------------------------------------------
@@ -149,6 +186,15 @@ ggsave(filename =
        device = "png"
        )
 
-
+ggsave(filename = 
+         here(
+           "output/figures/main",
+           "fig-ses_mfd-ugs.png"
+         ),
+       plot = ses_mfd_ugs,
+       width  = 4, 
+       height = 4,
+       device = "png"
+)
 
 
