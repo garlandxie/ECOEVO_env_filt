@@ -97,15 +97,27 @@ table_S1 <-
          "Diet"             = diet, 
          "Voltinism"        = volt, 
          "Body size (ITD)"  = itd
-  ) 
+  )
+  
 
 flextable_S1 <- table_S1 %>%
   flextable() %>%
-  autofit()
+  autofit() %>%
+  italic(j = c("Family", "Genus", "Species"))
 
-doc <- read_docx()
-doc <- body_add_flextable(doc, value = flextable_S1)
-doc <- body_end_section_landscape(doc)
+doc <- read_docx() %>%
+  body_add_par(
+    'Table S1. A trait matrix of the fifty sampled solitary cavity-nesting wasp and bee species in this study.', 
+     style = 'Normal'
+    ) %>%
+  body_add_par(
+    ' ', 
+    style = 'Normal'
+    ) %>% 
+  body_add_flextable(
+    value = flextable_S1
+    ) %>%
+  body_end_section_landscape()
 
 print(
   doc, 
