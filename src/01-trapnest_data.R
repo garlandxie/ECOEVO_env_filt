@@ -57,12 +57,12 @@ int_tidy <- int_raw %>%
 
 # get sites that outside the TO boundary
 outside_TO <- c(
-  "Dumesh", 
-  "Kavanah",
-  "Lynott", 
-  "RangersGround", 
-  "RangersRoof",
-  "Chute"
+  "GAJVv", 
+  "SQWq3",
+  "N53op", 
+  "auCMf", 
+  "lWpWV",
+  "Z42dv"
 )
 
 # get sites that were sampled across 2011-2013 within TO
