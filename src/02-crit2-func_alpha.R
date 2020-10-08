@@ -342,32 +342,6 @@ rq_lab_500 <- bquote("Adj-R"^2: .(format(rq_500, digits = 2)))
   theme_bw()
 )
 
-# other linear regresson models ------------------------------------------------
-
-obs_mfd_250 <- reg_250 %>%
-  select(sr, mfd.obs, prop_urb_250) %>%
-  ggplot(aes(x = prop_urb_250, y = mfd.obs, size = sr)) + 
-  geom_point() + 
-  labs(title = "A)",
-       x = "% Impervious surface (250m spatial scale)",
-       y = "observed MFD") + 
-  scale_size_continuous(guide = FALSE) +
-  theme_bw()
-
-obs_mfd_500 <- reg_500 %>%
-  select(sr, mfd.obs, prop_urb_500) %>%
-  ggplot(aes(x = prop_urb_500, y = mfd.obs, size = sr)) + 
-  geom_point() + 
-  labs(title = "B)",
-       x = "% Impervious surface (500m spatial scale)",
-       y = NULL) + 
-  scale_size_continuous(
-    name   = "Species Richness",
-    breaks = c(2, 5, 8, 10, 13)
-  ) +
-  theme_bw()
-
-obs_mfd <- obs_mfd_250 + obs_mfd_500
 
 # save to disk -----------------------------------------------------------------
 
