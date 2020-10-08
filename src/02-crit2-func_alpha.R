@@ -295,16 +295,14 @@ rq_lab_500 <- bquote("Adj-R"^2: .(format(rq_500, digits = 2)))
 (part_urb_250 <- reg_250 %>%
   select(site, 
          ses_mfd, 
-         Habitat_type,
          p_value, 
          prop_urb_250) %>%
   mutate(pred_urb_250 = predict(lm_250, terms = "prop_urb_250"),
          part_urb_250 = pred_urb_250 + resid(lm_250)) %>%
-  ggplot(aes(x = prop_urb_250, y = part_urb_250, shape = Habitat_type)) + 
+  ggplot(aes(x = prop_urb_250, y = part_urb_250)) + 
   geom_point() + 
   gghighlight(p_value < 0.05, use_direct_label = FALSE) + 
   geom_hline(yintercept = 0) + 
-  scale_shape_discrete(name = "UGS type") + 
   annotate(
     "text",
     x = 75, 
@@ -320,7 +318,6 @@ rq_lab_500 <- bquote("Adj-R"^2: .(format(rq_500, digits = 2)))
   select(
          ses_mfd, 
          p_value, 
-         Habitat_type,
          prop_urb_500
          ) %>%
   mutate(pred_urb_500 = predict(lm_500, terms = "prop_urb_500"),
@@ -328,13 +325,12 @@ rq_lab_500 <- bquote("Adj-R"^2: .(format(rq_500, digits = 2)))
   ggplot(
     aes(
       x = prop_urb_500, 
-      y = part_urb_500,
-      shape = Habitat_type)
+      y = part_urb_500
+      )
     ) + 
   geom_point() + 
   gghighlight(p_value < 0.05, use_direct_label = FALSE) +
   geom_hline(yintercept = 0) + 
-  scale_shape_discrete(name = "UGS type") + 
   annotate(
     "text",
     x = 75, 
