@@ -355,15 +355,6 @@ ggsave(filename =
        height = 4
        )
 
-ggsave(filename = 
-         here("output/figures/supp", 
-              "fig-supp-obs_mfd.png"
-         ),
-       plot = obs_mfd, 
-       device = "png", 
-       width = 9, 
-       height = 4
-)
 
 ggsave(filename = 
          here("output/figures/supp", 
