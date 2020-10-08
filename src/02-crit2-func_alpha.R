@@ -213,12 +213,12 @@ vif(lm_250_v2)
 summary(lm_250_v2)
 
 # show model diagnostics in a non-interactive manner 
-plot(lm_250, which = c(1))
-plot(lm_250, which = c(2))
-plot(lm_250, which = c(3))
-plot(lm_250, which = c(4))
-plot(lm_250, which = c(5))
-plot(lm_250, which = c(6))
+plot(lm_250_v2, which = c(1))
+plot(lm_250_v2, which = c(2))
+plot(lm_250_v2, which = c(3))
+plot(lm_250_v2, which = c(4))
+plot(lm_250_v2, which = c(5))
+plot(lm_250_v2, which = c(6))
 
 # hypothesis testing: multiple regression (500m) -------------------------------
 
@@ -232,15 +232,15 @@ lm_500_v2 <- update(lm_500_v1, ~. -prop_tree_500)
 vif(lm_500_v2)
 
 # get summary
-summary(lm_500)
+summary(lm_500_v2)
 
 # show model diagnostics in a non-interactive manner 
-plot(lm_500, which = c(1))
-plot(lm_500, which = c(2))
-plot(lm_500, which = c(3))
-plot(lm_500, which = c(4))
-plot(lm_500, which = c(5))
-plot(lm_500, which = c(6))
+plot(lm_500_v2, which = c(1))
+plot(lm_500_v2, which = c(2))
+plot(lm_500_v2, which = c(3))
+plot(lm_500_v2, which = c(4))
+plot(lm_500_v2, which = c(5))
+plot(lm_500_v2, which = c(6))
 
 # spatial autocorrelaton tests -------------------------------------------------
 
@@ -254,7 +254,7 @@ proj4string(coords_250) <- CRS("+proj=utm +zone=17 +ellps=GRS80 +datum=NAD83
 
 # formal spatial autocorrelation on the regression residuals
 # for Global Moran's I
-lm.morantest(lm_250, 
+lm.morantest(lm_250_v2, 
              listw = nb2listw(
                knn2nb(
                  knearneigh(x = coords_250,
@@ -272,7 +272,7 @@ coordinates(coords_500) <- ~lats + longs
 proj4string(coords_500) <- CRS("+proj=utm +zone=17 +ellps=GRS80 +datum=NAD83 
                             +units=m +no_defs")
 
-lm.morantest(lm_500, 
+lm.morantest(lm_500_v2, 
              listw = nb2listw(
                knn2nb(
                  knearneigh(x = coords_500, 
@@ -285,8 +285,8 @@ lm.morantest(lm_500,
 
 # get R-squared values for labelling
 
-rq_250 <- summary(lm_250)$adj.r.squared
-rq_500 <- summary(lm_500)$adj.r.squared
+rq_250 <- summary(lm_250_v2)$adj.r.squared
+rq_500 <- summary(lm_500_v2)$adj.r.squared
 
 rq_lab_250 <- bquote("Adj-R"^2: .(format(rq_250, digits = 3)))
 rq_lab_500 <- bquote("Adj-R"^2: .(format(rq_500, digits = 2)))
@@ -297,8 +297,8 @@ rq_lab_500 <- bquote("Adj-R"^2: .(format(rq_500, digits = 2)))
          ses_mfd, 
          p_value, 
          prop_urb_250) %>%
-  mutate(pred_urb_250 = predict(lm_250, terms = "prop_urb_250"),
-         part_urb_250 = pred_urb_250 + resid(lm_250)) %>%
+  mutate(pred_urb_250 = predict(lm_250_v2, terms = "prop_urb_250"),
+         part_urb_250 = pred_urb_250 + resid(lm_250_v2)) %>%
   ggplot(aes(x = prop_urb_250, y = part_urb_250)) + 
   geom_point() + 
   gghighlight(p_value < 0.05, use_direct_label = FALSE) + 
@@ -320,8 +320,8 @@ rq_lab_500 <- bquote("Adj-R"^2: .(format(rq_500, digits = 2)))
          p_value, 
          prop_urb_500
          ) %>%
-  mutate(pred_urb_500 = predict(lm_500, terms = "prop_urb_500"),
-         part_urb_500 = pred_urb_500 + resid(lm_500)) %>%
+  mutate(pred_urb_500 = predict(lm_500_v2, terms = "prop_urb_500"),
+         part_urb_500 = pred_urb_500 + resid(lm_500_v2)) %>%
   ggplot(
     aes(
       x = prop_urb_500, 
