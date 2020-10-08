@@ -178,27 +178,39 @@ reg_250 %>%
   scale_colour_gradientn(colours = terrain.colors(10)) + 
   theme_minimal()
 
-# hypothesis testing: multiple regression (250m) -------------------------------
+# correlation matrix -----------------------------------------------------------
 
-# Pearson's correlation matrix 
+# Pearson's correlation matrix for 250m
 pairs_250 <- reg_250 %>%
   select(
     "% Tree"  = prop_tree_250, 
     "% Grass" = prop_grass_250,
     "% Urban" = prop_urb_250) %>%
-  ggpairs()
+  ggpairs() + 
+  labs(title = "250m spatial scale")
+
+# Pearson's correlation matrix for 500m
+pairs_500 <- reg_500 %>%
+  select(
+    "% Tree"  = prop_tree_500, 
+    "% Grass" = prop_grass_500,
+    "% Urban" = prop_urb_500) %>%
+  ggpairs() + 
+  labs(title = "500m spatial scale")
+
+# hypothesis testing: multiple regression (250m) -------------------------------
 
 # first fit
-lm_250 <- lm(ses_mfd ~ prop_grass_250 + prop_tree_250 + prop_urb_250, 
+lm_250_v1 <- lm(ses_mfd ~ prop_grass_250 + prop_tree_250 + prop_urb_250, 
              data = reg_250)
-vif(lm_250)
+vif(lm_250_v1)
 
 # remove tree cover
-lm_250 <- update(lm_250, ~. -prop_tree_250)
-vif(lm_250)
+lm_250_v2 <- update(lm_250_v1, ~. -prop_tree_250)
+vif(lm_250_v2)
 
 # get summary
-summary(lm_250)
+summary(lm_250_v2)
 
 # show model diagnostics in a non-interactive manner 
 plot(lm_250, which = c(1))
@@ -210,23 +222,14 @@ plot(lm_250, which = c(6))
 
 # hypothesis testing: multiple regression (500m) -------------------------------
 
-# Pearson's correlation matrix for 500m
-pairs_500 <- reg_500 %>%
-  select(
-    "% Tree"  = prop_tree_500, 
-    "% Grass" = prop_grass_500,
-    "% Urban" = prop_urb_500) %>%
-  ggpairs()
-
-
 # first fit
-lm_500 <- lm(ses_mfd ~ prop_grass_500 + prop_tree_500 + prop_urb_500, 
+lm_500_v1 <- lm(ses_mfd ~ prop_grass_500 + prop_tree_500 + prop_urb_500, 
              data = reg_500)
-vif(lm_500)
+vif(lm_500_v1)
 
 # remove tree cover
-lm_500 <- update(lm_500, ~. -prop_tree_500)
-vif(lm_500)
+lm_500_v2 <- update(lm_500_v1, ~. -prop_tree_500)
+vif(lm_500_v2)
 
 # get summary
 summary(lm_500)
@@ -397,6 +400,26 @@ ggsave(filename =
               "fig-crit2_mfd_500.png"
          ),
        plot = part_urb_500, 
+       device = "png", 
+       width = 5, 
+       height = 4
+)
+
+ggsave(filename = 
+         here("output/figures/supp", 
+              "fig-corr_matrix_250.png"
+         ),
+       plot = pairs_250, 
+       device = "png", 
+       width = 5, 
+       height = 4
+)
+
+ggsave(filename = 
+         here("output/figures/supp", 
+              "fig-corr_matrix_500.png"
+         ),
+       plot = pairs_500, 
        device = "png", 
        width = 5, 
        height = 4
