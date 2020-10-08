@@ -84,7 +84,7 @@ all_years <- site %>%
   facet_wrap(~year) + 
   labs(
     title = "A)",
-    x = "Number of occupied brood cells (bees)",
+    x = "Number of completed brood cells (bees)",
     y = "Count"
   ) + 
   theme_bw()
@@ -98,7 +98,7 @@ all_years <- site %>%
   ylim(0, 300) + 
   labs(
     title = "B)",
-    x = "Number of occupied brood cells (wasps)",
+    x = "Number of completed brood cells (wasps)",
     y = NULL) + 
   theme_bw()
 )
