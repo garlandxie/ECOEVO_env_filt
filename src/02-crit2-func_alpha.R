@@ -180,6 +180,14 @@ reg_250 %>%
 
 # hypothesis testing: multiple regression (250m) -------------------------------
 
+# Pearson's correlation matrix 
+pairs_250 <- reg_250 %>%
+  select(
+    "% Tree"  = prop_tree_250, 
+    "% Grass" = prop_grass_250,
+    "% Urban" = prop_urb_250) %>%
+  ggpairs()
+
 # first fit
 lm_250 <- lm(ses_mfd ~ prop_grass_250 + prop_tree_250 + prop_urb_250, 
              data = reg_250)
@@ -200,9 +208,16 @@ plot(lm_250, which = c(4))
 plot(lm_250, which = c(5))
 plot(lm_250, which = c(6))
 
-
-
 # hypothesis testing: multiple regression (500m) -------------------------------
+
+# Pearson's correlation matrix for 500m
+pairs_500 <- reg_500 %>%
+  select(
+    "% Tree"  = prop_tree_500, 
+    "% Grass" = prop_grass_500,
+    "% Urban" = prop_urb_500) %>%
+  ggpairs()
+
 
 # first fit
 lm_500 <- lm(ses_mfd ~ prop_grass_500 + prop_tree_500 + prop_urb_500, 
