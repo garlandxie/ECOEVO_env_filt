@@ -216,7 +216,7 @@ tidy_500 <- tidy_500 %>%
    
    # geometry
    geom_sf(fill = NA) + 
-   geom_jitter(
+   geom_point(
      data = tidy_250, 
      aes(
        x = Longitude, 
@@ -256,7 +256,7 @@ tidy_500 <- tidy_500 %>%
     
     # geometry
     geom_sf(fill = NA) + 
-    geom_jitter(
+    geom_point(
       data = tidy_500, 
       aes(
         x = Longitude, 
