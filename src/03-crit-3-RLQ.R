@@ -434,22 +434,53 @@ L_500_load <- RLQ_500$mQ %>%
     
     species = reorder(species, NorS1)
     ) %>%
-  ggplot(aes(x = species, y = NorS1)) + 
+  ggplot(aes(x = NorS1, y = species)) + 
   geom_point() +
   geom_segment(
     aes(
-      x = species, 
-      xend = species,
-      y = 0, 
-      yend = NorS1
+      x    = 0, 
+      xend = NorS1,
+      y    = species, 
+      yend = species
     ), 
     alpha = 0.5) + 
-  geom_hline(yintercept = 0, linetype = "solid") + 
+  geom_vline(xintercept = 0, linetype = "dashed") + 
   labs(title = "500m spatial scale",
-       x = NULL,
-       y = "Relative importance in normed species scores") + 
-  coord_flip() + 
-  theme_minimal()
+       x = "Relative importance in normed species scores",
+       y = NULL) + 
+  theme_bw() + 
+  theme(plot.margin  = unit(c(5, 5, 5, 5), "lines"),
+        axis.text.y  = element_text(size = 13),
+        axis.title.x = element_text(size = 13)) + 
+  annotation_custom(
+    more_urb,
+    ymin = -5,
+    ymax = -5,
+    xmin = 2,
+    xmax = 2
+  ) + 
+  annotation_custom(
+    less_urb,
+    ymin = -5,
+    ymax = -5,
+    xmin = -2,
+    xmax = -2
+  ) + 
+  annotation_custom(
+    less_urb_arrow,
+    ymin = -5,
+    ymax = -5,
+    xmin = -1,
+    xmax = 0
+  ) +
+  annotation_custom(
+    more_urb_arrow,
+    ymin = -5,
+    ymax = -5,
+    xmin = 1,
+    xmax = 0
+  ) + 
+  coord_cartesian(clip = "off") 
 
 L <- L_250_load + L_500_load
 
@@ -651,7 +682,7 @@ ggsave(
     "output/figures/supp", 
     "fig_sup_species_rlq_500.png"),
   device = "png",
-  height = 9, 
+  height = 10, 
   width = 9
 )
 
