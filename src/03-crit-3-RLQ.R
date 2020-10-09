@@ -29,6 +29,7 @@ library(ade4)
 library(here)
 library(tidyverse)
 library(patchwork)
+library(grid)
 
 # Import files -----------------------------------------------------------------
 
@@ -265,6 +266,43 @@ scree <- scree_250 + scree_500
 
 # plots: env loadings  ---------------------------------------------------------
 
+# set up grob objects to place text underneath the plots
+
+more_urb <- textGrob(
+  "More Urban", 
+  gp = gpar(
+    fontsize = 13
+  )
+)
+
+less_urb <- textGrob(
+  "Less Urban", 
+  gp = gpar(
+    fontsize = 13
+  )
+)
+
+less_urb_arrow <- linesGrob(
+  arrow = arrow(
+    type   = "open", 
+    ends   = "first", 
+    length = unit(3, "mm")
+    ),
+  gp = gpar(
+    col = "black", 
+    lwd = 1)
+  )
+more_urb_arrow <- linesGrob(
+  arrow = arrow(
+    type   = "open", 
+    ends   = "last", 
+    length = unit(3, "mm")
+  ),
+  gp = gpar(
+    col = "black", 
+    lwd = 1)
+)
+  
 R_250_load <- RLQ_250$l1 %>%
   rownames_to_column(var = "class") %>%
   select(class, RS1) %>%
@@ -383,9 +421,9 @@ L_500_load <- RLQ_500$mQ %>%
 
 L <- L_250_load + L_500_load
 
-# trait scores -----------------------------------------------------------------
+# plot: trait scores -----------------------------------------------------------------
 
-RLQ_250_load <- RLQ_250$c1 %>%
+(RLQ_250_load <- RLQ_250$c1 %>%
   rownames_to_column(var = "traits")%>%
   select(traits, CS1) %>%
   mutate(traits = as.character(traits), 
@@ -410,24 +448,58 @@ RLQ_250_load <- RLQ_250$c1 %>%
            traits == "diet.aphid"        ~ "Diet (Aphid)", 
            TRUE ~ traits)
          ) %>%  
-  ggplot(aes(x = traits %>% fct_reorder(CS1), y = CS1)) + 
-  geom_point() +
+  ggplot(aes(
+    x = CS1,
+    y = traits %>% fct_reorder(CS1)) 
+    ) + 
+  geom_point(shape = 18, size = 2) +
   geom_segment(
     aes(
-      x    = traits, 
-      xend = traits,
-      y    = 0, 
-      yend = CS1
+      y    = traits, 
+      yend = traits,
+      x    = 0, 
+      xend = CS1
     ), 
     alpha = 0.5) + 
-  geom_hline(yintercept = 0, linetype = "solid") + 
+  xlim(-3, 3) + 
+  geom_vline(xintercept = 0, linetype = "dashed") + 
   labs(title = "250m spatial scale",
-       x = NULL,
-       y = "Relative importance in trait scores") + 
-  coord_flip() + 
-  theme_minimal()
+       y = NULL,
+       x = "Relative importance in trait scores") + 
+  theme_bw() + 
+  theme(plot.margin = unit(c(5, 5, 5, 5), "lines")) + 
+  annotation_custom(
+    more_urb,
+    ymin = -3,
+    ymax = -3,
+    xmin = 3,
+    xmax = 3
+  ) + 
+  annotation_custom(
+    less_urb,
+    ymin = -3,
+    ymax = -3,
+    xmin = -3,
+    xmax = -3
+  ) + 
+   annotation_custom(
+     less_urb_arrow,
+     ymin = -3,
+     ymax = -3,
+     xmin = -2,
+     xmax = 0
+   ) +
+   annotation_custom(
+     more_urb_arrow,
+     ymin = -3,
+     ymax = -3,
+     xmin = 2,
+     xmax = 0
+   ) + 
+  coord_cartesian(clip = "off") 
+)
 
-RLQ_500_load <- RLQ_500$c1 %>%
+(RLQ_500_load <- RLQ_500$c1 %>%
   rownames_to_column(var = "traits")%>%
   select(traits, CS1) %>%
   mutate(traits = as.character(traits), 
@@ -452,25 +524,57 @@ RLQ_500_load <- RLQ_500$c1 %>%
            traits == "diet.aphid"        ~ "Diet (Aphid)", 
            TRUE ~ traits)
   ) %>%  
-  ggplot(aes(x = traits %>% fct_reorder(CS1), y = CS1)) + 
-  geom_point() +
+  ggplot(aes(y = traits %>% fct_reorder(CS1), x = CS1)) + 
+  geom_point(shape = 18, size = 2.5) +
   geom_segment(
     aes(
-      x    = traits, 
-      xend = traits,
-      y    = 0, 
-      yend = CS1
+      y    = traits, 
+      yend = traits,
+      x    = 0, 
+      xend = CS1
     ), 
     alpha = 0.5) + 
-  geom_hline(yintercept = 0, linetype = "solid") + 
+  geom_vline(xintercept = 0, linetype = "dashed") + 
+  xlim(-3, 3) +   
   labs(title = "500m spatial scale",
-       x = NULL,
-       y = "Relative importance in trait scores") + 
-  coord_flip() + 
-  theme_minimal()
-
-RLQ_load <- RLQ_250_load + RLQ_500_load
-
+       y = NULL,
+       x = "Relative importance in trait scores") + 
+  theme_bw() + 
+  theme(plot.margin = unit(c(5, 5, 5, 5), "lines"),
+        axis.text = element_text(size = 13),
+        axis.title.x = element_text(size = 13)
+        ) + 
+  annotation_custom(
+    more_urb,
+    ymin = -3,
+    ymax = -3,
+    xmin = 3,
+    xmax = 3
+  ) + 
+  annotation_custom(
+      less_urb,
+      ymin = -3,
+      ymax = -3,
+      xmin = -3,
+      xmax = -3
+    ) + 
+  annotation_custom(
+      less_urb_arrow,
+      ymin = -3,
+      ymax = -3,
+      xmin = -2,
+      xmax = 0
+    ) +
+  annotation_custom(
+      more_urb_arrow,
+      ymin = -3,
+      ymax = -3,
+      xmin = 2,
+      xmax = 0
+    ) +
+  coord_cartesian(clip = "off") 
+)  
+ 
 # save to disk -----------------------------------------------------------------
 
 # PCA environmental variable loadings
@@ -535,5 +639,5 @@ ggsave(
     "fig_sup_traits_500.png"),
   device = "png",
   height = 7, 
-  width = 10
+  width = 9
 )
