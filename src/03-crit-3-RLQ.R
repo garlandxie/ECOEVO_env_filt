@@ -359,7 +359,7 @@ R_load <- R_250_load + R_500_load
 
 # plots: species scores ---------------------------------------------------------------
 
-L_250_load <- RLQ_250$mQ %>%
+(L_250_load <- RLQ_250$mQ %>%
   rownames_to_column(var = "species") %>%
   select(species, NorS1) %>%
   mutate(
@@ -372,22 +372,54 @@ L_250_load <- RLQ_250$mQ %>%
     
     species = reorder(species, NorS1)
     )%>%
-  ggplot(aes(x = species, y = NorS1)) + 
+  ggplot(aes(y = species, x = NorS1)) + 
   geom_point() +
   geom_segment(
     aes(
-      x = species, 
-      xend = species,
-      y = 0, 
-      yend = NorS1
+      x = 0, 
+      xend = NorS1,
+      y = species, 
+      yend = species
     ), 
     alpha = 0.5) + 
-  geom_hline(yintercept = 0, linetype = "solid") + 
+  geom_vline(xintercept = 0, linetype = "dashed") + 
   labs(title = "250m spatial scale",
-       x = NULL,
-       y = "Relative importance in normed species scores") + 
-  coord_flip() + 
-  theme_minimal()
+       x = "Relative importance in normed species scores",
+       y = NULL) + 
+  theme_bw() +
+  theme(plot.margin  = unit(c(5, 5, 5, 5), "lines"),
+        axis.text.y  = element_text(size = 13),
+        axis.title.x = element_text(size = 13)) + 
+   annotation_custom(
+     more_urb,
+     ymin = -5,
+     ymax = -5,
+     xmin = 2,
+     xmax = 2
+   ) + 
+   annotation_custom(
+     less_urb,
+     ymin = -5,
+     ymax = -5,
+     xmin = -2,
+     xmax = -2
+   ) + 
+   annotation_custom(
+     less_urb_arrow,
+     ymin = -5,
+     ymax = -5,
+     xmin = -1,
+     xmax = 0
+   ) +
+   annotation_custom(
+     more_urb_arrow,
+     ymin = -5,
+     ymax = -5,
+     xmin = 1,
+     xmax = 0
+   ) + 
+   coord_cartesian(clip = "off") 
+)
 
 L_500_load <- RLQ_500$mQ %>%
   rownames_to_column(var = "species") %>%
@@ -467,7 +499,9 @@ L <- L_250_load + L_500_load
        y = NULL,
        x = "Relative importance in trait scores") + 
   theme_bw() + 
-  theme(plot.margin = unit(c(5, 5, 5, 5), "lines")) + 
+  theme(plot.margin  = unit(c(5, 5, 5, 5), "lines"),
+        axis.text    = element_text(size = 13),
+        axis.title.x = element_text(size = 13)) + 
   annotation_custom(
     more_urb,
     ymin = -3,
@@ -541,7 +575,7 @@ L <- L_250_load + L_500_load
        x = "Relative importance in trait scores") + 
   theme_bw() + 
   theme(plot.margin = unit(c(5, 5, 5, 5), "lines"),
-        axis.text = element_text(size = 13),
+        axis.text.y = element_text(size = 13),
         axis.title.x = element_text(size = 13)
         ) + 
   annotation_custom(
@@ -607,8 +641,8 @@ ggsave(
     "output/figures/supp", 
     "fig_sup_species_rlq_250.png"),
   device = "png",
-  height = 7, 
-  width = 7
+  height = 10, 
+  width = 9
 )
 
 ggsave(
@@ -617,8 +651,8 @@ ggsave(
     "output/figures/supp", 
     "fig_sup_species_rlq_500.png"),
   device = "png",
-  height = 7, 
-  width = 7
+  height = 9, 
+  width = 9
 )
 
 # trait scores
