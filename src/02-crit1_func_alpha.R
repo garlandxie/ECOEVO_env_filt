@@ -141,21 +141,30 @@ ses_mfd_habitat <- ses_mfd_tidy %>%
 )
 
 (ses_mfd_ugs <- ses_mfd_habitat %>%
-  ggplot(aes(x = Habitat_type, y = ses_mfd)) + 
+    mutate(Habitat_type = case_when(
+      Habitat_type == "Community" ~ "Community Garden",
+      Habitat_type == "Roof"     ~ "Green Roof",
+      Habitat_type == "Garden"   ~ "Home Garden",
+      TRUE ~ Habitat_type )
+      ) %>%
+  ggplot(aes(y = Habitat_type, x = ses_mfd)) + 
   geom_point() + 
   gghighlight(
     p_value < 0.05, 
-    use_direct_label = TRUE,
+    use_direct_label = FALSE,
     use_group_by = FALSE
-    ) + 
+    ) +
+  xlim(-4, 4) + 
   labs(
-    x = "UGS Type",
-    y = "ses.MFD"
+    x = "ses.MFD",
+    y = "UGS Type"
   ) + 
-  geom_hline(yintercept = 0, linetype = "dashed") + 
-  coord_flip() + 
-  theme_bw() 
+  geom_vline(xintercept = 0, linetype = "dashed") + 
+  theme_bw() +
+  theme(plot.margin = unit(c(5, 5, 5, 5), "lines")) 
 )
+    
+
 
 # save to disk -----------------------------------------------------------------
 
