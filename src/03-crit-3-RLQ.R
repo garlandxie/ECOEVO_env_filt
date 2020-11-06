@@ -275,6 +275,8 @@ more_urb <- textGrob(
   )
 )
 
+
+
 less_urb <- textGrob(
   "Less Urban", 
   gp = gpar(
