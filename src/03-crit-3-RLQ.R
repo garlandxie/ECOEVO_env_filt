@@ -493,8 +493,8 @@ L <- L_250_load + L_500_load
   select(traits, CS1) %>%
   mutate(traits = as.character(traits), 
          traits = case_when(
-           traits == "volt.2"             ~ "Multivoltinism",
-           traits == "volt.1"             ~ "Univoltinism",
+           traits == "volt.2"            ~ "Multivoltinism",
+           traits == "volt.1"            ~ "Univoltinism",
            traits == "nest.secretions"   ~ "Nest (Secretions)", 
            traits == "nest.scrapings"    ~ "Nest (Scrapings)",
            traits == "nest.resin"        ~ "Nest (Resin)",
@@ -502,8 +502,8 @@ L <- L_250_load + L_500_load
            traits == "nest.leaf.and.mud" ~ "Nest (Leaf + Mud)",
            traits == "nest.leaf"         ~ "Nest (Leaf)", 
            traits == "nest.grass"        ~ "Nest (Grass)",
-           traits == "nativ.1"          ~ "Native Status", 
-           traits == "nativ.0"          ~ "Exotic Status",
+           traits == "nativ.1"           ~ "Native Status", 
+           traits == "nativ.0"           ~ "Exotic Status",
            traits == "itd"               ~ "Body Size (ITD)",
            traits == "diet.spider"       ~ "Diet (Spider)",
            traits == "diet.pollen"       ~ "Diet (Pollen)", 
@@ -571,8 +571,8 @@ L <- L_250_load + L_500_load
   select(traits, CS1) %>%
   mutate(traits = as.character(traits), 
          traits = case_when(
-           traits == "volt.2"             ~ "Multivoltinism",
-           traits == "volt.1"             ~ "Univoltinism",
+           traits == "volt.2"            ~ "Multivoltinism",
+           traits == "volt.1"            ~ "Univoltinism",
            traits == "nest.secretions"   ~ "Nest (Secretions)", 
            traits == "nest.scrapings"    ~ "Nest (Scrapings)",
            traits == "nest.resin"        ~ "Nest (Resin)",
@@ -580,8 +580,8 @@ L <- L_250_load + L_500_load
            traits == "nest.leaf.and.mud" ~ "Nest (Leaf + Mud)",
            traits == "nest.leaf"         ~ "Nest (Leaf)", 
            traits == "nest.grass"        ~ "Nest (Grass)",
-           traits == "nativ.1"          ~ "Native Status", 
-           traits == "nativ.0"          ~ "Exotic Status",
+           traits == "nativ.1"           ~ "Native Status", 
+           traits == "nativ.0"           ~ "Exotic Status",
            traits == "itd"               ~ "Body Size (ITD)",
            traits == "diet.spider"       ~ "Diet (Spider)",
            traits == "diet.pollen"       ~ "Diet (Pollen)", 
