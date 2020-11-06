@@ -146,7 +146,7 @@ tidy_500 <- site %>%
     dist_unit = "km",
     st.size = 2) +
   
-  theme_bw()
+  theme_bw() 
 )
 
 # land cover map: 500m ---------------------------------------------------------
@@ -223,8 +223,7 @@ tidy_500 <- tidy_500 %>%
        y = Latitude, 
        color = Habitat_type
      ),
-     size = 2,
-     width = 0.01
+     size = 2
    ) + 
    
    # north arrow
@@ -249,7 +248,11 @@ tidy_500 <- tidy_500 %>%
    scale_color_discrete(name = "UGS type") + 
    
    # theme
-   theme_bw() 
+   theme_bw() +
+   theme(
+     legend.position = c(0.86, 0.25),
+     legend.background = element_rect(fill = "white", color = "black")
+   )
 )
 
 (ugs_map_500 <- ggplot(data = bound) + 
@@ -289,7 +292,10 @@ tidy_500 <- tidy_500 %>%
     scale_color_discrete(name = "UGS type") + 
     
     # theme
-    theme_bw()
+    theme_bw() + 
+    theme(axis.title.x = element_text(size = 16)
+      
+    )
 )
 
 # save to disk -----------------------------------------------------------------
