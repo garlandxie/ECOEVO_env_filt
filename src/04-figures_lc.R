@@ -141,9 +141,15 @@ tidy_500 <- site %>%
     dist = 10 ,
     transform = TRUE, 
     dist_unit = "km",
-    st.size = 2) +
+    st.size = 4) +
   
-  theme_bw() 
+  theme_bw() +
+  theme(
+    axis.title.x = element_text(size = 16),
+    axis.title.y = element_text(size = 16), 
+    axis.text.x = element_text(size = 16),
+    axis.text.y = element_text(size = 16)
+  )
 )
 
 # land cover map: 500m ---------------------------------------------------------
