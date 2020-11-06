@@ -270,10 +270,7 @@ tidy_500 <- tidy_500 %>%
       size = 2,
       width = 0.01
     ) + 
-    
-    # north arrow
-    north(bound, symbol = 9) +
-    
+  
     # scale-bar
     scalebar(
       data = bound, 
