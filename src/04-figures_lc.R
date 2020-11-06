@@ -226,16 +226,13 @@ tidy_500 <- tidy_500 %>%
      size = 2
    ) + 
    
-   # north arrow
-   north(bound, symbol = 9) +
-   
    # scale-bar
    scalebar(
      data = bound, 
      dist = 10 ,
      transform = TRUE, 
      dist_unit = "km",
-     st.size = 2)  +
+     st.size = 4)  +
    
    # labels
    labs(
@@ -251,7 +248,9 @@ tidy_500 <- tidy_500 %>%
    theme_bw() +
    theme(
      legend.position = c(0.86, 0.25),
-     legend.background = element_rect(fill = "white", color = "black")
+     legend.background = element_rect(fill = "white", color = "black"),
+     axis.title.x = element_text(size = 16),
+     axis.title.y = element_text(size = 16)
    )
 )
 
