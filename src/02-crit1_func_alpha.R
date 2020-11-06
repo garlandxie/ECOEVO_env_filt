@@ -140,6 +140,42 @@ ses_mfd_habitat <- ses_mfd_tidy %>%
   theme_bw()
 )
 
+cluster <- textGrob(
+  "Clustering", 
+  gp = gpar(
+    fontsize = 12
+  )
+)
+
+over_disp <- textGrob(
+  "Overdispersion", 
+  gp = gpar(
+    fontsize = 12
+  )
+)
+
+less_arrow <- linesGrob(
+  arrow = arrow(
+    type   = "open", 
+    ends   = "first", 
+    length = unit(3, "mm")
+  ),
+  gp = gpar(
+    col = "black", 
+    lwd = 1)
+)
+
+more_arrow <- linesGrob(
+  arrow = arrow(
+    type   = "open", 
+    ends   = "last", 
+    length = unit(3, "mm")
+  ),
+  gp = gpar(
+    col = "black", 
+    lwd = 1)
+)
+
 (ses_mfd_ugs <- ses_mfd_habitat %>%
     mutate(Habitat_type = case_when(
       Habitat_type == "Community" ~ "Community Garden",
@@ -161,7 +197,36 @@ ses_mfd_habitat <- ses_mfd_tidy %>%
   ) + 
   geom_vline(xintercept = 0, linetype = "dashed") + 
   theme_bw() +
-  theme(plot.margin = unit(c(5, 5, 5, 5), "lines")) 
+  theme(plot.margin = unit(c(5, 5, 5, 5), "lines")) + 
+  annotation_custom(
+    cluster,
+    xmin = -3,
+    xmax = -3,
+    ymin = -0.5,
+    ymax = -0.5
+    ) +
+  annotation_custom(
+    less_arrow,
+    xmin = 0,
+    xmax = -1.5,
+    ymin = -0.5,
+    ymax = -0.5
+    ) + 
+  annotation_custom(
+    over_disp,
+    xmin = 3,
+    xmax = 3,
+    ymin = -0.5,
+    ymax = -0.5
+  ) + 
+  annotation_custom(
+    more_arrow,
+    xmin = 0,
+    xmax = 1.3,
+    ymin = -0.5,
+    ymax = -0.5
+    ) +
+  coord_cartesian(clip = "off")
 )
     
 
@@ -190,7 +255,7 @@ ggsave(filename =
            "fig-crit1.png"
          ),
        plot = crit1_mfd,
-       width  = 4, 
+       width  = 7, 
        height = 4,
        device = "png"
        )
@@ -201,8 +266,8 @@ ggsave(filename =
            "fig-ses_mfd-ugs.png"
          ),
        plot = ses_mfd_ugs,
-       width  = 4, 
-       height = 4,
+       width  = 7, 
+       height = 5,
        device = "png"
 )
 
