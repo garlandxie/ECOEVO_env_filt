@@ -250,10 +250,8 @@ tidy_500 <- tidy_500 %>%
    # theme
    theme_bw() +
    theme(
-     legend.position = c(0.86, 0.25),
-     legend.background = element_rect(fill = "white", color = "black"),
-     axis.text.x = element_text(size = 14),
-     axis.text.y = element_text(size = 14),
+     axis.text.x = element_text(size = 16),
+     axis.text.y = element_text(size = 16),
      axis.title.x = element_text(size = 16),
      axis.title.y = element_text(size = 16)
    )
@@ -295,10 +293,8 @@ tidy_500 <- tidy_500 %>%
     # theme
     theme_bw() + 
     theme(
-      legend.position = c(0.86, 0.25),
-      legend.background = element_rect(fill = "white", color = "black"),
-      axis.text.x = element_text(size = 14),
-      axis.text.y = element_text(size = 14),
+      axis.text.x = element_text(size = 16),
+      axis.text.y = element_text(size = 16),
       axis.title.x = element_text(size = 16),
       axis.title.y = element_text(size = 16)
     )
