@@ -183,18 +183,18 @@ reg_250 %>%
 # Pearson's correlation matrix for 250m
 pairs_250 <- reg_250 %>%
   select(
-    "% Tree"  = prop_tree_250, 
-    "% Grass" = prop_grass_250,
-    "% Urban" = prop_urb_250) %>%
+    "% Closed Green"  = prop_tree_250, 
+    "% Open Green" = prop_grass_250,
+    "% Impervious" = prop_urb_250) %>%
   ggpairs() + 
   labs(title = "250m spatial scale")
 
 # Pearson's correlation matrix for 500m
 pairs_500 <- reg_500 %>%
   select(
-    "% Tree"  = prop_tree_500, 
-    "% Grass" = prop_grass_500,
-    "% Urban" = prop_urb_500) %>%
+    "% Closed Green"  = prop_tree_500, 
+    "% Open Green" = prop_grass_500,
+    "% Impervious" = prop_urb_500) %>%
   ggpairs() + 
   labs(title = "500m spatial scale")
 
