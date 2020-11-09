@@ -93,7 +93,7 @@ all_years <- site %>%
     x = "Number of completed brood cells (bees)",
     y = NULL
   ) + 
-  theme_bw()
+  theme_bw() 
 )
 
 (hist_wasp_ab <- int_tidy %>%
@@ -108,7 +108,7 @@ all_years <- site %>%
     title = "B)",
     x = "Number of completed brood cells (wasps)",
     y = NULL) + 
-  theme_bw()
+  theme_bw() 
 )
 
 (hist_total_ab <- int_tidy %>%
@@ -163,6 +163,22 @@ all_years <- site %>%
     theme_bw()
 )
 
+(hist_sr_total <- int_tidy %>%
+    filter(id %in% all_years) %>%
+    group_by(id, year) %>%
+    summarize(species_richness = length(unique(lower_species))) %>%
+    ggplot(aes(x = species_richness)) + 
+    geom_histogram(binwidth = 1) + 
+    ylim(0, 200) + 
+    facet_wrap(~year) + 
+    labs(
+      title = "B)",
+      x = "Speciess richness",
+      y = "Count"
+    ) + 
+    theme_bw()
+)
+
 # multi-panel histograms
 (hist_SR <- hist_sr_bees + hist_sr_wasps)
 
@@ -198,7 +214,7 @@ ggsave(
   ),
   device = "png", 
   height = 5, 
-  width  = 4
+  width  = 5
 )
 
 ggsave(
