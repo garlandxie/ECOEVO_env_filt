@@ -142,7 +142,7 @@ all_years <- site %>%
   labs(
     title = "A)",
     x = "Speciess richness (bees)",
-    y = "Count"
+    y = NULL
   ) + 
   theme_bw()
 )
@@ -158,7 +158,7 @@ all_years <- site %>%
     labs(
       title = "B)",
       x = "Speciess richness (wasps)",
-      y = "Count"
+      y = NULL
     ) + 
     theme_bw()
 )
@@ -170,17 +170,17 @@ all_years <- site %>%
     ggplot(aes(x = species_richness)) + 
     geom_histogram(binwidth = 1) + 
     ylim(0, 200) + 
-    facet_wrap(~year) + 
+    facet_wrap(~year) +
     labs(
-      title = "B)",
-      x = "Speciess richness",
-      y = "Count"
+      title = "C)",
+      x = "Speciess richness (bees and wasps)",
+      y = NULL
     ) + 
     theme_bw()
 )
 
 # multi-panel histograms
-(hist_SR <- hist_sr_bees + hist_sr_wasps)
+(hist_SR <- hist_sr_bees / hist_sr_wasps / hist_sr_total)
 
 # data cleaning: bees ----------------------------------------------------------
 
@@ -224,8 +224,8 @@ ggsave(
     "fig-supp-histogram_SR.png"
   ),
   device = "png", 
-  height = 3, 
-  width  = 7
+  height = 5, 
+  width  = 5
 )
 
 
