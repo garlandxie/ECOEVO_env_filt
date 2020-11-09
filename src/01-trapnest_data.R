@@ -111,8 +111,23 @@ all_years <- site %>%
   theme_bw()
 )
 
+(hist_total_ab <- int_tidy %>%
+    filter(id %in% all_years) %>%
+    group_by(id, year) %>%
+    summarize(sum_broods = sum(no_broodcells)) %>%
+    ggplot(aes(x = sum_broods)) + 
+    geom_histogram(binwidth = 1) + 
+    facet_wrap(~year) + 
+    ylim(0, 10) + 
+    labs(
+      title = "C)",
+      x = "Number of completed brood cells",
+      y = NULL) + 
+    theme_bw()
+)
+
 # multi-panel histograms
-(hist_ab <- hist_bees_ab + hist_wasp_ab)
+(hist_ab <- hist_bees_ab/ hist_wasp_ab / hist_total_ab)
 
 # plot: histograms for species richness ----------------------------------------
 
