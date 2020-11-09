@@ -181,10 +181,6 @@ tidy_500 <- site %>%
     breaks = c(2, 5, 8, 10, 13)
   ) +
   
-  # north arrow
-   
-  north(bound, symbol = 9) +
-  
   # scale-bar
   scalebar(
     data = bound, 
