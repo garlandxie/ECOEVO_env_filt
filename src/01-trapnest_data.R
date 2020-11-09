@@ -136,9 +136,12 @@ all_years <- site %>%
   group_by(year, id) %>%
   summarize(species_richness = length(unique(lower_species))) %>%
   ggplot(aes(x = species_richness)) + 
-  geom_histogram(binwidth = 1) + 
+  geom_histogram(bins = 5, binwidth = 1) + 
   ylim(0, 200) + 
   facet_wrap(~year) + 
+  scale_x_continuous(
+    breaks = c(2,4,6,8)
+  ) +
   labs(
     title = "A)",
     x = "Speciess richness (bees)",
@@ -152,9 +155,12 @@ all_years <- site %>%
     group_by(id, year) %>%
     summarize(species_richness = length(unique(lower_species))) %>%
     ggplot(aes(x = species_richness)) + 
-    geom_histogram(binwidth = 1) + 
+    geom_histogram(bins = 5, binwidth = 1) + 
     ylim(0, 200) + 
     facet_wrap(~year) + 
+    scale_x_continuous(
+      breaks = c(2,4,6,8)
+    ) + 
     labs(
       title = "B)",
       x = "Speciess richness (wasps)",
@@ -168,9 +174,12 @@ all_years <- site %>%
     group_by(id, year) %>%
     summarize(species_richness = length(unique(lower_species))) %>%
     ggplot(aes(x = species_richness)) + 
-    geom_histogram(binwidth = 1) + 
+    geom_histogram(bins =5, binwidth = 1) + 
     ylim(0, 200) + 
     facet_wrap(~year) +
+    scale_x_continuous(
+      breaks = c(2,4,6,8)
+      ) + 
     labs(
       title = "C)",
       x = "Speciess richness (bees and wasps)",
