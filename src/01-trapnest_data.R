@@ -91,7 +91,7 @@ all_years <- site %>%
   labs(
     title = "A)",
     x = "Number of completed brood cells (bees)",
-    y = "Count"
+    y = NULL
   ) + 
   theme_bw()
 )
@@ -123,11 +123,11 @@ all_years <- site %>%
       title = "C)",
       x = "Number of completed brood cells",
       y = NULL) + 
-    theme_bw()
+    theme_bw() 
 )
 
 # multi-panel histograms
-(hist_ab <- hist_bees_ab/ hist_wasp_ab / hist_total_ab)
+(hist_ab <- hist_bees_ab / hist_wasp_ab / hist_total_ab)
 
 # plot: histograms for species richness ----------------------------------------
 
@@ -183,7 +183,7 @@ broods <- int_tidy %>%
 # save to disk -----------------------------------------------------------------
 
 write.csv(
-  broods_tidy, 
+  broods, 
   file = here(
     "data/final", 
     "comm_matrix_B.csv"
@@ -197,8 +197,8 @@ ggsave(
     "fig-supp-histogram.png"
   ),
   device = "png", 
-  height = 3, 
-  width  = 7
+  height = 5, 
+  width  = 4
 )
 
 ggsave(
