@@ -203,7 +203,7 @@ tidy_500 <- site %>%
 
 tidy_250 <- tidy_250 %>%
   mutate(Habitat_type = case_when(
-    Habitat_type == "Communty" ~ "Community Garden",
+    Habitat_type == "Community" ~ "Community Garden",
     Habitat_type == "Roof"     ~ "Green Roof",
     Habitat_type == "Garden"   ~ "Home Garden",
     TRUE ~ Habitat_type 
@@ -211,7 +211,7 @@ tidy_250 <- tidy_250 %>%
 
 tidy_500 <- tidy_500 %>%
   mutate(Habitat_type = case_when(
-    Habitat_type == "Communty" ~ "Community Garden",
+    Habitat_type == "Community" ~ "Community Garden",
     Habitat_type == "Roof"     ~ "Green Roof",
     Habitat_type == "Garden"   ~ "Home Garden",
     TRUE ~ Habitat_type 
