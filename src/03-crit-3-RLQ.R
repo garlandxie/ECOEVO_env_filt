@@ -317,19 +317,19 @@ R_250_load <- RLQ_250$l1 %>%
     
     class = factor(class),
     class = fct_reorder(class, RS1)) %>%
-  ggplot(aes(x = class, y = RS1, fill = class)) + 
+  ggplot(aes(x = RS1, y = class)) + 
   geom_point() + 
   geom_segment(
     aes(
-      x = class, 
-      xend = class,
-      y = 0, 
-      yend = RS1)
-    )+ 
-  geom_hline(yintercept = 0, linetype = "dashed") + 
+      x = 0, 
+      xend = RS1,
+      y = class, 
+      yend = class)
+    ) + 
+  geom_vline(xintercept = 0, linetype = "dashed") + 
   labs(title = "A) 250m spatial scale",
-       x = NULL,
-       y = "Relative importance in environmnental scores") + 
+       x = "Relative importance in environmnental scores",
+       y = NULL) + 
   coord_flip() + 
   theme_bw() + 
   theme(legend.position = "none",
