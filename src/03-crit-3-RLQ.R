@@ -424,8 +424,6 @@ R_500_load <- RLQ_500$l1 %>%
   ) + 
   coord_cartesian(clip = "off") 
 
-R_load <- R_250_load + R_500_load
-
 # plots: species scores ---------------------------------------------------------------
 
 (L_250_load <- RLQ_250$mQ %>%
