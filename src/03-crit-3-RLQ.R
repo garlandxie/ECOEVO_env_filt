@@ -392,7 +392,37 @@ R_500_load <- RLQ_500$l1 %>%
   theme_bw() + 
   theme(axis.text.y = element_blank(), 
         legend.position = "none",
-        axis.title.x = element_text(size = 10))     
+        plot.margin  = unit(c(5, 5, 5, 5), "lines"),
+        axis.title.x = element_text(size = 10)) + 
+  annotation_custom(
+    more_urb,
+    ymin = -1,
+    ymax = -1,
+    xmin = 0.5,
+    xmax = 0.5
+  ) + 
+  annotation_custom(
+    less_urb,
+    ymin = -1,
+    ymax = -1,
+    xmin = -0.5,
+    xmax = -0.5
+  ) + 
+  annotation_custom(
+    less_urb_arrow,
+    ymin = -1,
+    ymax = -1,
+    xmin = -0.3,
+    xmax = 0
+  ) +
+  annotation_custom(
+    more_urb_arrow,
+    ymin = -1,
+    ymax = -1,
+    xmin = 0.3,
+    xmax = 0
+  ) + 
+  coord_cartesian(clip = "off") 
 
 R_load <- R_250_load + R_500_load
 
