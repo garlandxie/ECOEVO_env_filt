@@ -711,11 +711,22 @@ L <- L_250_load + L_500_load
 
 # PCA environmental variable loadings
 ggsave(
-  plot = R_load, 
+  plot = R_250_load, 
   filename = here(
     "output/figures/supp", 
-    "fig_sup_env_loadings.png"
+    "fig_sup_env_loadings_250.png"
     ),
+  device = "png",
+  height = 5, 
+  width = 8
+)
+
+ggsave(
+  plot = R_500_load, 
+  filename = here(
+    "output/figures/supp", 
+    "fig_sup_env_loadings_500.png"
+  ),
   device = "png",
   height = 5, 
   width = 8
