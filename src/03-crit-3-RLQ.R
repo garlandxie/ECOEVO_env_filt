@@ -327,7 +327,7 @@ R_250_load <- RLQ_250$l1 %>%
       yend = class)
     ) + 
   geom_vline(xintercept = 0, linetype = "dashed") + 
-  labs(title = "A) 250m spatial scale",
+  labs(title = NULL,
        x = "Relative importance in environmnental scores",
        y = NULL) + 
   theme_bw() + 
@@ -386,11 +386,11 @@ R_500_load <- RLQ_500$l1 %>%
       yend = class)
   )+   
   geom_vline(xintercept = 0, linetype = "dashed") + 
-  labs(title = "B) 500m spatial scale",
+  labs(title = NULL,
        x = "Relative importance in environmnental scores",
        y = NULL) + 
   theme_bw() + 
-  theme(axis.text.y = element_blank(), 
+  theme( 
         legend.position = "none",
         plot.margin  = unit(c(5, 5, 5, 5), "lines"),
         axis.title.x = element_text(size = 10)) + 
