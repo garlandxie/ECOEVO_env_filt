@@ -389,7 +389,6 @@ R_500_load <- RLQ_500$l1 %>%
   labs(title = "B) 500m spatial scale",
        x = "Relative importance in environmnental scores",
        y = NULL) + 
-  coord_flip() +
   theme_bw() + 
   theme(axis.text.y = element_blank(), 
         legend.position = "none",
