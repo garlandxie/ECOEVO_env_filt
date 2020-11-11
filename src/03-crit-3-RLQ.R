@@ -312,8 +312,8 @@ R_250_load <- RLQ_250$l1 %>%
     
     class = case_when(
       class == "prop_urb_250"   ~ "% Impervious surface", 
-      class == "prop_tree_250"  ~ "% Tree cover",
-      class == "prop_grass_250" ~ "% Grass cover"),
+      class == "prop_tree_250"  ~ "% Closed green cover",
+      class == "prop_grass_250" ~ "% Open green cover"),
     
     class = factor(class),
     class = fct_reorder(class, RS1)) %>%
