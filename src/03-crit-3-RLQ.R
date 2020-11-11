@@ -264,7 +264,7 @@ scree_500 <-
 
 scree <- scree_250 + scree_500
 
-# plots: env loadings  ---------------------------------------------------------
+# prep: grobs ------------------------------------------------------------------
 
 # set up grob objects to place text underneath the plots
 
@@ -274,8 +274,6 @@ more_urb <- textGrob(
     fontsize = 13
   )
 )
-
-
 
 less_urb <- textGrob(
   "Less Urban", 
@@ -289,11 +287,11 @@ less_urb_arrow <- linesGrob(
     type   = "open", 
     ends   = "first", 
     length = unit(3, "mm")
-    ),
+  ),
   gp = gpar(
     col = "black", 
     lwd = 1)
-  )
+)
 more_urb_arrow <- linesGrob(
   arrow = arrow(
     type   = "open", 
@@ -304,6 +302,8 @@ more_urb_arrow <- linesGrob(
     col = "black", 
     lwd = 1)
 )
+
+# plots: env loadings  ---------------------------------------------------------
   
 R_250_load <- RLQ_250$l1 %>%
   rownames_to_column(var = "class") %>%
