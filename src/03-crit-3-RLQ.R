@@ -338,6 +338,15 @@ R_250_load <- RLQ_250$l1 %>%
 R_500_load <- RLQ_500$l1 %>%
   rownames_to_column(var = "class") %>%
   select(class, RS1) %>%
+  mutate(
+    
+    class = case_when(
+      class == "prop_urb_500"   ~ "% Impervious surface", 
+      class == "prop_tree_500"  ~ "% Closed green cover",
+      class == "prop_grass_500" ~ "% Open green cover"),
+    
+    class = factor(class),
+    class = fct_reorder(class, RS1)) %>%
   ggplot(aes(x = class, y = RS1, fill = class)) + 
   geom_point() + 
   geom_segment(
