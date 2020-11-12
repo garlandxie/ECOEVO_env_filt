@@ -455,7 +455,7 @@ R_500_load <- RLQ_500$l1 %>%
        y = NULL) + 
   theme_bw() +
   theme(plot.margin  = unit(c(5, 5, 5, 5), "lines"),
-        axis.text.y  = element_text(size = 13),
+        axis.text.y  = element_text(size = 13, face = "italic"),
         axis.title.x = element_text(size = 13)) + 
    annotation_custom(
      more_urb,
@@ -482,7 +482,7 @@ R_500_load <- RLQ_500$l1 %>%
      more_urb_arrow,
      ymin = -5,
      ymax = -5,
-     xmin = 1,
+     xmin = 1.2,
      xmax = 0
    ) + 
    coord_cartesian(clip = "off") 
