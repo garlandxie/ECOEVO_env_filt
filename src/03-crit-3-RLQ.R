@@ -276,7 +276,7 @@ more_urb <- textGrob(
 )
 
 less_urb <- textGrob(
-  "Less Urban", 
+  "More Closed Green", 
   gp = gpar(
     fontsize = 13
   )
