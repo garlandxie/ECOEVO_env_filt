@@ -618,7 +618,7 @@ L <- L_250_load + L_500_load
      less_urb_arrow,
      ymin = -3,
      ymax = -3,
-     xmin = -2,
+     xmin = -1.8,
      xmax = 0
    ) +
    annotation_custom(
@@ -694,7 +694,7 @@ L <- L_250_load + L_500_load
       less_urb_arrow,
       ymin = -3,
       ymax = -3,
-      xmin = -2,
+      xmin = -1.8,
       xmax = 0
     ) +
   annotation_custom(
