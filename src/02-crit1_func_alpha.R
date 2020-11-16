@@ -128,6 +128,17 @@ less_arrow <- linesGrob(
     lwd = 1)
 )
 
+more_arrow <- linesGrob(
+  arrow = arrow(
+    type   = "open", 
+    ends   = "last", 
+    length = unit(3, "mm")
+  ),
+  gp = gpar(
+    col = "black", 
+    lwd = 1)
+)
+
 # plots ------------------------------------------------------------------------
 
 ses_mfd_tidy <- ses_mfd %>%
@@ -167,16 +178,6 @@ ses_mfd_habitat <- ses_mfd_tidy %>%
   theme_bw()
 )
 
-more_arrow <- linesGrob(
-  arrow = arrow(
-    type   = "open", 
-    ends   = "last", 
-    length = unit(3, "mm")
-  ),
-  gp = gpar(
-    col = "black", 
-    lwd = 1)
-)
 
 (ses_mfd_ugs <- ses_mfd_habitat %>%
     mutate(Habitat_type = case_when(
