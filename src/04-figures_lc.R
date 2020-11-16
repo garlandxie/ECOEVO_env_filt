@@ -247,7 +247,7 @@ tidy_500 <- tidy_500 %>%
    ) + 
    
    # legend
-   scale_shape_discrete(name = "UGS type") + 
+   scale_shape_discrete(name = "Urban Green Space") + 
    
    # theme
    theme_bw() +
@@ -268,7 +268,7 @@ tidy_500 <- tidy_500 %>%
       aes(
         x = Longitude, 
         y = Latitude, 
-        color = Habitat_type
+        shape = Habitat_type
       ),
       size = 2,
       width = 0.01
@@ -290,7 +290,7 @@ tidy_500 <- tidy_500 %>%
     ) + 
     
     # legend
-    scale_color_discrete(name = "UGS type") + 
+    scale_shape_discrete(name = "Urban Green Space") + 
     
     # theme
     theme_bw() + 
