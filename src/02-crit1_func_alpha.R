@@ -101,6 +101,33 @@ colnames(ses_mfd) <-
 # how many sites have 1 species?
 sum(ses_mfd$ntaxa != 1)
 
+# grobs: set up arrows ---------------------------------------------------------
+
+cluster <- textGrob(
+  "Clustering", 
+  gp = gpar(
+    fontsize = 12
+  )
+)
+
+over_disp <- textGrob(
+  "Overdispersion", 
+  gp = gpar(
+    fontsize = 12
+  )
+)
+
+less_arrow <- linesGrob(
+  arrow = arrow(
+    type   = "open", 
+    ends   = "first", 
+    length = unit(3, "mm")
+  ),
+  gp = gpar(
+    col = "black", 
+    lwd = 1)
+)
+
 # plots ------------------------------------------------------------------------
 
 ses_mfd_tidy <- ses_mfd %>%
@@ -138,31 +165,6 @@ ses_mfd_habitat <- ses_mfd_tidy %>%
   labs(x = "p-value", 
        y= "ses.MFD") + 
   theme_bw()
-)
-
-cluster <- textGrob(
-  "Clustering", 
-  gp = gpar(
-    fontsize = 12
-  )
-)
-
-over_disp <- textGrob(
-  "Overdispersion", 
-  gp = gpar(
-    fontsize = 12
-  )
-)
-
-less_arrow <- linesGrob(
-  arrow = arrow(
-    type   = "open", 
-    ends   = "first", 
-    length = unit(3, "mm")
-  ),
-  gp = gpar(
-    col = "black", 
-    lwd = 1)
 )
 
 more_arrow <- linesGrob(
