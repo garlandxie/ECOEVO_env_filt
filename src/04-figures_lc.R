@@ -226,7 +226,7 @@ tidy_500 <- tidy_500 %>%
      aes(
        x = Longitude, 
        y = Latitude, 
-       color = Habitat_type
+       shape = Habitat_type
      ),
      size = 2
    ) + 
@@ -247,7 +247,7 @@ tidy_500 <- tidy_500 %>%
    ) + 
    
    # legend
-   scale_color_discrete(name = "UGS type") + 
+   scale_shape_discrete(name = "UGS type") + 
    
    # theme
    theme_bw() +
