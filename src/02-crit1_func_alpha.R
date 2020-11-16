@@ -162,23 +162,6 @@ ses_mfd_habitat <- ses_mfd_tidy %>%
     p_value, 
     Habitat_type)
 
-(crit1_mfd <- ses_mfd_tidy %>%
-  ggplot(aes(x = p_value, y = ses_mfd)) +
-  geom_point() + 
-  gghighlight(p_value < 0.05) + 
-  geom_hline(yintercept = 0, linetype = "dashed") + 
-  geom_vline(xintercept = 0.05, linetype = "dashed") +
-  geom_rect(ymin = -4, ymax = 0,
-            xmin = 0, xmax = 0.05,
-            alpha = 0.01,
-            fill = "red") + 
-  ylim(-4, 2) + 
-  labs(x = "p-value", 
-       y= "ses.MFD") + 
-  theme_bw()
-)
-
-
 (ses_mfd_ugs <- ses_mfd_habitat %>%
     mutate(Habitat_type = case_when(
       Habitat_type == "Community" ~ "Community Garden",
@@ -252,17 +235,6 @@ write.csv(
 )
 
 # plots
-ggsave(filename = 
-         here(
-           "output/figures/main",
-           "fig-crit1.png"
-         ),
-       plot = crit1_mfd,
-       width  = 7, 
-       height = 4,
-       device = "png"
-       )
-
 ggsave(filename = 
          here(
            "output/figures/main",
