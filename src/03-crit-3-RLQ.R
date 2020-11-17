@@ -327,7 +327,7 @@ R_250_load <- RLQ_250$l1 %>%
       yend = class)
     ) + 
   geom_vline(xintercept = 0, linetype = "dashed") + 
-  labs(title = NULL,
+  labs(title = "250 m spatial scale",
        x = "Relative importance in environmnental scores",
        y = NULL) + 
   theme_bw() + 
@@ -352,7 +352,7 @@ R_250_load <- RLQ_250$l1 %>%
     less_urb_arrow,
     ymin = -1,
     ymax = -1,
-    xmin = -0.3,
+    xmin = -0.2,
     xmax = 0
   ) +
   annotation_custom(
@@ -386,7 +386,7 @@ R_500_load <- RLQ_500$l1 %>%
       yend = class)
   )+   
   geom_vline(xintercept = 0, linetype = "dashed") + 
-  labs(title = NULL,
+  labs(title = "500 m spatial scale ",
        x = "Relative importance in environmnental scores",
        y = NULL) + 
   theme_bw() + 
@@ -412,7 +412,7 @@ R_500_load <- RLQ_500$l1 %>%
     less_urb_arrow,
     ymin = -1,
     ymax = -1,
-    xmin = -0.3,
+    xmin = -0.2,
     xmax = 0
   ) +
   annotation_custom(
