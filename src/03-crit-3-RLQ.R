@@ -450,7 +450,7 @@ R_500_load <- RLQ_500$l1 %>%
     ), 
     alpha = 0.5) + 
   geom_vline(xintercept = 0, linetype = "dashed") + 
-  labs(title = "250m spatial scale",
+  labs(title = "250 m spatial scale",
        x = "Relative importance in normed species scores",
        y = NULL) + 
   theme_bw() +
@@ -512,7 +512,7 @@ L_500_load <- RLQ_500$mQ %>%
     ), 
     alpha = 0.5) + 
   geom_vline(xintercept = 0, linetype = "dashed") + 
-  labs(title = "500m spatial scale",
+  labs(title = "500 m spatial scale",
        x = "Relative importance in normed species scores",
        y = NULL) + 
   theme_bw() + 
@@ -593,7 +593,7 @@ L <- L_250_load + L_500_load
     alpha = 0.5) + 
   xlim(-3, 3) + 
   geom_vline(xintercept = 0, linetype = "dashed") + 
-  labs(title = "250m spatial scale",
+  labs(title = "250 m spatial scale",
        y = NULL,
        x = "Relative importance in trait scores") + 
   theme_bw() + 
@@ -668,7 +668,7 @@ L <- L_250_load + L_500_load
     alpha = 0.5) + 
   geom_vline(xintercept = 0, linetype = "dashed") + 
   xlim(-3, 3) +   
-  labs(title = "500m spatial scale",
+  labs(title = "500 m spatial scale",
        y = NULL,
        x = "Relative importance in trait scores") + 
   theme_bw() + 
