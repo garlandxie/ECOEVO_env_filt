@@ -165,8 +165,9 @@ ses_mfd_habitat <- ses_mfd_tidy %>%
 (ses_mfd_ugs <- ses_mfd_habitat %>%
     mutate(Habitat_type = case_when(
       Habitat_type == "Community" ~ "Community Garden",
-      Habitat_type == "Roof"     ~ "Green Roof",
-      Habitat_type == "Garden"   ~ "Home Garden",
+      Habitat_type == "Roof"      ~ "Green Roof",
+      Habitat_type == "Garden"    ~ "Home Garden",
+      Habitat_type == "Park"      ~ "Public Park",
       TRUE ~ Habitat_type )
       ) %>%
   ggplot(aes(y = Habitat_type, x = ses_mfd)) + 
