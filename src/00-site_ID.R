@@ -1,3 +1,29 @@
+################################################################################
+# Accompanying code for the paper: 
+#   No environmental filtering of wasps and bees during urbanization
+#
+# Paper authors: 
+#   Garland Xie          (1), 
+#   Nicholas Sookhan     (1), 
+#   Kelly Carscadden     (2), 
+#   and J. Scott MacIvor (1)
+#
+# Corresponding authors for this script:  
+#   Garland Xie      (1)
+#   Nicholas Sookhan (2)
+#
+# Affiliations: 
+#   (1) Department of Biological Sciences, 
+#       University of Toronto Scarborough,
+#       1265 Military Trail, Toronto, ON, M1C 1A4, Canada
+#       email: garland.xie@mail.utoronto.ca, 
+#              nicholas.sookhan@mail.utoronto.ca
+#              scott.macivor@mail.utoronto.ca
+#   (2) Department of Ecology and Evolutionary Biology,
+#       University of Colorado Boulder,
+#
+# Purpose of this R script: to encrypt confidential site data
+
 # libraries --------------------------------------------------------------------
 library(readxl)    # for reading excel files  
 library(stringi)   # for creating random strings of characters
