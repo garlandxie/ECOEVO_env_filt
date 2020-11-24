@@ -1,7 +1,8 @@
-library(readxl)
-library(stringi)
-library(here)
-library(dplyr)
+# libraries --------------------------------------------------------------------
+library(readxl)    # for reading excel files  
+library(stringi)   # for creating random strings of characters
+library(here)      # for creating relative file paths 
+library(dplyr)     # for manipulating our data 
 
 # import -----------------------------------------------------------------------
 site <- readxl::read_excel(
