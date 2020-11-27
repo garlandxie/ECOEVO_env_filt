@@ -210,7 +210,12 @@ lm_250_v2 <- update(lm_250_v1, ~. -prop_tree_250)
 vif(lm_250_v2)
 
 # get summary
-summary(lm_250_v2)
+sum_250 <- summary(lm_250_v2)
+
+# one-tailed hypothesis test
+# H0: beta >= 0
+# H1: beta < 0
+pt(coef(sum_250)[, 3], lm_250_v2$df, lower = TRUE)
 
 # show model diagnostics in a non-interactive manner 
 plot(lm_250_v2, which = c(1))
@@ -219,6 +224,7 @@ plot(lm_250_v2, which = c(3))
 plot(lm_250_v2, which = c(4))
 plot(lm_250_v2, which = c(5))
 plot(lm_250_v2, which = c(6))
+
 
 # hypothesis testing: multiple regression (500m) -------------------------------
 
