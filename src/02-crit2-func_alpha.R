@@ -238,7 +238,12 @@ lm_500_v2 <- update(lm_500_v1, ~. -prop_tree_500)
 vif(lm_500_v2)
 
 # get summary
-summary(lm_500_v2)
+sum_500 <- summary(lm_500_v2)
+
+# one-tailed hypothesis test
+# H0: beta >= 0
+# H1: beta < 0
+pt(coef(sum_500)[, 3], lm_500_v2$df, lower = TRUE)
 
 # show model diagnostics in a non-interactive manner 
 plot(lm_500_v2, which = c(1))
