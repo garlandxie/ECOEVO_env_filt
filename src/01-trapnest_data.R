@@ -83,7 +83,7 @@ all_years <- site %>%
 (hist_bees_ab <- int_tidy %>%
   filter(taxa_ls == "Bee", id %in% all_years) %>%
   group_by(id, year) %>%
-  summarize(sum_broods = sum(no_broodcells)) %>%
+  summarize(sum_broods = sum(no_alive)) %>%
   ggplot(aes(x = sum_broods)) + 
   geom_histogram(binwidth = 1) + 
   ylim(0, 10) + 
@@ -99,7 +99,7 @@ all_years <- site %>%
 (hist_wasp_ab <- int_tidy %>%
   filter(taxa_ls == "Wasp", id %in% all_years) %>%
   group_by(id, year) %>%
-  summarize(sum_broods = sum(no_broodcells)) %>%
+  summarize(sum_broods = sum(no_alive)) %>%
   ggplot(aes(x = sum_broods)) + 
   geom_histogram(binwidth = 1) + 
   facet_wrap(~year) + 
@@ -114,7 +114,7 @@ all_years <- site %>%
 (hist_total_ab <- int_tidy %>%
     filter(id %in% all_years) %>%
     group_by(id, year) %>%
-    summarize(sum_broods = sum(no_broodcells)) %>%
+    summarize(sum_broods = sum(no_alive)) %>%
     ggplot(aes(x = sum_broods)) + 
     geom_histogram(binwidth = 1) + 
     facet_wrap(~year) + 
@@ -199,7 +199,7 @@ all_years <- site %>%
 broods <- int_tidy %>%
   filter(id %in% all_years) %>%
   group_by(id, lower_species) %>%
-  summarize(total_alive = sum(no_broodcells)) %>%
+  summarize(total_alive = sum(no_alive)) %>%
   pivot_wider(names_from = lower_species, values_from = total_alive) %>%
   ungroup() %>%
   mutate(across(everything(), ~replace_na(., 0))) %>%
@@ -236,6 +236,3 @@ ggsave(
   height = 5, 
   width  = 5
 )
-
-
-
