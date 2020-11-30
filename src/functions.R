@@ -38,3 +38,37 @@ calc_Stats <- function(l, buffer) {
   
   return(metrics_pland)
 }
+
+# Calculate proportion of missing cells
+
+calc_prop_miss <- function(l, buffer) {
+  
+  clip1 <- raster::crop(l, extent(buffer))
+  clip2 <- raster::rasterize(buffer, clip1, mask = TRUE)
+
+  if(raster::cellStats(clip2 > 0, stat = "sum") == 0) {
+    
+    # if there are no populated cells
+    metric_calc <- NA
+    prop_missing <- data.frame(
+      "id" = buffer$ID,
+      "prop_missing" = 1)
+    clip2 <- NA
+    
+  } else{
+    
+    # create mask
+    clip3 <- rasterize(buffer, setValues(clip1, 1), mask = TRUE)
+    
+    # calculate metrics 
+    prop_missing <- 1 - cellStats(!is.na(clip2), sum) / cellStats(clip3, sum)
+    prop_missing <- data.frame(
+      "id" = buffer$ID,
+      "prop_missing" = prop_missing)
+  }
+  
+ return(prop_missing)
+  
+}
+  
+  
