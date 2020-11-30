@@ -23,6 +23,8 @@
 #       University of Colorado Boulder,
 #
 # Purpose of this R script: to clean up data for the land cover metrics 
+#
+# IMPORTANT: Running this code is a bit slow (approx. 15 minutes).
 
 # libraries --------------------------------------------------------------------
 library(here)              # for creating relative file-paths
