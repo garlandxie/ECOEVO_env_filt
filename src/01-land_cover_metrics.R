@@ -32,7 +32,7 @@ library(readxl)            # for importing excel files
 library(landscapemetrics)  # for calculating landscape composition metrics
 library(dplyr)             # for manipulating data frames
 library(tidyr)             # for pivoting tables from long to wide format
-
+library(rgdal)
 # import -----------------------------------------------------------------------
 
 # land cover data
@@ -105,6 +105,7 @@ for (k in 1:length(buffer_250)) {
   pland_250[[k]] <- calc_Stats(l = lc, buffer = buffer_250[[k]])
 }
 
+
 land_use_250 <- do.call("rbind", pland_250) %>%
   dplyr::select(class,
                 id, 
@@ -116,17 +117,42 @@ pland_500 <- list(rep(NA, times = length(buffer_500)))
 
 for (i in 1:length(buffer_500)) {
     pland_500[[i]] <- calc_Stats(l = lc, buffer = buffer_500[[i]])
-  }
+}
+
+
 
 land_use_500 <- do.call("rbind", pland_500) %>%
   dplyr::select(class,
          id, 
          "prop_land_use" = value)
+
+# calc missing data: 250 -------------------------------------------------------
+
+prop_miss_250 <- list(rep(NA, times = length(buffer_250)))
+
+for (k in 1:length(buffer_250)) {
+  prop_miss_250[[k]] <- calc_prop_miss(l = lc, buffer = buffer_250[[k]])
+}
+
+prop_miss_250 <- do.call("rbind", prop_miss_250)
+
+# calc missing data: 500 -------------------------------------------------------
+
+prop_miss_500 <- list(rep(NA, times = length(buffer_500)))
+
+for (k in 1:length(buffer_500)) {
+  prop_miss_500[[k]] <- calc_prop_miss(l = lc, buffer = buffer_500[[k]])
+}
+
+prop_miss_500 <- do.call("rbind", prop_miss_500)
   
 # clean: land cover ------------------------------------------------------------
 
+miss_sites_250 <- prop_miss_250[prop_miss_250$prop_missing < 0.3,]
+
 # 250m
 lw_250 <- land_use_250 %>% 
+  filter(id %in% miss_sites_250$id) %>%
   select(class, id, prop_land_use) %>%
   pivot_wider(names_from = class, values_from = prop_land_use) %>% 
   select(site = `id`,
@@ -142,9 +168,12 @@ lw_250 <- land_use_250 %>%
   mutate(prop_urb_250 = prop_roads_250 + prop_paved_250 + prop_build_250,
          across(where(is.numeric), ~replace_na(., 0)))
 
+miss_sites_500 <- prop_miss_250[prop_miss_500$prop_missing < 0.3,]
+
 # 500m
 lw_500 <- land_use_500 %>% 
   select(class, id, prop_land_use) %>%
+  filter(id %in% miss_sites_250$id) %>%
   pivot_wider(names_from = class, values_from = prop_land_use) %>% 
   select(site = `id`,
          prop_tree_500 = `1`,
@@ -188,6 +217,3 @@ write.csv(l_500,
             "data/working", 
             "land_use_500.csv")
           )
-
-
-
