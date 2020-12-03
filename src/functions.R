@@ -70,5 +70,21 @@ calc_prop_miss <- function(l, buffer) {
  return(prop_missing)
   
 }
+
+
+calc_pland <- function(l, buffer) {
+  
+  clip1 <- raster::crop(l, extent(buffer))
+  clip2 <- raster::rasterize(buffer, clip1, mask = TRUE)
+  
+  f <- freq(clip2)
+  f <- data.frame(f)
+  f <- subset(f, value %in% c(1:7))
+  f$area <- f$count * 0.6 
+
+  p <- data.frame(f, p = f[,2]/sum(f[, 2]))
+  
+  return(metrics_pland)
+}
   
   
