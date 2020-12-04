@@ -174,19 +174,17 @@ lw_250 <- land_use_250 %>%
 
 # 500m
 lw_500 <- land_use_500 %>% 
-  select(class, id, prop_land_use) %>%
-  pivot_wider(names_from = class, values_from = prop_land_use) %>% 
-  select(site = `id`,
-         prop_tree_500 = `1`,
-         prop_grass_500 = `2`,
-         prop_earth_500 = `3`,
-         prop_water_500 = `4`,
-         prop_build_500 = `5`,
-         prop_roads_500 = `6`,
-         prop_paved_500 = `7`,
-         prop_agri_500  = `8`
+  select(value, ID, percent_class) %>%
+  pivot_wider(names_from = value, values_from = percent_class) %>% 
+  select(site = `ID`,
+         perc_tree_500 = `1`,
+         perc_grass_500 = `2`,
+         perc_earth_500 = `3`,
+         perc_build_500 = `5`,
+         perc_roads_500 = `6`,
+         perc_paved_500 = `7`
   ) %>%
-  mutate(prop_urb_500 = prop_roads_500 + prop_paved_500 + prop_build_500,
+  mutate(perc_urb_500 = perc_roads_500 + perc_paved_500 + perc_build_500,
          across(where(is.numeric), ~replace_na(., 0)))
 
 # clean: remove sites  ---------------------------------------------------------
