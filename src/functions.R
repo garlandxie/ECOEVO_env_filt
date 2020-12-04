@@ -54,7 +54,7 @@ calc_pland <- function(l, buffer) {
   # cell size is 0.6 m (projected coordinated system)
   f$area <- f$count * 0.6 
   
-  # calculate proportion of land cover class
+  # calculate percent of land cover class
   p <- data.frame(f, p = (f[,2]/sum(f[, 2])*100))
   
   return(p)
