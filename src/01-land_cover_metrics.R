@@ -117,12 +117,7 @@ for (i in 1:length(buffer_500)) {
     pland_500[[i]] <- calc_pland(l = lc, buffer = buffer_500[[i]])
 }
 
-
-
-land_use_500 <- do.call("rbind", pland_500) %>%
-  dplyr::select(class,
-         id, 
-         "prop_land_use" = value)
+land_use_500 <- do.call("rbind", pland_500)
 
 # calc missing data: 250 -------------------------------------------------------
 
