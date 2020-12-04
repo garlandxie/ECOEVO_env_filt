@@ -28,16 +28,22 @@
 # (7) other paved surfaces, 
 # (8) agriculture 
 
-calc_Stats <- function(l, buffer) {
+
+calc_pland <- function(l, buffer) {
   
   clip1 <- raster::crop(l, extent(buffer))
   clip2 <- raster::rasterize(buffer, clip1, mask = TRUE)
   
-  metrics_pland    <- landscapemetrics::lsm_c_pland(clip2)
-  metrics_pland$id <- buffer$ID
+  f <- freq(clip2)
+  f <- data.frame(f)
+  f <- subset(f, value %in% c(1:7))
+  f$area <- f$count * 0.6 
   
-  return(metrics_pland)
+  p <- data.frame(f, p = f[,2]/sum(f[, 2]))
+  
+  return(p)
 }
+
 
 # Calculate proportion of missing cells
 
@@ -72,19 +78,5 @@ calc_prop_miss <- function(l, buffer) {
 }
 
 
-calc_pland <- function(l, buffer) {
-  
-  clip1 <- raster::crop(l, extent(buffer))
-  clip2 <- raster::rasterize(buffer, clip1, mask = TRUE)
-  
-  f <- freq(clip2)
-  f <- data.frame(f)
-  f <- subset(f, value %in% c(1:7))
-  f$area <- f$count * 0.6 
-
-  p <- data.frame(f, p = f[,2]/sum(f[, 2]))
-  
-  return(metrics_pland)
-}
   
   
