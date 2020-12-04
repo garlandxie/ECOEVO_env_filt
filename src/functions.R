@@ -43,6 +43,9 @@ calc_pland <- function(l, buffer) {
   # coerce from matrix to data-frame for data cleaning
   f <- data.frame(f)
   
+  # attach buffer ID for database management
+  f$ID <- buffer$ID
+  
   # remove missing cells
   # remove water land cover class (not a landscape modification)
   f <- subset(f, value %in% c(1:7))
