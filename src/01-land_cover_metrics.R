@@ -159,7 +159,6 @@ prop_miss_500 <- do.call("rbind", prop_miss_500)
 
 # 250m
 lw_250 <- land_use_250 %>% 
-  filter(id %in% miss_sites_250$id) %>%
   select(class, id, prop_land_use) %>%
   pivot_wider(names_from = class, values_from = prop_land_use) %>% 
   select(site = `id`,
@@ -178,7 +177,6 @@ lw_250 <- land_use_250 %>%
 # 500m
 lw_500 <- land_use_500 %>% 
   select(class, id, prop_land_use) %>%
-  filter(id %in% miss_sites_250$id) %>%
   pivot_wider(names_from = class, values_from = prop_land_use) %>% 
   select(site = `id`,
          prop_tree_500 = `1`,
