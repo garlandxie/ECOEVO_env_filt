@@ -31,14 +31,27 @@
 
 calc_pland <- function(l, buffer) {
   
+  # crop the raster to a specific buffer
   clip1 <- raster::crop(l, extent(buffer))
+  
+  # get the geometry of a buffer
   clip2 <- raster::rasterize(buffer, clip1, mask = TRUE)
   
+  # count the number of pixels per CLASS in the buffer
   f <- freq(clip2)
+  
+  # coerce from matrix to data-frame for data cleaning
   f <- data.frame(f)
+  
+  # remove missing cells
+  # remove water land cover class (not a landscape modification)
   f <- subset(f, value %in% c(1:7))
+  
+  # calculate the total area of each CLASS in the buffer
+  # cell size is 0.6 m (projected coordinated system)
   f$area <- f$count * 0.6 
   
+  # calculate proportion of land cover class
   p <- data.frame(f, p = f[,2]/sum(f[, 2]))
   
   return(p)
