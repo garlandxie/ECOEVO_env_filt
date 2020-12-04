@@ -96,7 +96,7 @@ overl_500 <- unlist(lapply(buffer_500,
                            function(x) class(raster::intersect(extent(lc),x))=="Extent"
                            )
                    )
-# get insersecting buffers
+# get intersecting buffers
 buffer_500 <- buffer_500[overl_500]
 
 # landscape composition: 250 spatial scale -------------------------------------
@@ -104,21 +104,17 @@ buffer_500 <- buffer_500[overl_500]
 pland_250 <- list(rep(NA, times = length(buffer_250)))
 
 for (k in 1:length(buffer_250)) {
-  pland_250[[k]] <- calc_Stats(l = lc, buffer = buffer_250[[k]])
+  pland_250[[k]] <- calc_pland(l = lc, buffer = buffer_250[[k]])
 }
 
-
-land_use_250 <- do.call("rbind", pland_250) %>%
-  dplyr::select(class,
-                id, 
-                "prop_land_use" = value)
+land_use_250 <- do.call("rbind", pland_250) 
 
 # landscape composition: 500m spatial scale ------------------------------------
 
 pland_500 <- list(rep(NA, times = length(buffer_500)))
 
 for (i in 1:length(buffer_500)) {
-    pland_500[[i]] <- calc_Stats(l = lc, buffer = buffer_500[[i]])
+    pland_500[[i]] <- calc_pland(l = lc, buffer = buffer_500[[i]])
 }
 
 
@@ -137,6 +133,22 @@ for (k in 1:length(buffer_250)) {
 }
 
 prop_miss_250 <- do.call("rbind", prop_miss_250)
+
+# sites
+
+# 102 = "nSPob" (boundary edge) water
+# 36 = "BW4HD" (boundary edge) water
+# 166 - "XvuFi" (odd) water
+# 58 - fLwK1 (boundary)
+# 87 - LOMxN (boundary edge)
+# 156 -  vtkfe (boundary edge)
+# 47 - E3dsm (boundary edge)
+# 90 - Lwe2a (boundary edge)
+# 75 - iMm0w (boundary)
+# 38 - CAgNl (boundary)
+# 41 - Ci7F8 (boundary)
+# 73 - IBsVs (boundary)
+# 105 - OUdi4 (odd)
 
 # calc missing data: 500 -------------------------------------------------------
 
