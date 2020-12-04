@@ -48,7 +48,7 @@ calc_pland <- function(l, buffer) {
   
   # remove missing cells
   # remove water land cover class (not a landscape modification)
-  f <- subset(f, value %in% c(1:7))
+  f <- subset(f, value %in% c(1,2,3,5,6,7))
   
   # calculate the total area of each CLASS in the buffer
   # cell size is 0.6 m (projected coordinated system)
