@@ -55,7 +55,7 @@ calc_pland <- function(l, buffer) {
   f$area <- f$count * 0.6 
   
   # calculate percent of land cover class
-  p <- data.frame(f, p = (f[,2]/sum(f[, 2])*100))
+  p <- data.frame(f, percent_class = (f[,2]/sum(f[, 2])*100))
   
   return(p)
 }
