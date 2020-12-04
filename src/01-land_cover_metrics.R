@@ -157,8 +157,6 @@ prop_miss_500 <- do.call("rbind", prop_miss_500)
   
 # clean: land cover ------------------------------------------------------------
 
-miss_sites_250 <- prop_miss_250[prop_miss_250$prop_missing < 0.3,]
-
 # 250m
 lw_250 <- land_use_250 %>% 
   filter(id %in% miss_sites_250$id) %>%
@@ -176,8 +174,6 @@ lw_250 <- land_use_250 %>%
   ) %>%
   mutate(prop_urb_250 = prop_roads_250 + prop_paved_250 + prop_build_250,
          across(where(is.numeric), ~replace_na(., 0)))
-
-miss_sites_500 <- prop_miss_250[prop_miss_500$prop_missing < 0.3,]
 
 # 500m
 lw_500 <- land_use_500 %>% 
