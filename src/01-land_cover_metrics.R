@@ -159,19 +159,17 @@ prop_miss_500 <- do.call("rbind", prop_miss_500)
 
 # 250m
 lw_250 <- land_use_250 %>% 
-  select(class, id, prop_land_use) %>%
-  pivot_wider(names_from = class, values_from = prop_land_use) %>% 
-  select(site = `id`,
-         prop_tree_250   = `1`,
-         prop_grass_250  = `2`,
-         prop_earth_250  = `3`,
-         prop_water_250  = `4`,
-         prop_build_250  = `5`,
-         prop_roads_250  = `6`,
-         prop_paved_250  = `7`,
-         prop_agri_250   = `8`
+  select(value, ID, percent_class) %>%
+  pivot_wider(names_from = value, values_from = percent_class) %>% 
+  select(site = `ID`,
+         perc_tree_250   = `1`,
+         perc_grass_250  = `2`,
+         perc_earth_250  = `3`,
+         perc_build_250  = `5`,
+         perc_roads_250  = `6`,
+         perc_paved_250  = `7`
   ) %>%
-  mutate(prop_urb_250 = prop_roads_250 + prop_paved_250 + prop_build_250,
+  mutate(perc_urb_250 = perc_roads_250 + perc_paved_250 + perc_build_250,
          across(where(is.numeric), ~replace_na(., 0)))
 
 # 500m
