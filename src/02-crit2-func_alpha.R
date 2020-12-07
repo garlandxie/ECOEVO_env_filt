@@ -76,9 +76,9 @@ reg_250 <-  ses_mfd %>%
          mfd.obs,
          ses_mfd, 
          p_value,
-         prop_tree_250, 
-         prop_grass_250, 
-         prop_urb_250) %>%
+         perc_tree_250, 
+         perc_grass_250, 
+         perc_urb_250) %>%
   
   filter(
     
@@ -86,9 +86,9 @@ reg_250 <-  ses_mfd %>%
     !is.na(ses_mfd),
     
     # remove sites that are outside TO boundary
-    !is.na(prop_tree_250)  &
-    !is.na(prop_grass_250) & 
-    !is.na(prop_urb_250)  
+    !is.na(perc_tree_250)  &
+    !is.na(perc_grass_250) & 
+    !is.na(perc_urb_250)  
   )
 
 reg_500 <- ses_mfd %>%
@@ -103,9 +103,9 @@ reg_500 <- ses_mfd %>%
          mfd.obs,
          ses_mfd, 
          p_value,
-         prop_tree_500, 
-         prop_grass_500, 
-         prop_urb_500) %>%
+         perc_tree_500, 
+         perc_grass_500, 
+         perc_urb_500) %>%
   
   filter(
   
@@ -113,9 +113,9 @@ reg_500 <- ses_mfd %>%
     !is.na(ses_mfd),
     
     # remove sites outside TO boundary
-    !is.na(prop_tree_500)  &
-    !is.na(prop_grass_500) & 
-    !is.na(prop_urb_500)  
+    !is.na(perc_tree_500)  &
+    !is.na(perc_grass_500) & 
+    !is.na(perc_urb_500)  
     )
 
 # exploratory data analysis: relationships between X and Y variables -----------
@@ -126,21 +126,21 @@ reg_500 <- ses_mfd %>%
 
 # 250 m
 reg_250 %>%
-  ggplot(aes(x = prop_urb_250, y = ses_mfd)) + 
+  ggplot(aes(x = perc_urb_250, y = ses_mfd)) + 
   geom_smooth(method = "loess", se = FALSE) + 
   geom_point() + 
   labs(x = "Percent impervious surface (250m)",
        y = "ses MFD")
 
 reg_250 %>%
-  ggplot(aes(x = prop_tree_250, y = ses_mfd)) + 
+  ggplot(aes(x = perc_tree_250, y = ses_mfd)) + 
   geom_smooth(method = "loess", se = FALSE) + 
   geom_point() + 
   labs(x = "Percent tree cover (250m)",
        y = "ses MFD")
 
 reg_250 %>%
-  ggplot(aes(x = prop_grass_250, y = ses_mfd)) + 
+  ggplot(aes(x = perc_grass_250, y = ses_mfd)) + 
   geom_smooth(method = "loess", se = FALSE) + 
   geom_point() + 
   labs(x = "Percent grass cover (250m)",
@@ -148,21 +148,21 @@ reg_250 %>%
 
 # 500m
 reg_500 %>%
-  ggplot(aes(x = prop_urb_500, y = ses_mfd)) + 
+  ggplot(aes(x = perc_urb_500, y = ses_mfd)) + 
   geom_smooth(method = "loess", se = FALSE) + 
   geom_point() + 
   labs(x = "Percent impervious surface (500m)",
        y = "ses MFD")
 
 reg_500 %>%
-  ggplot(aes(x = prop_tree_500, y = ses_mfd)) + 
+  ggplot(aes(x = perc_tree_500, y = ses_mfd)) + 
   geom_smooth(method = "loess", se = FALSE) + 
   geom_point() + 
   labs(x = "Percent tree cover (500m)",
        y = "ses MFD")
 
 reg_500 %>%
-  ggplot(aes(x = prop_grass_500, y = ses_mfd)) + 
+  ggplot(aes(x = perc_grass_500, y = ses_mfd)) + 
   geom_smooth(method = "loess", se = FALSE) + 
   geom_point() + 
   labs(x = "Percent grass cover (500m)",
@@ -183,30 +183,30 @@ reg_250 %>%
 # Pearson's correlation matrix for 250m
 pairs_250 <- reg_250 %>%
   select(
-    "% Closed Green"  = prop_tree_250, 
-    "% Open Green" = prop_grass_250,
-    "% Impervious" = prop_urb_250) %>%
+    "% Closed Green"  = perc_tree_250, 
+    "% Open Green" = perc_grass_250,
+    "% Impervious" = perc_urb_250) %>%
   ggpairs() + 
   labs(title = "250m spatial scale")
 
 # Pearson's correlation matrix for 500m
 pairs_500 <- reg_500 %>%
   select(
-    "% Closed Green"  = prop_tree_500, 
-    "% Open Green" = prop_grass_500,
-    "% Impervious" = prop_urb_500) %>%
+    "% Closed Green"  = perc_tree_500, 
+    "% Open Green" = perc_grass_500,
+    "% Impervious" = perc_urb_500) %>%
   ggpairs() + 
   labs(title = "500m spatial scale")
 
 # hypothesis testing: multiple regression (250m) -------------------------------
 
 # first fit
-lm_250_v1 <- lm(ses_mfd ~ prop_grass_250 + prop_tree_250 + prop_urb_250, 
+lm_250_v1 <- lm(ses_mfd ~ perc_grass_250 + perc_tree_250 + perc_urb_250, 
              data = reg_250)
 vif(lm_250_v1)
 
 # remove tree cover
-lm_250_v2 <- update(lm_250_v1, ~. -prop_tree_250)
+lm_250_v2 <- update(lm_250_v1, ~. -perc_tree_250)
 vif(lm_250_v2)
 
 # get summary
@@ -229,12 +229,12 @@ plot(lm_250_v2, which = c(6))
 # hypothesis testing: multiple regression (500m) -------------------------------
 
 # first fit
-lm_500_v1 <- lm(ses_mfd ~ prop_grass_500 + prop_tree_500 + prop_urb_500, 
+lm_500_v1 <- lm(ses_mfd ~ perc_grass_500 + perc_tree_500 + perc_urb_500, 
              data = reg_500)
 vif(lm_500_v1)
 
 # remove tree cover
-lm_500_v2 <- update(lm_500_v1, ~. -prop_tree_500)
+lm_500_v2 <- update(lm_500_v1, ~. -perc_tree_500)
 vif(lm_500_v2)
 
 # get summary
@@ -307,10 +307,10 @@ rq_lab_500 <- bquote("Adj-R"^2: .(format(rq_500, digits = 2)))
   select(site, 
          ses_mfd, 
          p_value, 
-         prop_urb_250) %>%
-  mutate(pred_urb_250 = predict(lm_250_v2, terms = "prop_urb_250"),
+         perc_urb_250) %>%
+  mutate(pred_urb_250 = predict(lm_250_v2, terms = "perc_urb_250"),
          part_urb_250 = pred_urb_250 + resid(lm_250_v2)) %>%
-  ggplot(aes(x = prop_urb_250, y = part_urb_250)) + 
+  ggplot(aes(x = perc_urb_250, y = part_urb_250)) + 
   geom_point() + 
   gghighlight(p_value < 0.05, use_direct_label = FALSE) + 
   geom_hline(yintercept = 0) + 
@@ -329,13 +329,13 @@ rq_lab_500 <- bquote("Adj-R"^2: .(format(rq_500, digits = 2)))
   select(
          ses_mfd, 
          p_value, 
-         prop_urb_500
+         perc_urb_500
          ) %>%
-  mutate(pred_urb_500 = predict(lm_500_v2, terms = "prop_urb_500"),
+  mutate(pred_urb_500 = predict(lm_500_v2, terms = "perc_urb_500"),
          part_urb_500 = pred_urb_500 + resid(lm_500_v2)) %>%
   ggplot(
     aes(
-      x = prop_urb_500, 
+      x = perc_urb_500, 
       y = part_urb_500
       )
     ) + 
