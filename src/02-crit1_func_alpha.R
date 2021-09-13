@@ -44,22 +44,24 @@ comm <- read.csv(
 
 trait <- readRDS(
   here("data/final", 
-       "traits.rds"
+       "traits_no_volt.rds"
        )
   )
 
-site <- read.csv(
+site <- readxl::read_excel(
   here(
     "data/original", 
-    "site.csv"
-    )
+    "site_jsm_edits_Aug10_2021.xlsx"
+    ), 
+  sheet = 1
 )
 
 # functional distance matrix  --------------------------------------------------
 
 keep_spp <- trait %>%
-  filter(!is.na(itd)) %>%
-  pull(spp)
+  filter(!is.na(body_size)) %>%
+  filter(species != "Hylaeus_punctatus") %>%
+  pull(species)
 
 comm_rel <- comm %>%
   select(all_of(keep_spp)) %>%
@@ -67,13 +69,8 @@ comm_rel <- comm %>%
   
 trait_tidy <- trait %>%
   as.data.frame() %>% 
-  column_to_rownames(var = "spp") %>%
-  filter(!is.na(itd)) %>%
-  select(native_y_n, 
-         nest, 
-         diet, 
-         volt, 
-         itd) 
+  column_to_rownames(var = "species") %>%
+  filter(!is.na(body_size)) 
 
 trait_dist <- gower.dist(trait_tidy)
 colnames(trait_dist) <- rownames(trait_tidy)
@@ -97,9 +94,6 @@ colnames(ses_mfd) <-
     "mpd",
     "mfd"
   )
-
-# how many sites have 1 species?
-sum(ses_mfd$ntaxa != 1)
 
 # grobs: set up arrows ---------------------------------------------------------
 
@@ -216,7 +210,6 @@ ses_mfd_habitat <- ses_mfd_tidy %>%
   coord_cartesian(clip = "off")
 )
     
-
 
 # save to disk -----------------------------------------------------------------
 
