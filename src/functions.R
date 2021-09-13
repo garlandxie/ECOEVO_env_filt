@@ -1,12 +1,11 @@
 # Calculate landscape composition metrics
 #
 # @description 
-# This function calculates landscape composition 
-# metrics from a specific buffer.
+# This function manually calculates landscape composition 
+# metrics from a specific buffer size (e.g., 250 m radii).
 
 # * `crop()` clips the raster to the extent of a given buffer
 # * `rasterize()` ensures that the clipped object has the geometry of a buffer
-# * `lsm_c_pland()` calculates the landscape composition metrics
 #
 # @return a data frame of land cover class ID, site ID, and
 # proportion of a given land cover class
@@ -28,6 +27,8 @@
 # (7) other paved surfaces, 
 # (8) agriculture 
 
+# Please contact GARLAND XIE (author of this script: garlandxie@gmail.com)
+# for any inquiries about this custom function 
 
 calc_pland <- function(l, buffer) {
   
@@ -47,7 +48,8 @@ calc_pland <- function(l, buffer) {
   f$ID <- buffer$ID
   
   # remove missing cells
-  # remove water land cover class (not a landscape modification)
+  # remove water land cover class 
+  # (not a landscape modification for bees and wasps)
   f <- subset(f, value %in% c(1,2,3,5,6,7))
   
   # calculate the total area of each CLASS in the buffer
@@ -92,7 +94,4 @@ calc_prop_miss <- function(l, buffer) {
  return(prop_missing)
   
 }
-
-
-  
   
