@@ -62,6 +62,7 @@ calc_pland <- function(l, buffer) {
   return(p)
 }
 
+# Calculate proportion of missing cells 
 
 # @description 
 # This function manually calculates the proportion of missing cells  
