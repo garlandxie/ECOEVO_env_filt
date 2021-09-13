@@ -133,7 +133,7 @@ more_arrow <- linesGrob(
     lwd = 1)
 )
 
-# plots ------------------------------------------------------------------------
+# Figure 3: CT Criteria I (evidence of clustering) -----------------------------
 
 ses_mfd_tidy <- ses_mfd %>%
   rename(ses_mfd = mfd.obs.z, 
@@ -210,7 +210,6 @@ ses_mfd_habitat <- ses_mfd_tidy %>%
   coord_cartesian(clip = "off")
 )
     
-
 # save to disk -----------------------------------------------------------------
 
 # mfd
@@ -232,7 +231,7 @@ write.csv(
 ggsave(filename = 
          here(
            "output/figures/main",
-           "fig-ses_mfd-ugs.png"
+           "Xie_et_al-2021-Figure3-JAE.png"
          ),
        plot = ses_mfd_ugs,
        width  = 7, 
