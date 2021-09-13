@@ -292,7 +292,7 @@ lm.morantest(lm_500_v2,
                style = "W")
              )
 
-# plots ------------------------------------------------------------------------
+# prep for Figure 4 and Figure S7 ----------------------------------------------
 
 # get R-squared values for labelling
 
@@ -301,6 +301,8 @@ rq_500 <- summary(lm_500_v2)$adj.r.squared
 
 rq_lab_250 <- bquote("Adj-R"^2: .(format(rq_250, digits = 3)))
 rq_lab_500 <- bquote("Adj-R"^2: .(format(rq_500, digits = 2)))
+
+# Figure 4: ses.MFD vs % impervious surfaces (250m scale) ----------------------
 
 # scatterplots: ses.MFD vs % impervious surfaces
 (part_urb_250 <- reg_250 %>%
@@ -324,6 +326,8 @@ rq_lab_500 <- bquote("Adj-R"^2: .(format(rq_500, digits = 2)))
        x = "% Impervious surface (250m spatial scale)") + 
   theme_bw()
   )
+
+# Figure S7: ses.MFD vs % impervious surfaces (500m scale) ---------------------
 
 (part_urb_500 <- reg_500 %>%
   select(
@@ -353,12 +357,12 @@ rq_lab_500 <- bquote("Adj-R"^2: .(format(rq_500, digits = 2)))
   theme_bw()
 )
 
-
 # save to disk -----------------------------------------------------------------
 
+# Figure 4
 ggsave(filename = 
          here("output/figures/main", 
-              "fig-crit2_mfd_250.png"
+              "Xie_et_al-2021-Figure4-JAE.png"
               ),
        plot = part_urb_250, 
        device = "png", 
@@ -366,10 +370,10 @@ ggsave(filename =
        height = 4
        )
 
-
+# Figure S7
 ggsave(filename = 
          here("output/figures/supp", 
-              "fig-crit2_mfd_500.png"
+              "Xie_et_al-2021-FigureS7-JAE.png"
          ),
        plot = part_urb_500, 
        device = "png", 
@@ -377,9 +381,10 @@ ggsave(filename =
        height = 4
 )
 
+# Figure S4
 ggsave(filename = 
          here("output/figures/supp", 
-              "fig-corr_matrix_250.png"
+              "Xie_et_al-2021-FigureS5-JAE.png"
          ),
        plot = pairs_250, 
        device = "png", 
@@ -387,9 +392,10 @@ ggsave(filename =
        height = 4
 )
 
+# Figure S6
 ggsave(filename = 
          here("output/figures/supp", 
-              "fig-corr_matrix_500.png"
+              "Xie_et_al-2021-FigureS6-JAE.png"
          ),
        plot = pairs_500, 
        device = "png", 
