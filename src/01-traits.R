@@ -27,106 +27,63 @@
 library(here)     # for creating relative file-paths
 library(dplyr)    # for manipulating data 
 library(readxl)   # for reading excel files
-library(flextable)
-library(officer)
 
 # import -----------------------------------------------------------------------
 
 traits <- read_excel(
   here(
     "data/original", 
-    "bee_wasp_traits.xlsx")
+    "bee_wasp_traits_aug10.xlsx")
   )
 
-# data cleaning: ---------------------------------------------------------------
+# data cleaning: trait matrix with voltinism -----------------------------------
 
 traits_tidy <- traits %>%
   janitor::clean_names() %>%
   
   # insert missing values
-  mutate(
-    
-    itd = na_if(itd, "na"),
-    emer_per = na_if(emer_per, "na")
-    
-    ) %>% 
+  mutate(body_size = na_if(body_size, "NA")) %>% 
+  
+  # change Campunula to Campunulaecae 
+  mutate(specialization = case_when(
+    specialization == "Genus (Campanula)" ~ "Family (Campanulaceae)", 
+    TRUE ~ specialization)
+    ) %>%
 
   # coerce into factor variables
   mutate(
     
-    native_y_n = factor(native_y_n),
-    nest       = factor(nest),
-    diet       = factor(diet),
-    volt       = factor(volt)
+    origin = factor(origin),
+    
+    # uses most common material
+    nesting_material = factor(nesting_material), 
+    primary_diet = factor(primary_diet),
+    voltinism = factor(voltinism), 
+    specialization = factor(specialization),
+    trophic_rank = factor(trophic_rank)
     
     ) %>%
   
   # change to numeric values
+  mutate(body_size = as.numeric(body_size)) %>%
+  
+  # change species names so it is consistent 
+  # with the community matrix dataset
   mutate(
-    
-    itd      = as.numeric(itd),
-    emer_per = as.numeric(emer_per) 
-    
+    species = stringr::str_replace(
+      species, 
+      pattern = " ", 
+      replacement = "_")
     ) %>%
-
-  select(-1, -family)
-
-# double-check
-str(traits_tidy)
-
-# table prep -------------------------------------------------------------------
-
-table_S1 <- 
-  traits %>%
-  mutate(genus   = strsplit(spp, split = "_"),
-         genus   = sapply(genus, "[", 1),
-         species = strsplit(spp, split = "_"),
-         species = sapply(species, "[", 2)
-         ) %>%
   
-  mutate(itd = na_if(itd, "na"),
-         itd = as.numeric(itd),
-         itd = round(itd, digits = 2)
-         ) %>%
-  
-  select("Family"           = family,
-         "Genus"            = genus, 
-         "Species"          = species, 
-         "Native status"    = native_y_n,
-         "Nesting material" = nest, 
-         "Diet"             = diet, 
-         "Voltinism"        = volt, 
-         "Body size (ITD)"  = itd
-  )
-  
+  select(-bee_wasp, -authority, -family)
 
-flextable_S1 <- table_S1 %>%
-  flextable() %>%
-  autofit() %>%
-  italic(j = c("Family", "Genus", "Species"))
+# data cleaning: trait matrix without voltinism -------------------------------
 
-doc <- read_docx() %>%
-  body_add_par(
-    'Table S1. A trait matrix of the fifty sampled solitary cavity-nesting wasp and bee species in this study.', 
-     style = 'Normal'
-    ) %>%
-  body_add_par(
-    ' ', 
-    style = 'Normal'
-    ) %>% 
-  body_add_flextable(
-    value = flextable_S1
-    ) %>%
-  body_end_section_landscape()
-
-print(
-  doc, 
-  target = 
-    here(
-      "output/tables/supp", 
-      "table_S1.docx"
-      )
-  )
+# remove volitinism (as requested by JSM)
+# remember to re-run the data pipeline with this dataset!
+traits_no_volt <- traits_tidy %>%
+  select(-voltinism)
 
 # save to disk -----------------------------------------------------------------
 
@@ -134,7 +91,16 @@ saveRDS(
   traits_tidy, 
   file = here(
     "data/final", 
-    "traits.rds")
+    "traits_with_volt.rds")
   )
+
+saveRDS(
+  traits_no_volt, 
+  file = here(
+    "data/final",
+    "traits_no_volt.RDS"
+  )
+)
+
 
 
