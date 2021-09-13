@@ -181,7 +181,7 @@ reg_250 %>%
   scale_colour_gradientn(colours = terrain.colors(10)) + 
   theme_minimal()
 
-# correlation matrix -----------------------------------------------------------
+# Figure S5: correlation matrix ------------------------------------------------
 
 # Pearson's correlation matrix for 250m
 pairs_250 <- reg_250 %>%
@@ -191,6 +191,8 @@ pairs_250 <- reg_250 %>%
     "% Impervious" = perc_urb_250) %>%
   ggpairs() + 
   labs(title = "250m spatial scale")
+
+# Figure S6: correlation matrix ------------------------------------------------
 
 # Pearson's correlation matrix for 500m
 pairs_500 <- reg_500 %>%
