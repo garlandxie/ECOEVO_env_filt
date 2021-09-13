@@ -27,19 +27,19 @@
 library(here)      # for creating relative file-paths
 library(tidyverse) 
 library(patchwork) # for creating multi-panel figures
+library(readxl)
+library(janitor)
 
 # import -----------------------------------------------------------------------
 
 # abundance per site 
-int_raw <- read.csv(
-  here("data/original", "trap_nest.csv"),
-  row.names = 1
+int_raw <- read_excel(
+  here("data/original", "trap_nest_jsm_Aug10_2021.xlsx")
 )
 
 # site data
-site <- read.csv(
-  here("data/original", "site.csv"),
-  row.names = 1
+site <- read_excel(
+  here("data/original", "site_jsm_edits_Aug10_2021.xlsx"),
 )
 
 # data cleaning: sites ---------------------------------------------------------
@@ -48,12 +48,9 @@ site <- read.csv(
 int_tidy <- int_raw %>%
   janitor::clean_names() %>%
   filter(!is.na(id)) %>%
-  mutate(
-    
-    lower_species = case_when(
-      lower_species == "Hylaeus_sp" ~ "Hylaeus_punctatus", 
-      TRUE ~ lower_species)
-  )
+  
+  # keep only species-level analyses
+  filter(lower_species != "Hylaeus_sp")
 
 # get sites that outside the TO boundary
 outside_TO <- c(
@@ -68,10 +65,10 @@ outside_TO <- c(
 # get sites that were sampled across 2011-2013 within TO
 all_years <- site %>%
   
-  # six sites should be outside TO
+  # keep sites within TO
   filter(!ID %in% outside_TO) %>% 
   
-  # fourteen sites should only be sampled in a year or two
+  # keep sites sampled across all three years (2011-2013)
   filter(Year_2011 == "Y" &
          Year_2012 == "Y" & 
          Year_2013 == "Y") %>%
@@ -219,7 +216,7 @@ ggsave(
   plot = hist_ab, 
   filename = here(
     "output/figures/supp", 
-    "fig-supp-histogram.png"
+    "fig-supp-histogram_AB.png"
   ),
   device = "png", 
   height = 5, 
