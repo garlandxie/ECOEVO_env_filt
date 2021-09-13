@@ -304,7 +304,7 @@ more_urb_arrow <- linesGrob(
     lwd = 1)
 )
 
-# Figure S8: Environmental loadings (250m) -------------------------------------
+# Figure S9: Environmental loadings (250m) -------------------------------------
   
 R_250_load <- RLQ_250$l1 %>%
   rownames_to_column(var = "class") %>%
@@ -365,7 +365,7 @@ R_250_load <- RLQ_250$l1 %>%
   ) + 
   coord_cartesian(clip = "off") 
 
-# Figure S9: Environmental loadings (500m scale) -------------------------------
+# Figure S10: Environmental loadings (500m scale) -------------------------------
 
 R_500_load <- RLQ_500$l1 %>%
   rownames_to_column(var = "class") %>%
@@ -868,77 +868,80 @@ R_500_load <- RLQ_500$l1 %>%
  
 # Save To Disk -----------------------------------------------------------------
 
-# PCA environmental variable loadings
+# Figure S9
 ggsave(
   plot = R_250_load, 
   filename = here(
     "output/figures/supp", 
-    "fig_sup_env_loadings_250.png"
+    "Xie_et_al-2021-FigureS9-JAE.png"
     ),
   device = "png",
   height = 5, 
   width = 8
 )
 
+# Figure S10
 ggsave(
   plot = R_500_load, 
   filename = here(
     "output/figures/supp", 
-    "fig_sup_env_loadings_500.png"
+    "Xie_et_al-2021-FigureS10-JAE.png"
   ),
   device = "png",
   height = 5, 
   width = 8
 )
 
-# Scree plots
+# Figure S8
 ggsave(
   plot = scree, 
   filename = here(
     "output/figures/supp", 
-    "fig_sup_scree.png"),
+    "Xie_et_al-2021-FigureS8-JAE.png"),
   device = "png",
   height = 5, 
   width = 7
 )
 
-# species scores
+# Figure 6
 ggsave(
   plot = L_250_load, 
   filename = here(
     "output/figures/supp", 
-    "fig_sup_species_rlq_250.png"),
+    "Xie_et_al-2021-Figure6-JAE.png"),
   device = "png",
   height = 10, 
   width = 9
 )
 
+# Figure S12
 ggsave(
   plot = L_500_load, 
   filename = here(
     "output/figures/supp", 
-    "fig_sup_species_rlq_500.png"),
+    "Xie_et_al-2021-FigureS12-JAE.png"),
   device = "png",
   height = 10, 
   width = 9
 )
 
-# trait scores
+# Figure 6
 ggsave(
   plot = RLQ_250_load, 
   filename = here(
     "output/figures/supp", 
-    "fig_sup_traits_250.png"),
+    "Xie_et_al-2021-Figure6-JAE.png"),
   device = "png",
   height = 8, 
   width = 11
 )
 
+# Figure S11
 ggsave(
   plot = RLQ_500_load, 
   filename = here(
     "output/figures/supp", 
-    "fig_sup_traits_500.png"),
+    "Xie_et_al-2021-FigureS11-JAE.png"),
   device = "png",
   height = 8, 
   width = 11
