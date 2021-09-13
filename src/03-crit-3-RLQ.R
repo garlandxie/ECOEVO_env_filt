@@ -207,7 +207,7 @@ glob_RLQ_500 <-
 # cumulative projected inertia (%)
 summary(RLQ_500)
 
-# plots: scree plot ------------------------------------------------------------
+# Figure S8: scree plots (250m and 50mm scales) --------------------------------
 
 eigs_250 <- data.frame(
   Axes = paste("Axis", 1:3, sep = " "),
@@ -265,7 +265,7 @@ scree_500 <-
 
 scree <- scree_250 + scree_500
 
-# prep: grobs ------------------------------------------------------------------
+# Prep: grobs!! ----------------------------------------------------------------
 
 # set up grob objects to place text underneath the plots
 
@@ -304,7 +304,7 @@ more_urb_arrow <- linesGrob(
     lwd = 1)
 )
 
-# plots: env loadings  ---------------------------------------------------------
+# Figure S8: Environmental loadings (250m) -------------------------------------
   
 R_250_load <- RLQ_250$l1 %>%
   rownames_to_column(var = "class") %>%
@@ -364,6 +364,8 @@ R_250_load <- RLQ_250$l1 %>%
     xmax = 0
   ) + 
   coord_cartesian(clip = "off") 
+
+# Figure S9: Environmental loadings (500m scale) -------------------------------
 
 R_500_load <- RLQ_500$l1 %>%
   rownames_to_column(var = "class") %>%
@@ -425,7 +427,7 @@ R_500_load <- RLQ_500$l1 %>%
   ) + 
   coord_cartesian(clip = "off") 
 
-# plots: species scores ---------------------------------------------------------------
+# Figure 6: species scores (250m) ----------------------------------------------
 
 (L_250_load <- RLQ_250$mQ %>%
   rownames_to_column(var = "species") %>%
@@ -490,6 +492,8 @@ R_500_load <- RLQ_500$l1 %>%
    coord_cartesian(clip = "off") 
 )
 
+# Figure S12: species score (500 m) -------------------------------------------- 
+
 (L_500_load <- RLQ_500$mQ %>%
   rownames_to_column(var = "species") %>%
   select(species, NorS1) %>%
@@ -552,8 +556,7 @@ R_500_load <- RLQ_500$l1 %>%
   coord_cartesian(clip = "off") 
 )
 
-
-# plot: trait scores -----------------------------------------------------------------
+# Figure 5: Trait scores (250 m) -----------------------------------------------
 
 (RLQ_250_load <- RLQ_250$c1 %>%
   rownames_to_column(var = "traits")%>%
@@ -709,6 +712,8 @@ R_500_load <- RLQ_500$l1 %>%
   coord_cartesian(clip = "off") 
 )
 
+# Figure S11: Trait scores (500m scale) ----------------------------------------
+
 (RLQ_500_load <- RLQ_500$c1 %>%
   rownames_to_column(var = "traits")%>%
   select(traits, CS1) %>%
@@ -861,7 +866,7 @@ R_500_load <- RLQ_500$l1 %>%
   coord_cartesian(clip = "off") 
 )  
  
-# save to disk -----------------------------------------------------------------
+# Save To Disk -----------------------------------------------------------------
 
 # PCA environmental variable loadings
 ggsave(
