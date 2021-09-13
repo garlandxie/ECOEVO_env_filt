@@ -63,7 +63,32 @@ calc_pland <- function(l, buffer) {
 }
 
 
-# Calculate proportion of missing cells
+# @description 
+# This function manually calculates the proportion of missing cells  
+# of a raster dataset from a specific buffer size (e.g., 250 m radii).
+
+# * `crop()` clips the raster to the extent of a given buffer
+# * `rasterize()` ensures that the clipped object has the geometry of a buffer
+#
+# @return a data frame of site ID, and
+# a proportion which represents the number of missing cells for a given buffer
+#
+# @param l A RasterLayer object that represents the 2008 
+# Forest and Land Cover raster dataset from Open Data Toronto
+# 
+# @param buffer A list of sf objects of the buffers for all the sampled sites
+#
+# @details 
+# Link to raster data: https://open.toronto.ca/dataset/forest-and-land-cover/
+# Note that the landcover classes are coded as follows: 
+# (1) tree canopy, 
+# (2) grass/shrub, 
+# (3) bare earth, 
+# (4) water, 
+# (5) buildings, 
+# (6) roads, 
+# (7) other paved surfaces, 
+# (8) agriculture 
 
 calc_prop_miss <- function(l, buffer) {
   
@@ -94,4 +119,7 @@ calc_prop_miss <- function(l, buffer) {
  return(prop_missing)
   
 }
+
+
+  
   
