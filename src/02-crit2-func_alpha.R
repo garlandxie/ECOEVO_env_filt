@@ -39,10 +39,13 @@ library(tibble)
 # import -----------------------------------------------------------------------
 
 # site info
-site <- read.csv(
-  here("data/original", 
-       "site.csv")
-  )
+site <- readxl::read_excel(
+  here(
+    "data/original", 
+    "site_jsm_edits_Aug10_2021.xlsx"
+  ), 
+  sheet = 1
+)
 
 # ses mfd
 ses_mfd <- readRDS(
@@ -221,10 +224,7 @@ pt(coef(sum_250)[, 3], lm_250_v2$df, lower = TRUE)
 plot(lm_250_v2, which = c(1))
 plot(lm_250_v2, which = c(2))
 plot(lm_250_v2, which = c(3))
-plot(lm_250_v2, which = c(4))
 plot(lm_250_v2, which = c(5))
-plot(lm_250_v2, which = c(6))
-
 
 # hypothesis testing: multiple regression (500m) -------------------------------
 
@@ -249,9 +249,7 @@ pt(coef(sum_500)[, 3], lm_500_v2$df, lower = TRUE)
 plot(lm_500_v2, which = c(1))
 plot(lm_500_v2, which = c(2))
 plot(lm_500_v2, which = c(3))
-plot(lm_500_v2, which = c(4))
 plot(lm_500_v2, which = c(5))
-plot(lm_500_v2, which = c(6))
 
 # spatial autocorrelaton tests -------------------------------------------------
 
@@ -315,7 +313,7 @@ rq_lab_500 <- bquote("Adj-R"^2: .(format(rq_500, digits = 2)))
   gghighlight(p_value < 0.05, use_direct_label = FALSE) + 
   geom_hline(yintercept = 0) + 
   annotate(
-    "text",
+    geom = "text",
     x = 75, 
     y = 2, 
     label = rq_lab_250
