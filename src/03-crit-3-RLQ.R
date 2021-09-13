@@ -56,15 +56,16 @@ comm <- read.csv(
 # Q table - traits
 traits <- readRDS(
   here("data/final", 
-       "traits.rds")
+       "traits_no_volt.rds")
 )
 
 # RLQ: 250 ---------------------------------------------------------------------
 
 # some prep
 keep_spp <- traits %>%
-  filter(!is.na(itd)) %>%
-  pull(spp)
+  filter(!is.na(body_size)) %>%
+  filter(species != "Hylaeus_punctatus") %>%
+  pull(species)
 
 # Procedure of RLQ follows closely to:
 # Dray et al. 2014. Ecology. 
@@ -90,7 +91,7 @@ dudiL_250 <- dudi.coa(df = L_250, scannf = F)
 R_250 <- env_250 %>%
   filter(site %in% rownames(comm)) %>%
   column_to_rownames(var = "site") %>%
-  select(prop_urb_250, prop_tree_250, prop_grass_250) %>%
+  select(perc_urb_250, perc_tree_250, perc_grass_250) %>%
   as.data.frame() 
 
 dudiR_250 <- 
@@ -105,9 +106,9 @@ dudiR_250 <-
 # weighted by sites weight from previous correspondance analysis
 
 Q_250 <- traits %>%
-  column_to_rownames(var = "spp") %>%
-  select(-emer_per, -taxa) %>%
-  filter(!is.na(itd)) %>%
+  filter(species != "Hylaeus_punctatus") %>%
+  column_to_rownames(var = "species") %>%
+  filter(!is.na(body_size)) %>%
   as.data.frame()
 
 dudiQ_250 <- 
@@ -160,7 +161,7 @@ dudiL_500 <- dudi.coa(
 R_500 <- env_500 %>%
   filter(site %in% rownames(comm)) %>%
   column_to_rownames(var = "site") %>%
-  select(prop_urb_500, prop_tree_500, prop_grass_500) %>%
+  select(perc_urb_500, perc_tree_500, perc_grass_500) %>%
   as.data.frame()
 
 dudiR_500 <- 
@@ -175,9 +176,9 @@ dudiR_500 <-
 # weighted by sites weight from previous correspondance analysis
 
 Q_500 <- traits %>%
-  column_to_rownames(var = "spp") %>%
-  select(-emer_per, -taxa) %>%
-  filter(!is.na(itd)) %>%
+  filter(species != "Hylaeus_punctatus") %>%
+  column_to_rownames(var = "species") %>%
+  filter(!is.na(body_size)) %>%
   as.data.frame()
 
 dudiQ_500 <- 
@@ -311,9 +312,9 @@ R_250_load <- RLQ_250$l1 %>%
   mutate(
     
     class = case_when(
-      class == "prop_urb_250"   ~ "% Impervious surface", 
-      class == "prop_tree_250"  ~ "% Closed green cover",
-      class == "prop_grass_250" ~ "% Open green cover"),
+      class == "perc_urb_250"   ~ "% Impervious surface", 
+      class == "perc_tree_250"  ~ "% Closed green cover",
+      class == "perc_grass_250" ~ "% Open green cover"),
     
     class = factor(class),
     class = fct_reorder(class, RS1)) %>%
@@ -370,9 +371,9 @@ R_500_load <- RLQ_500$l1 %>%
   mutate(
     
     class = case_when(
-      class == "prop_urb_500"   ~ "% Impervious surface", 
-      class == "prop_tree_500"  ~ "% Closed green cover",
-      class == "prop_grass_500" ~ "% Open green cover"),
+      class == "perc_urb_500"   ~ "% Impervious surface", 
+      class == "perc_tree_500"  ~ "% Closed green cover",
+      class == "perc_grass_500" ~ "% Open green cover"),
     
     class = factor(class),
     class = fct_reorder(class, RS1)) %>%
@@ -450,6 +451,7 @@ R_500_load <- RLQ_500$l1 %>%
     ), 
     alpha = 0.5) + 
   geom_vline(xintercept = 0, linetype = "dashed") + 
+  xlim(-3, 3) + 
   labs(title = "250 m spatial scale",
        x = "Relative importance in normed species scores",
        y = NULL) + 
@@ -461,34 +463,34 @@ R_500_load <- RLQ_500$l1 %>%
      more_urb,
      ymin = -5,
      ymax = -5,
-     xmin = 2,
-     xmax = 2
+     xmin = 3,
+     xmax = 3
    ) + 
    annotation_custom(
      less_urb,
      ymin = -5,
      ymax = -5,
-     xmin = -2,
-     xmax = -2
+     xmin = -3,
+     xmax = -3
    ) + 
    annotation_custom(
      less_urb_arrow,
      ymin = -5,
      ymax = -5,
-     xmin = -1,
+     xmin = -1.5,
      xmax = 0
    ) +
    annotation_custom(
      more_urb_arrow,
      ymin = -5,
      ymax = -5,
-     xmin = 1.2,
+     xmin = 2,
      xmax = 0
    ) + 
    coord_cartesian(clip = "off") 
 )
 
-L_500_load <- RLQ_500$mQ %>%
+(L_500_load <- RLQ_500$mQ %>%
   rownames_to_column(var = "species") %>%
   select(species, NorS1) %>%
   mutate(
@@ -498,7 +500,6 @@ L_500_load <- RLQ_500$mQ %>%
         pattern = "_",
         replacement = " "
       ),
-    
     species = reorder(species, NorS1)
     ) %>%
   ggplot(aes(x = NorS1, y = species)) + 
@@ -512,6 +513,7 @@ L_500_load <- RLQ_500$mQ %>%
     ), 
     alpha = 0.5) + 
   geom_vline(xintercept = 0, linetype = "dashed") + 
+  xlim(-3, 3) + 
   labs(title = "500 m spatial scale",
        x = "Relative importance in normed species scores",
        y = NULL) + 
@@ -523,66 +525,142 @@ L_500_load <- RLQ_500$mQ %>%
     more_urb,
     ymin = -5,
     ymax = -5,
-    xmin = 2,
-    xmax = 2
+    xmin = 1,
+    xmax = 1
   ) + 
   annotation_custom(
     less_urb,
     ymin = -5,
     ymax = -5,
-    xmin = -2,
-    xmax = -2
+    xmin = -3,
+    xmax = -3
   ) + 
   annotation_custom(
     less_urb_arrow,
     ymin = -5,
     ymax = -5,
-    xmin = -1,
+    xmin = -2,
     xmax = 0
   ) +
   annotation_custom(
     more_urb_arrow,
     ymin = -5,
     ymax = -5,
-    xmin = 1.3,
+    xmin = 0.2,
     xmax = 0
   ) + 
   coord_cartesian(clip = "off") 
+)
 
-L <- L_250_load + L_500_load
 
 # plot: trait scores -----------------------------------------------------------------
 
 (RLQ_250_load <- RLQ_250$c1 %>%
   rownames_to_column(var = "traits")%>%
   select(traits, CS1) %>%
-  mutate(traits = as.character(traits), 
-         traits = case_when(
-           traits == "volt.2"            ~ "Multivoltinism",
-           traits == "volt.1"            ~ "Univoltinism",
-           traits == "nest.secretions"   ~ "Nest (Secretions)", 
-           traits == "nest.scrapings"    ~ "Nest (Scrapings)",
-           traits == "nest.resin"        ~ "Nest (Resin)",
-           traits == "nest.mud"          ~ "Nest (Mud)",
-           traits == "nest.leaf.and.mud" ~ "Nest (Leaf + Mud)",
-           traits == "nest.leaf"         ~ "Nest (Leaf)", 
-           traits == "nest.grass"        ~ "Nest (Grass)",
-           traits == "nativ.1"           ~ "Native (Status)", 
-           traits == "nativ.0"           ~ "Non-native (Status)",
-           traits == "itd"               ~ "Body Size (ITD)",
-           traits == "diet.spider"       ~ "Diet (Spider)",
-           traits == "diet.pollen"       ~ "Diet (Pollen)", 
-           traits == "diet.katydid"      ~ "Diet (Katydid)", 
-           traits == "diet.caterpillar"  ~ "Diet (Caterpillar)", 
-           traits == "diet.beetle.larva" ~ "Diet (Beetle Larva)", 
-           traits == "diet.aphid"        ~ "Diet (Aphid)", 
-           TRUE ~ traits)
-         ) %>%  
+  mutate(
+    traits = as.character(traits), 
+    taxon = case_when(
+      
+      # Nesting material preference
+      traits == "nesti.Secretions"              ~ "Bees", 
+      traits == "nesti.Nest.tube.scrapings"     ~ "Bees",
+      traits == "nesti.Resin"                   ~ "Bees",
+      traits == "nesti.Mud"                     ~ "Bees",
+      traits == "nesti.Leaf.cut"                ~ "Bees",
+      traits == "nesti.Leaf.hair"               ~ "Bees", 
+      traits == "nesti.Grass"                   ~ "Bees",
+      traits == "nesti.Leaf.pulp"               ~ "Bees",
+      
+      # Body size
+      traits == "body_size"                     ~ "Both",
+      
+      # Origin
+      traits == "origi.Holarctic"               ~ "Both",
+      traits == "origi.Nearctic"                ~ "Both",
+      traits == "origi.Palearctic"              ~ "Both",
+      
+      # Diet
+      traits == "prima.Aphids"                  ~ "Wasps",
+      traits == "prima.Beetle.larva"            ~ "Wasps",
+      traits == "prima.Caterpillars"            ~ "Wasps",
+      traits == "prima.Pollen"                  ~ "Wasps",
+      traits == "prima.Spiders"                 ~ "Wasps",
+      traits == "prima.Tree.crickets"           ~ "Wasps",
+      
+      # Specialization
+      traits == "speci.Family..Aphididae."      ~ "Wasps", 
+      traits == "speci.Family..Asteraceae."     ~ "Bees",
+      traits == "speci.Family..Campanulaceae."  ~ "Bees",
+      traits == "speci.Family..Chrysomelidae."  ~ "Wasps",
+      traits == "speci.Family.Aphididae."       ~ "Wasps",
+      traits == "speci.Genus..Campanula."       ~ "Bees",
+      traits == "speci.Multi.Order"             ~ "Both",
+      traits == "speci.Multi.Order..Coleoptera..Lepidoptera." ~ "Wasps",
+      traits == "speci.Order..Araneae."         ~ "Wasps",
+      traits == "speci.Order..Lepidoptera."     ~ "Wasps",
+      traits == "speci.Order..Orthoptera."      ~ "Wasps",
+      
+      # Trophic level
+      traits == "troph.First"  ~ "Bees",
+      traits == "troph.Second" ~ "Wasps",
+      traits == "troph.Third"  ~ "Wasps",
+      
+      TRUE ~ traits)
+  ) %>%
+    mutate(traits = case_when(
+           
+          # Nesting material preference
+          traits == "nesti.Secretions"              ~ "Nest (Secretions)", 
+          traits == "nesti.Nest.tube.scrapings"    ~ "Nest (Scrapings)",
+          traits == "nesti.Resin"                   ~ "Nest (Resin)",
+          traits == "nesti.Mud"                     ~ "Nest (Mud)",
+          traits == "nesti.Leaf.cut"               ~ "Nest (Leaf cut)",
+          traits == "nesti.Leaf.hair"               ~ "Nest (Leaf hair)", 
+          traits == "nesti.Grass"                  ~ "Nest (Grass)",
+          traits == "nesti.Leaf.pulp"              ~ "Nest (pulp)",
+          
+          # Body size
+          traits == "body_size"                    ~ "Body Size (ITD)",
+           
+          # Origin
+          traits == "origi.Holarctic"              ~ "Origin (Holarctic)",
+          traits == "origi.Nearctic"               ~ "Origin (Nearctic)",
+          traits == "origi.Palearctic"             ~ "Origin (Palearctic)",
+           
+          # Diet
+          traits == "prima.Aphids"                 ~ "Diet (Alphids)",
+          traits == "prima.Beetle.larva"           ~ "Diet (Beetle larvae)",
+          traits == "prima.Caterpillars"           ~ "Diet (Caterpillars)",
+          traits == "prima.Pollen"                 ~ "Diet (Pollen)",
+          traits == "prima.Spiders"                ~ "Diet (Spiders)",
+          traits == "prima.Tree.crickets"          ~ "Diet (Tree crickets)",
+          
+          # Specialization
+          traits == "speci.Family..Aphididae."      ~ "Specialization (Aphididae)", 
+          traits == "speci.Family..Asteraceae."     ~ "Specialization (Asteraceae)",
+          traits == "speci.Family..Campanulaceae."  ~ "Specialization (Campanulaceae)",
+          traits == "speci.Family..Chrysomelidae."  ~ "Specialization (Chrysomelidae)",
+          traits == "speci.Family.Aphididae."       ~  "Specialization (Aphididae)",
+          traits == "speci.Genus..Campanula."       ~ "Specialization (Campanula)",
+          traits == "speci.Multi.Order"             ~ "Specialization (Multi-order)",
+          traits == "speci.Multi.Order..Coleoptera..Lepidoptera." ~ "Specialization (Multi-order: Coleoptera + Lepidoptera)",
+          traits == "speci.Order..Araneae."         ~ "Specialization (Aranae)",
+          traits == "speci.Order..Lepidoptera."     ~ "Specialization (Lepidoptera)",
+          traits == "speci.Order..Orthoptera."      ~ "Specialization (Orthoptera)",
+          
+          # Trophic level
+          traits == "troph.First"  ~ "Trophic Rank (First)",
+          traits == "troph.Second" ~ "Trophic Rank (Second)",
+          traits == "troph.Third"  ~ "Trophic Rank (Third)",
+       
+          TRUE ~ traits)
+          ) %>%  
   ggplot(aes(
     x = CS1,
     y = traits %>% fct_reorder(CS1)) 
     ) + 
-  geom_point(shape = 18, size = 2) +
+  geom_point(aes(shape = taxon), size = 2) +
   geom_segment(
     aes(
       y    = traits, 
@@ -604,21 +682,21 @@ L <- L_250_load + L_500_load
     more_urb,
     ymin = -3,
     ymax = -3,
-    xmin = 3,
-    xmax = 3
+    xmin = 3.5,
+    xmax = 3.5
   ) + 
   annotation_custom(
     less_urb,
     ymin = -3,
     ymax = -3,
-    xmin = -3,
-    xmax = -3
+    xmin = -3.5,
+    xmax = -3.5
   ) + 
    annotation_custom(
      less_urb_arrow,
      ymin = -3,
      ymax = -3,
-     xmin = -1.8,
+     xmin = -1.5,
      xmax = 0
    ) +
    annotation_custom(
@@ -634,30 +712,106 @@ L <- L_250_load + L_500_load
 (RLQ_500_load <- RLQ_500$c1 %>%
   rownames_to_column(var = "traits")%>%
   select(traits, CS1) %>%
-  mutate(traits = as.character(traits), 
-         traits = case_when(
-           traits == "volt.2"            ~ "Multivoltinism",
-           traits == "volt.1"            ~ "Univoltinism",
-           traits == "nest.secretions"   ~ "Nest (Secretions)", 
-           traits == "nest.scrapings"    ~ "Nest (Scrapings)",
-           traits == "nest.resin"        ~ "Nest (Resin)",
-           traits == "nest.mud"          ~ "Nest (Mud)",
-           traits == "nest.leaf.and.mud" ~ "Nest (Leaf + Mud)",
-           traits == "nest.leaf"         ~ "Nest (Leaf)", 
-           traits == "nest.grass"        ~ "Nest (Grass)",
-           traits == "nativ.1"           ~ "Native (Status)", 
-           traits == "nativ.0"           ~ "Non-native (Status)",
-           traits == "itd"               ~ "Body Size (ITD)",
-           traits == "diet.spider"       ~ "Diet (Spider)",
-           traits == "diet.pollen"       ~ "Diet (Pollen)", 
-           traits == "diet.katydid"      ~ "Diet (Katydid)", 
-           traits == "diet.caterpillar"  ~ "Diet (Caterpillar)", 
-           traits == "diet.beetle.larva" ~ "Diet (Beetle Larva)", 
-           traits == "diet.aphid"        ~ "Diet (Aphid)", 
-           TRUE ~ traits)
-  ) %>%  
+    mutate(
+      traits = as.character(traits), 
+      taxon = case_when(
+        
+        # Nesting material preference
+        traits == "nesti.Secretions"              ~ "Bees", 
+        traits == "nesti.Nest.tube.scrapings"     ~ "Bees",
+        traits == "nesti.Resin"                   ~ "Bees",
+        traits == "nesti.Mud"                     ~ "Bees",
+        traits == "nesti.Leaf.cut"                ~ "Bees",
+        traits == "nesti.Leaf.hair"               ~ "Bees", 
+        traits == "nesti.Grass"                   ~ "Bees",
+        traits == "nesti.Leaf.pulp"               ~ "Bees",
+        
+        # Body size
+        traits == "body_size"                     ~ "Both",
+        
+        # Origin
+        traits == "origi.Holarctic"               ~ "Both",
+        traits == "origi.Nearctic"                ~ "Both",
+        traits == "origi.Palearctic"              ~ "Both",
+        
+        # Diet
+        traits == "prima.Aphids"                  ~ "Wasps",
+        traits == "prima.Beetle.larva"            ~ "Wasps",
+        traits == "prima.Caterpillars"            ~ "Wasps",
+        traits == "prima.Pollen"                  ~ "Wasps",
+        traits == "prima.Spiders"                 ~ "Wasps",
+        traits == "prima.Tree.crickets"           ~ "Wasps",
+        
+        # Specialization
+        traits == "speci.Family..Aphididae."      ~ "Wasps", 
+        traits == "speci.Family..Asteraceae."     ~ "Bees",
+        traits == "speci.Family..Campanulaceae."  ~ "Bees",
+        traits == "speci.Family..Chrysomelidae."  ~ "Wasps",
+        traits == "speci.Family.Aphididae."       ~ "Wasps",
+        traits == "speci.Genus..Campanula."       ~ "Bees",
+        traits == "speci.Multi.Order"             ~ "Both",
+        traits == "speci.Multi.Order..Coleoptera..Lepidoptera." ~ "Wasps",
+        traits == "speci.Order..Araneae."         ~ "Wasps",
+        traits == "speci.Order..Lepidoptera."     ~ "Wasps",
+        traits == "speci.Order..Orthoptera."      ~ "Wasps",
+        
+        # Trophic level
+        traits == "troph.First"  ~ "Bees",
+        traits == "troph.Second" ~ "Wasps",
+        traits == "troph.Third"  ~ "Wasps",
+        
+        TRUE ~ traits)
+    ) %>%
+    mutate(traits = case_when(
+      
+      # Nesting material preference
+      traits == "nesti.Secretions"              ~ "Nest (Secretions)", 
+      traits == "nesti.Nest.tube.scrapings"    ~ "Nest (Scrapings)",
+      traits == "nesti.Resin"                   ~ "Nest (Resin)",
+      traits == "nesti.Mud"                     ~ "Nest (Mud)",
+      traits == "nesti.Leaf.cut"               ~ "Nest (Leaf cut)",
+      traits == "nesti.Leaf.hair"               ~ "Nest (Leaf hair)", 
+      traits == "nesti.Grass"                  ~ "Nest (Grass)",
+      traits == "nesti.Leaf.pulp"              ~ "Nest (pulp)",
+      
+      # Body size
+      traits == "body_size"                    ~ "Body Size (ITD)",
+      
+      # Origin
+      traits == "origi.Holarctic"              ~ "Origin (Holarctic)",
+      traits == "origi.Nearctic"               ~ "Origin (Nearctic)",
+      traits == "origi.Palearctic"             ~ "Origin (Palearctic)",
+      
+      # Diet
+      traits == "prima.Aphids"                 ~ "Diet (Alphids)",
+      traits == "prima.Beetle.larva"           ~ "Diet (Beetle larvae)",
+      traits == "prima.Caterpillars"           ~ "Diet (Caterpillars)",
+      traits == "prima.Pollen"                 ~ "Diet (Pollen)",
+      traits == "prima.Spiders"                ~ "Diet (Spiders)",
+      traits == "prima.Tree.crickets"          ~ "Diet (Tree crickets)",
+      
+      # Specialization
+      traits == "speci.Family..Aphididae."      ~ "Specialization (Aphididae)", 
+      traits == "speci.Family..Asteraceae."     ~ "Specialization (Asteraceae)",
+      traits == "speci.Family..Campanulaceae."  ~ "Specialization (Campanulaceae)",
+      traits == "speci.Family..Chrysomelidae."  ~ "Specialization (Chrysomelidae)",
+      traits == "speci.Family.Aphididae."       ~  "Specialization (Aphididae)",
+      traits == "speci.Genus..Campanula."       ~ "Specialization (Campanula)",
+      traits == "speci.Multi.Order"             ~ "Specialization (Multi-order)",
+      traits == "speci.Multi.Order..Coleoptera..Lepidoptera." ~ "Specialization (Multi-order: Coleoptera + Lepidoptera)",
+      traits == "speci.Order..Araneae."         ~ "Specialization (Aranae)",
+      traits == "speci.Order..Lepidoptera."     ~ "Specialization (Lepidoptera)",
+      traits == "speci.Order..Orthoptera."      ~ "Specialization (Orthoptera)",
+      
+      # Trophic level
+      traits == "troph.First"  ~ "Trophic Rank (First)",
+      traits == "troph.Second" ~ "Trophic Rank (Second)",
+      traits == "troph.Third"  ~ "Trophic Rank (Third)",
+      
+      TRUE ~ traits)
+    ) %>%  
   ggplot(aes(y = traits %>% fct_reorder(CS1), x = CS1)) + 
-  geom_point(shape = 18, size = 2.5) +
+  geom_point(aes(shape = taxon), size = 2.5) +
   geom_segment(
     aes(
       y    = traits, 
@@ -680,21 +834,21 @@ L <- L_250_load + L_500_load
     more_urb,
     ymin = -3,
     ymax = -3,
-    xmin = 3,
-    xmax = 3
+    xmin = 3.5,
+    xmax = 3.5
   ) + 
   annotation_custom(
       less_urb,
       ymin = -3,
       ymax = -3,
-      xmin = -3,
-      xmax = -3
+      xmin = -3.5,
+      xmax = -3.5
     ) + 
   annotation_custom(
       less_urb_arrow,
       ymin = -3,
       ymax = -3,
-      xmin = -1.8,
+      xmin = -1.5,
       xmax = 0
     ) +
   annotation_custom(
@@ -771,8 +925,8 @@ ggsave(
     "output/figures/supp", 
     "fig_sup_traits_250.png"),
   device = "png",
-  height = 7, 
-  width = 9
+  height = 8, 
+  width = 11
 )
 
 ggsave(
@@ -781,6 +935,6 @@ ggsave(
     "output/figures/supp", 
     "fig_sup_traits_500.png"),
   device = "png",
-  height = 7, 
-  width = 9
+  height = 8, 
+  width = 11
 )
