@@ -91,7 +91,7 @@ tidy_250 <- site %>%
   select(ID, 
          Latitude, 
          Longitude, 
-         prop_urb_250, 
+         perc_urb_250, 
          ntaxa,
          Habitat_type) 
 
@@ -102,7 +102,7 @@ tidy_500 <- site %>%
   select(ID, 
          Latitude, 
          Longitude, 
-         prop_urb_500, 
+         perc_urb_500, 
          ntaxa,
          Habitat_type) 
 
@@ -115,7 +115,7 @@ tidy_500 <- site %>%
     aes(
       x = Longitude, 
       y = Latitude, 
-      colour = prop_urb_250,
+      colour = perc_urb_250,
       size = ntaxa
       )
     ) +
@@ -161,7 +161,7 @@ tidy_500 <- site %>%
     aes(
       x = Longitude, 
       y = Latitude, 
-      colour = prop_urb_500,
+      colour = perc_urb_500,
       size = ntaxa
     )
   ) +
