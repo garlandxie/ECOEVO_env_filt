@@ -185,6 +185,9 @@ all_years <- site %>%
     theme_bw()
 )
 
+# multi-panel figure
+(hist_SR <- hist_sr_bees / hist_sr_wasps / hist_sr_total)
+
 # data cleaning: bees ----------------------------------------------------------
 
 # community data matrix
