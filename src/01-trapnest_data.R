@@ -75,7 +75,7 @@ all_years <- site %>%
   
   pull(ID)
 
-# plot: histograms for abundance -----------------------------------------------
+# Figure S3: histograms for abundance -----------------------------------------------
 
 (hist_bees_ab <- int_tidy %>%
   filter(taxa_ls == "Bee", id %in% all_years) %>%
@@ -126,7 +126,7 @@ all_years <- site %>%
 # multi-panel histograms
 (hist_ab <- hist_bees_ab / hist_wasp_ab / hist_total_ab)
 
-# plot: histograms for species richness ----------------------------------------
+# Figure S4: histograms for species richness ----------------------------------------
 
 (hist_sr_bees <- int_tidy %>%
   filter(taxa_ls == "Bee", id %in% all_years) %>%
@@ -185,9 +185,6 @@ all_years <- site %>%
     theme_bw()
 )
 
-# multi-panel histograms
-(hist_SR <- hist_sr_bees / hist_sr_wasps / hist_sr_total)
-
 # data cleaning: bees ----------------------------------------------------------
 
 # community data matrix
@@ -216,7 +213,7 @@ ggsave(
   plot = hist_ab, 
   filename = here(
     "output/figures/supp", 
-    "fig-supp-histogram_AB.png"
+    "Xie_et_al-2021-FigureS3-JAE.png"
   ),
   device = "png", 
   height = 5, 
@@ -227,7 +224,7 @@ ggsave(
   plot = hist_SR, 
   filename = here(
     "output/figures/supp", 
-    "fig-supp-histogram_SR.png"
+    "Xie_et_al-2021-FigureS4-JAE.png"
   ),
   device = "png", 
   height = 5, 
