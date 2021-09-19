@@ -24,20 +24,22 @@
 # Purpose of this R script: to create a figure of the land cover map
 
 # library ----------------------------------------------------------------------
-library(here)      # for creating relative file-paths
-library(vegan)     # for analyzing ecological community data
-library(dplyr)     # for manipulating data
-library(tibble)    # for manipulating data frames
-library(ggplot2)   # for visualizing data
-library(sf)        # for manipulating geospatial data
-library(ggsn)      # for adding cartographical elements
-library(patchwork) # for creating multi-panel figures
-library(opendatatoronto)
+library(here)            # for creating relative file-paths
+library(vegan)           # for analyzing ecological community data
+library(dplyr)           # for manipulating data
+library(tibble)          # for manipulating data frames
+library(ggplot2)         # for visualizing data
+library(sf)              # for manipulating geospatial data
+library(ggsn)            # for adding cartographical elements
+library(patchwork)       # for creating multi-panel figures
+library(opendatatoronto) # for reading the TO boudnary shp file 
+library(readxl)          # for reading excel files
 
 # site -------------------------------------------------------------------------
-site <- read.csv(
+site <- read_excel(
   here("data/original", 
-       "site.csv")
+        "site_jsm_edits_Aug10_2021.xlsx"
+       )
   )
 
 # ses mfd
