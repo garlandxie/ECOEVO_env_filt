@@ -46,9 +46,8 @@ lc <- raster(
 )
 
 # abundance per site 
-site<- read.csv(
-  here("data/original", "site.csv"), 
-  row.names = 1
+site<- read_excel(
+  here("data/original", "site_jsm_edits_Aug10_2021.xlsx")
 )
 
 # functions
