@@ -35,6 +35,8 @@ library(landscapemetrics)  # for calculating landscape composition metrics
 library(dplyr)             # for manipulating data frames
 library(tidyr)             # for pivoting tables from long to wide format
 library(rgdal)
+library(readxl)            # for reading excel files 
+
 # import -----------------------------------------------------------------------
 
 # land cover data
@@ -128,22 +130,6 @@ for (k in 1:length(buffer_250)) {
 }
 
 prop_miss_250 <- do.call("rbind", prop_miss_250)
-
-# sites
-
-# 102 = "nSPob" (boundary edge) water
-# 36 = "BW4HD" (boundary edge) water
-# 166 - "XvuFi" (odd) water
-# 58 - fLwK1 (boundary)
-# 87 - LOMxN (boundary edge)
-# 156 -  vtkfe (boundary edge)
-# 47 - E3dsm (boundary edge)
-# 90 - Lwe2a (boundary edge)
-# 75 - iMm0w (boundary)
-# 38 - CAgNl (boundary)
-# 41 - Ci7F8 (boundary)
-# 73 - IBsVs (boundary)
-# 105 - OUdi4 (odd)
 
 # calc missing data: 500 -------------------------------------------------------
 
