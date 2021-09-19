@@ -68,7 +68,7 @@ point <- st_transform(point,lc_proj)
 buffer_250 <- st_buffer(point, 250)
 
 # convert from a data frame to a list 
-buffer_250 <- split(buffer_250[,1], f = buffer_250[,1,drop = T])
+buffer_250 <- split(buffer_250[,c("ID", "geometry")], f = buffer_250[,1,drop = T])
 
 #only retain buffers which intersect lc 
 overl_250 <- unlist(
@@ -90,7 +90,7 @@ buffer_250 <- buffer_250[overl_250]
 buffer_500 <- st_buffer(point, 500)
 
 # convert from a data frame to a list 
-buffer_500 <- split(buffer_500[,1], f = buffer_500[,1,drop=T])
+buffer_500 <- split(buffer_500[,c("ID", "geometry")], f = buffer_500[,1,drop=T])
 
 # only retain buffers which intersect lc 
 overl_500 <- unlist(lapply(buffer_500, 
