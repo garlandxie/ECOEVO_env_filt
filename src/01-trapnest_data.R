@@ -59,7 +59,10 @@ outside_TO <- c(
   "N53op", 
   "auCMf", 
   "lWpWV",
-  "Z42dv"
+  "Z42dv",
+  "h6KO1",
+  "SC5O0", 
+  "wB2e4"
 )
 
 # get sites that were sampled across 2011-2013 within TO
