@@ -60,8 +60,8 @@ outside_TO <- c(
   "auCMf", 
   "lWpWV",
   "Z42dv",
-  "h6KO1",
-  "SC5O0", 
+  "h6kO1",
+  "sC5O0", 
   "wB2e4"
 )
 
@@ -69,12 +69,12 @@ outside_TO <- c(
 all_years <- site %>%
   
   # keep sites within TO
-  filter(!ID %in% outside_TO) %>% 
+  filter(!(ID %in% outside_TO)) %>%
   
   # keep sites sampled across all three years (2011-2013)
   filter(Year_2011 == "Y" &
-         Year_2012 == "Y" & 
-         Year_2013 == "Y") %>%
+          Year_2012 == "Y" & 
+          Year_2013 == "Y") %>%
   
   pull(ID)
 
