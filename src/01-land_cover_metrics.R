@@ -180,8 +180,8 @@ outside_TO <- c(
   "auCMf", 
   "lWpWV",
   "Z42dv",
-  "h6KO1",
-  "SC5O0", 
+  "h6kO1",
+  "sC5O0", 
   "wB2e4"
 )
 
