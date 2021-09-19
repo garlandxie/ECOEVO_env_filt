@@ -180,7 +180,10 @@ outside_TO <- c(
   "N53op", 
   "auCMf", 
   "lWpWV",
-  "Z42dv"
+  "Z42dv",
+  "h6KO1",
+  "SC5O0", 
+  "wB2e4"
 )
 
 # remove sites that are outside raster boundaries 
