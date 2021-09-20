@@ -68,13 +68,13 @@ outside_TO <- c(
 # get sites that were sampled across 2011-2013 within TO
 all_years <- site %>%
   
-  # keep sites within TO
-  filter(!(ID %in% outside_TO)) %>%
-  
   # keep sites sampled across all three years (2011-2013)
   filter(Year_2011 == "Y" &
           Year_2012 == "Y" & 
           Year_2013 == "Y") %>%
+  
+  # keep sites within TO
+  filter(!(ID %in% outside_TO)) %>%
   
   pull(ID)
 
