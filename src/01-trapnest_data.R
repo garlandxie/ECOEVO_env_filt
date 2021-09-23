@@ -27,8 +27,8 @@
 library(here)      # for creating relative file-paths
 library(tidyverse) 
 library(patchwork) # for creating multi-panel figures
-library(readxl)
-library(janitor)
+library(readxl)    # for reading excel files
+library(janitor)   # for cleaning column names
 
 # import -----------------------------------------------------------------------
 
@@ -69,9 +69,7 @@ outside_TO <- c(
 all_years <- site %>%
   
   # keep sites sampled across all three years (2011-2013)
-  filter(Year_2011 == "Y" &
-          Year_2012 == "Y" & 
-          Year_2013 == "Y") %>%
+  filter(Year_2011 == "Y" & Year_2012 == "Y" & Year_2013 == "Y") %>%
   
   # keep sites within TO
   filter(!(ID %in% outside_TO)) %>%
