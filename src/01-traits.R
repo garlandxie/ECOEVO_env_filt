@@ -44,16 +44,45 @@ traits_tidy <- traits %>%
   # insert missing values
   mutate(body_size = na_if(body_size, "NA")) %>% 
   
-  # change Campunula to Campunulaecae 
-  mutate(specialization = case_when(
-    specialization == "Genus (Campanula)" ~ "Family (Campanulaceae)", 
-    TRUE ~ specialization)
-    ) %>%
+  # change specialization
+   mutate(specialization = case_when(
+     
+     # genus
+     specialization == "Genus (Campanula)" ~ "Family", 
+     
+     # order 
+     specialization == "Order (Lepidoptera)" ~ "Order", 
+     specialization == "Order (Araneae)" ~ "Order", 
+     specialization == "Order (Orthoptera)" ~ "Order", 
+     specialization == "Multi-Order (Coleoptera, Lepidoptera)" ~ "Multi-Order", 
+     
+     # family
+     specialization == "Family (Campanulaceae)" ~ "Family",
+     specialization == "Family (Asteraceae)" ~ "Family",
+     specialization == "Family (Chrysomelidae)" ~ "Family", 
+     specialization == "Family (Aphididae)" ~ "Family", 
+     
+     # use the original trait states 
+     TRUE ~ specialization)
+     
+     ) %>%
 
+  
+  # native status
+  mutate(native_status = case_when(
+    origin == "Palearctic" ~ "Non-Native", 
+    origin == "Nearctic" ~ "Native", 
+    origin == "Holarctic" ~ "Native", 
+    TRUE ~ origin)
+    ) %>%
+  
+  # remove some variables 
+  select(-origin) %>%
+  
   # coerce into factor variables
   mutate(
     
-    origin = factor(origin),
+    native_status = factor(native_status),
     
     # uses most common material
     nesting_material = factor(nesting_material), 
