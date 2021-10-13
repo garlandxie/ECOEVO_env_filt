@@ -123,6 +123,12 @@ saveRDS(
     "traits_with_volt.rds")
   )
 
+write.csv(
+  x = traits_no_volt,
+  file = here("output", "tables", "traits_no_volt.csv"), 
+  row.names = FALSE
+)
+
 saveRDS(
   traits_no_volt, 
   file = here(
