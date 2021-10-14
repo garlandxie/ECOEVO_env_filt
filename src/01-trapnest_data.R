@@ -39,7 +39,7 @@ int_raw <- read_excel(
 
 # site data
 site <- read_excel(
-  here("data/original", "site_jsm_edits_Aug10_2021.xlsx"),
+    here("data/original", "site_jsm_edits_Aug10_2021.xlsx")
 )
 
 # data cleaning: sites ---------------------------------------------------------
@@ -198,8 +198,8 @@ broods <- int_tidy %>%
   filter(id %in% all_years) %>%
   group_by(id, lower_species) %>%
   summarize(total_alive = sum(no_broodcells)) %>%
-  pivot_wider(names_from = lower_species, values_from = total_alive) %>%
   ungroup() %>%
+  pivot_wider(names_from = lower_species, values_from = total_alive) %>%
   mutate(across(everything(), ~replace_na(., 0))) %>%
   column_to_rownames(var = "id")
    
