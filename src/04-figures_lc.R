@@ -312,7 +312,7 @@ ggsave(
   plot = lc_map_250, 
   here(
   "output/figures/main", 
-  "fig-lc-map_250.png"
+  "Xie_et_al-2021-Figure2-JAE.png"
   ),
   device = "png",
   width = 10, 
@@ -323,31 +323,18 @@ ggsave(
   plot = lc_map_500, 
   here(
     "output/figures/supp", 
-    "fig-lc-map_500.png"
+    "Xie_et_al-2021-FigureS2-JAE.png"
   ),
   device = "png",
   width = 10, 
   height = 10
 )
-
-# note sure if UGS 250 and 500 differ so just plot both
 
 ggsave(
   plot = ugs_map_250, 
   here(
     "output/figures/supp", 
-    "fig-ugs-map_250.png"
-  ),
-  device = "png",
-  width = 10, 
-  height = 10
-)
-
-ggsave(
-  plot = ugs_map_500, 
-  here(
-    "output/figures/supp", 
-    "fig-ugs-map_500.png"
+    "Xie_et_al-2021-FigureS1-JAE.png"
   ),
   device = "png",
   width = 10, 
