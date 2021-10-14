@@ -60,7 +60,7 @@ lc_proj <- proj4string(lc)
 
 # ensure that site data is in the same coordinate system as the raster data
 point <- st_as_sf(site, coords = c("Longitude", "Latitude"), crs = 4326)
-point <- st_transform(point,lc_proj)
+point <- st_transform(point, lc_proj)
 
 # buffers: 250 spatial scale ---------------------------------------------------
 
@@ -81,7 +81,7 @@ overl_250 <- unlist(
    )  
   )
 
-# get insersecting buffers
+# get intersecting buffers
 buffer_250 <- buffer_250[overl_250]
 
 # buffers: 500m spatial scale --------------------------------------------------
@@ -144,9 +144,9 @@ prop_miss_500 <- do.call("rbind", prop_miss_500)
 
 # 250m
 lw_250 <- land_use_250 %>% 
-  select(value, ID, percent_class) %>%
+  dplyr::select(value, ID, percent_class) %>%
   pivot_wider(names_from = value, values_from = percent_class) %>% 
-  select(site = `ID`,
+  dplyr::select(site = `ID`,
          perc_tree_250   = `1`,
          perc_grass_250  = `2`,
          perc_earth_250  = `3`,
@@ -159,9 +159,9 @@ lw_250 <- land_use_250 %>%
 
 # 500m
 lw_500 <- land_use_500 %>% 
-  select(value, ID, percent_class) %>%
+  dplyr::select(value, ID, percent_class) %>%
   pivot_wider(names_from = value, values_from = percent_class) %>% 
-  select(site = `ID`,
+  dplyr::select(site = `ID`,
          perc_tree_500 = `1`,
          perc_grass_500 = `2`,
          perc_earth_500 = `3`,
