@@ -472,8 +472,8 @@ R_500_load <- RLQ_500$l1 %>%
      less_urb,
      ymin = -5,
      ymax = -5,
-     xmin = -3,
-     xmax = -3
+     xmin = -3.2,
+     xmax = -3.2
    ) + 
    annotation_custom(
      less_urb_arrow,
@@ -517,7 +517,7 @@ R_500_load <- RLQ_500$l1 %>%
     ), 
     alpha = 0.5) + 
   geom_vline(xintercept = 0, linetype = "dashed") + 
-  xlim(-5.1, 5.1) + 
+  xlim(-7, 7) + 
   labs(title = "500 m spatial scale",
        x = "Relative importance in normed species scores",
        y = NULL) + 
@@ -529,15 +529,15 @@ R_500_load <- RLQ_500$l1 %>%
     more_urb,
     ymin = -5,
     ymax = -5,
-    xmin = 1,
-    xmax = 1
+    xmin = 4,
+    xmax = 4
   ) + 
   annotation_custom(
     less_urb,
     ymin = -5,
     ymax = -5,
-    xmin = -3,
-    xmax = -3
+    xmin = -5,
+    xmax = -5
   ) + 
   annotation_custom(
     less_urb_arrow,
@@ -550,7 +550,7 @@ R_500_load <- RLQ_500$l1 %>%
     more_urb_arrow,
     ymin = -5,
     ymax = -5,
-    xmin = 0.2,
+    xmin = 2,
     xmax = 0
   ) + 
   coord_cartesian(clip = "off") 
@@ -579,10 +579,9 @@ R_500_load <- RLQ_500$l1 %>%
       traits == "body_size"                     ~ "Both",
       
       # Origin
-      traits == "origi.Holarctic"               ~ "Both",
-      traits == "origi.Nearctic"                ~ "Both",
-      traits == "origi.Palearctic"              ~ "Both",
-      
+      traits == "nativ.Native"                  ~ "Both",
+      traits == "nativ.Non.Native"              ~ "Both",
+
       # Diet
       traits == "prima.Aphids"                  ~ "Wasps",
       traits == "prima.Beetle.larva"            ~ "Wasps",
@@ -592,22 +591,14 @@ R_500_load <- RLQ_500$l1 %>%
       traits == "prima.Tree.crickets"           ~ "Wasps",
       
       # Specialization
-      traits == "speci.Family..Aphididae."      ~ "Wasps", 
-      traits == "speci.Family..Asteraceae."     ~ "Bees",
-      traits == "speci.Family..Campanulaceae."  ~ "Bees",
-      traits == "speci.Family..Chrysomelidae."  ~ "Wasps",
-      traits == "speci.Family.Aphididae."       ~ "Wasps",
-      traits == "speci.Genus..Campanula."       ~ "Bees",
-      traits == "speci.Multi.Order"             ~ "Both",
-      traits == "speci.Multi.Order..Coleoptera..Lepidoptera." ~ "Wasps",
-      traits == "speci.Order..Araneae."         ~ "Wasps",
-      traits == "speci.Order..Lepidoptera."     ~ "Wasps",
-      traits == "speci.Order..Orthoptera."      ~ "Wasps",
-      
+      traits == "speci.Family"                 ~ "Both",
+      traits == "speci.Order"                  ~ "Both",
+      traits == "speci.Multi.Order"            ~ "Both",
+    
       # Trophic level
-      traits == "troph.First"  ~ "Bees",
-      traits == "troph.Second" ~ "Wasps",
-      traits == "troph.Third"  ~ "Wasps",
+      traits == "troph.First"                  ~ "Bees",
+      traits == "troph.Second"                 ~ "Wasps",
+      traits == "troph.Third"                  ~ "Wasps",
       
       TRUE ~ traits)
   ) %>%
@@ -615,47 +606,38 @@ R_500_load <- RLQ_500$l1 %>%
            
           # Nesting material preference
           traits == "nesti.Secretions"              ~ "Nest (Secretions)", 
-          traits == "nesti.Nest.tube.scrapings"    ~ "Nest (Scrapings)",
+          traits == "nesti.Nest.tube.scrapings"     ~ "Nest (Scrapings)",
           traits == "nesti.Resin"                   ~ "Nest (Resin)",
           traits == "nesti.Mud"                     ~ "Nest (Mud)",
-          traits == "nesti.Leaf.cut"               ~ "Nest (Leaf cut)",
+          traits == "nesti.Leaf.cut"                ~ "Nest (Leaf cut)",
           traits == "nesti.Leaf.hair"               ~ "Nest (Leaf hair)", 
-          traits == "nesti.Grass"                  ~ "Nest (Grass)",
-          traits == "nesti.Leaf.pulp"              ~ "Nest (pulp)",
+          traits == "nesti.Grass"                   ~ "Nest (Grass)",
+          traits == "nesti.Leaf.pulp"               ~ "Nest (pulp)",
           
           # Body size
-          traits == "body_size"                    ~ "Body Size (ITD)",
+          traits == "body_size"                     ~ "Body Size (ITD)",
            
           # Origin
-          traits == "origi.Holarctic"              ~ "Origin (Holarctic)",
-          traits == "origi.Nearctic"               ~ "Origin (Nearctic)",
-          traits == "origi.Palearctic"             ~ "Origin (Palearctic)",
-           
+          traits == "nativ.Native"                  ~ "Native Status",
+          traits == "nativ.Non.Native"              ~ "Exotic Status",
+
           # Diet
-          traits == "prima.Aphids"                 ~ "Diet (Alphids)",
-          traits == "prima.Beetle.larva"           ~ "Diet (Beetle larvae)",
-          traits == "prima.Caterpillars"           ~ "Diet (Caterpillars)",
-          traits == "prima.Pollen"                 ~ "Diet (Pollen)",
-          traits == "prima.Spiders"                ~ "Diet (Spiders)",
-          traits == "prima.Tree.crickets"          ~ "Diet (Tree crickets)",
+          traits == "prima.Aphids"                  ~ "Diet (Alphids)",
+          traits == "prima.Beetle.larva"            ~ "Diet (Beetle larvae)",
+          traits == "prima.Caterpillars"            ~ "Diet (Caterpillars)",
+          traits == "prima.Pollen"                  ~ "Diet (Pollen)",
+          traits == "prima.Spiders"                 ~ "Diet (Spiders)",
+          traits == "prima.Tree.crickets"           ~ "Diet (Tree crickets)",
           
           # Specialization
-          traits == "speci.Family..Aphididae."      ~ "Specialization (Aphididae)", 
-          traits == "speci.Family..Asteraceae."     ~ "Specialization (Asteraceae)",
-          traits == "speci.Family..Campanulaceae."  ~ "Specialization (Campanulaceae)",
-          traits == "speci.Family..Chrysomelidae."  ~ "Specialization (Chrysomelidae)",
-          traits == "speci.Family.Aphididae."       ~  "Specialization (Aphididae)",
-          traits == "speci.Genus..Campanula."       ~ "Specialization (Campanula)",
-          traits == "speci.Multi.Order"             ~ "Specialization (Multi-order)",
-          traits == "speci.Multi.Order..Coleoptera..Lepidoptera." ~ "Specialization (Multi-order: Coleoptera + Lepidoptera)",
-          traits == "speci.Order..Araneae."         ~ "Specialization (Aranae)",
-          traits == "speci.Order..Lepidoptera."     ~ "Specialization (Lepidoptera)",
-          traits == "speci.Order..Orthoptera."      ~ "Specialization (Orthoptera)",
+          traits == "speci.Family"                  ~ "Specialization (Family)",
+          traits == "speci.Order"                   ~ "Specialization (Order)",
+          traits == "speci.Multi.Order"             ~ "Specialization (Multi-Order)",
           
           # Trophic level
-          traits == "troph.First"  ~ "Trophic Rank (First)",
-          traits == "troph.Second" ~ "Trophic Rank (Second)",
-          traits == "troph.Third"  ~ "Trophic Rank (Third)",
+          traits == "troph.First"                   ~ "Trophic Rank (First)",
+          traits == "troph.Second"                  ~ "Trophic Rank (Second)",
+          traits == "troph.Third"                   ~ "Trophic Rank (Third)",
        
           TRUE ~ traits)
           ) %>%  
@@ -717,104 +699,86 @@ R_500_load <- RLQ_500$l1 %>%
 (RLQ_500_load <- RLQ_500$c1 %>%
   rownames_to_column(var = "traits")%>%
   select(traits, CS1) %>%
-    mutate(
-      traits = as.character(traits), 
-      taxon = case_when(
-        
-        # Nesting material preference
-        traits == "nesti.Secretions"              ~ "Bees", 
-        traits == "nesti.Nest.tube.scrapings"     ~ "Bees",
-        traits == "nesti.Resin"                   ~ "Bees",
-        traits == "nesti.Mud"                     ~ "Bees",
-        traits == "nesti.Leaf.cut"                ~ "Bees",
-        traits == "nesti.Leaf.hair"               ~ "Bees", 
-        traits == "nesti.Grass"                   ~ "Bees",
-        traits == "nesti.Leaf.pulp"               ~ "Bees",
-        
-        # Body size
-        traits == "body_size"                     ~ "Both",
-        
-        # Origin
-        traits == "origi.Holarctic"               ~ "Both",
-        traits == "origi.Nearctic"                ~ "Both",
-        traits == "origi.Palearctic"              ~ "Both",
-        
-        # Diet
-        traits == "prima.Aphids"                  ~ "Wasps",
-        traits == "prima.Beetle.larva"            ~ "Wasps",
-        traits == "prima.Caterpillars"            ~ "Wasps",
-        traits == "prima.Pollen"                  ~ "Wasps",
-        traits == "prima.Spiders"                 ~ "Wasps",
-        traits == "prima.Tree.crickets"           ~ "Wasps",
-        
-        # Specialization
-        traits == "speci.Family..Aphididae."      ~ "Wasps", 
-        traits == "speci.Family..Asteraceae."     ~ "Bees",
-        traits == "speci.Family..Campanulaceae."  ~ "Bees",
-        traits == "speci.Family..Chrysomelidae."  ~ "Wasps",
-        traits == "speci.Family.Aphididae."       ~ "Wasps",
-        traits == "speci.Genus..Campanula."       ~ "Bees",
-        traits == "speci.Multi.Order"             ~ "Both",
-        traits == "speci.Multi.Order..Coleoptera..Lepidoptera." ~ "Wasps",
-        traits == "speci.Order..Araneae."         ~ "Wasps",
-        traits == "speci.Order..Lepidoptera."     ~ "Wasps",
-        traits == "speci.Order..Orthoptera."      ~ "Wasps",
-        
-        # Trophic level
-        traits == "troph.First"  ~ "Bees",
-        traits == "troph.Second" ~ "Wasps",
-        traits == "troph.Third"  ~ "Wasps",
-        
-        TRUE ~ traits)
-    ) %>%
-    mutate(traits = case_when(
-      
-      # Nesting material preference
-      traits == "nesti.Secretions"              ~ "Nest (Secretions)", 
-      traits == "nesti.Nest.tube.scrapings"    ~ "Nest (Scrapings)",
-      traits == "nesti.Resin"                   ~ "Nest (Resin)",
-      traits == "nesti.Mud"                     ~ "Nest (Mud)",
-      traits == "nesti.Leaf.cut"               ~ "Nest (Leaf cut)",
-      traits == "nesti.Leaf.hair"               ~ "Nest (Leaf hair)", 
-      traits == "nesti.Grass"                  ~ "Nest (Grass)",
-      traits == "nesti.Leaf.pulp"              ~ "Nest (pulp)",
-      
-      # Body size
-      traits == "body_size"                    ~ "Body Size (ITD)",
-      
-      # Origin
-      traits == "origi.Holarctic"              ~ "Origin (Holarctic)",
-      traits == "origi.Nearctic"               ~ "Origin (Nearctic)",
-      traits == "origi.Palearctic"             ~ "Origin (Palearctic)",
-      
-      # Diet
-      traits == "prima.Aphids"                 ~ "Diet (Alphids)",
-      traits == "prima.Beetle.larva"           ~ "Diet (Beetle larvae)",
-      traits == "prima.Caterpillars"           ~ "Diet (Caterpillars)",
-      traits == "prima.Pollen"                 ~ "Diet (Pollen)",
-      traits == "prima.Spiders"                ~ "Diet (Spiders)",
-      traits == "prima.Tree.crickets"          ~ "Diet (Tree crickets)",
-      
-      # Specialization
-      traits == "speci.Family..Aphididae."      ~ "Specialization (Aphididae)", 
-      traits == "speci.Family..Asteraceae."     ~ "Specialization (Asteraceae)",
-      traits == "speci.Family..Campanulaceae."  ~ "Specialization (Campanulaceae)",
-      traits == "speci.Family..Chrysomelidae."  ~ "Specialization (Chrysomelidae)",
-      traits == "speci.Family.Aphididae."       ~  "Specialization (Aphididae)",
-      traits == "speci.Genus..Campanula."       ~ "Specialization (Campanula)",
-      traits == "speci.Multi.Order"             ~ "Specialization (Multi-order)",
-      traits == "speci.Multi.Order..Coleoptera..Lepidoptera." ~ "Specialization (Multi-order: Coleoptera + Lepidoptera)",
-      traits == "speci.Order..Araneae."         ~ "Specialization (Aranae)",
-      traits == "speci.Order..Lepidoptera."     ~ "Specialization (Lepidoptera)",
-      traits == "speci.Order..Orthoptera."      ~ "Specialization (Orthoptera)",
-      
-      # Trophic level
-      traits == "troph.First"  ~ "Trophic Rank (First)",
-      traits == "troph.Second" ~ "Trophic Rank (Second)",
-      traits == "troph.Third"  ~ "Trophic Rank (Third)",
-      
-      TRUE ~ traits)
-    ) %>%  
+   mutate(
+     traits = as.character(traits), 
+     taxon = case_when(
+       
+       # Nesting material preference
+       traits == "nesti.Secretions"              ~ "Bees", 
+       traits == "nesti.Nest.tube.scrapings"     ~ "Bees",
+       traits == "nesti.Resin"                   ~ "Bees",
+       traits == "nesti.Mud"                     ~ "Bees",
+       traits == "nesti.Leaf.cut"                ~ "Bees",
+       traits == "nesti.Leaf.hair"               ~ "Bees", 
+       traits == "nesti.Grass"                   ~ "Bees",
+       traits == "nesti.Leaf.pulp"               ~ "Bees",
+       
+       # Body size
+       traits == "body_size"                     ~ "Both",
+       
+       # Origin
+       traits == "nativ.Native"                  ~ "Both",
+       traits == "nativ.Non.Native"              ~ "Both",
+       
+       # Diet
+       traits == "prima.Aphids"                  ~ "Wasps",
+       traits == "prima.Beetle.larva"            ~ "Wasps",
+       traits == "prima.Caterpillars"            ~ "Wasps",
+       traits == "prima.Pollen"                  ~ "Wasps",
+       traits == "prima.Spiders"                 ~ "Wasps",
+       traits == "prima.Tree.crickets"           ~ "Wasps",
+       
+       # Specialization
+       traits == "speci.Family"                 ~ "Both",
+       traits == "speci.Order"                  ~ "Both",
+       traits == "speci.Multi.Order"            ~ "Both",
+       
+       # Trophic level
+       traits == "troph.First"                  ~ "Bees",
+       traits == "troph.Second"                 ~ "Wasps",
+       traits == "troph.Third"                  ~ "Wasps",
+       
+       TRUE ~ traits)
+   ) %>%
+   mutate(traits = case_when(
+     
+     # Nesting material preference
+     traits == "nesti.Secretions"              ~ "Nest (Secretions)", 
+     traits == "nesti.Nest.tube.scrapings"     ~ "Nest (Scrapings)",
+     traits == "nesti.Resin"                   ~ "Nest (Resin)",
+     traits == "nesti.Mud"                     ~ "Nest (Mud)",
+     traits == "nesti.Leaf.cut"                ~ "Nest (Leaf cut)",
+     traits == "nesti.Leaf.hair"               ~ "Nest (Leaf hair)", 
+     traits == "nesti.Grass"                   ~ "Nest (Grass)",
+     traits == "nesti.Leaf.pulp"               ~ "Nest (pulp)",
+     
+     # Body size
+     traits == "body_size"                     ~ "Body Size (ITD)",
+     
+     # Origin
+     traits == "nativ.Native"                  ~ "Native Status",
+     traits == "nativ.Non.Native"              ~ "Exotic Status",
+     
+     # Diet
+     traits == "prima.Aphids"                  ~ "Diet (Alphids)",
+     traits == "prima.Beetle.larva"            ~ "Diet (Beetle larvae)",
+     traits == "prima.Caterpillars"            ~ "Diet (Caterpillars)",
+     traits == "prima.Pollen"                  ~ "Diet (Pollen)",
+     traits == "prima.Spiders"                 ~ "Diet (Spiders)",
+     traits == "prima.Tree.crickets"           ~ "Diet (Tree crickets)",
+     
+     # Specialization
+     traits == "speci.Family"                  ~ "Specialization (Family)",
+     traits == "speci.Order"                   ~ "Specialization (Order)",
+     traits == "speci.Multi.Order"             ~ "Specialization (Multi-Order)",
+     
+     # Trophic level
+     traits == "troph.First"                   ~ "Trophic Rank (First)",
+     traits == "troph.Second"                  ~ "Trophic Rank (Second)",
+     traits == "troph.Third"                   ~ "Trophic Rank (Third)",
+     
+     TRUE ~ traits)
+   ) %>%  
   ggplot(aes(y = traits %>% fct_reorder(CS1), x = CS1)) + 
   geom_point(aes(shape = taxon), size = 2.5) +
   geom_segment(
@@ -826,7 +790,7 @@ R_500_load <- RLQ_500$l1 %>%
     ), 
     alpha = 0.5) + 
   geom_vline(xintercept = 0, linetype = "dashed") + 
-  xlim(-5.1, 5.1) +   
+  xlim(-7, 7) +   
   labs(title = "500 m spatial scale",
        y = NULL,
        x = "Relative importance in trait scores") + 
@@ -846,8 +810,8 @@ R_500_load <- RLQ_500$l1 %>%
       less_urb,
       ymin = -3,
       ymax = -3,
-      xmin = -3.5,
-      xmax = -3.5
+      xmin = -3.7,
+      xmax = -3.7
     ) + 
   annotation_custom(
       less_urb_arrow,
@@ -866,7 +830,66 @@ R_500_load <- RLQ_500$l1 %>%
   coord_cartesian(clip = "off") 
 )  
  
-# Save To Disk -----------------------------------------------------------------
+# Other analyses ---------------------------------------------------------------
+
+# 250 m spatial scale
+# fourthcorner(
+#  R_250, 
+#  L_250, 
+#  Q_250, 
+#  modeltype = 6,
+#  p.adjust.method.G = "fdr", 
+#  p.adjust.method.D = "fdr",
+#  nrepet = 49999
+#  )
+
+# 500 m spatial scale
+# fourthcorner(
+#  R_500, 
+#  L_500, 
+#  Q_500, 
+#  modeltype = 6,
+#  p.adjust.method.G = "fdr", 
+#  p.adjust.method.D = "fdr",
+#  nrepet = 49999
+#  )
+
+# Save To disk: main figures ---------------------------------------------------
+
+# Figure 5
+ggsave(
+  plot = RLQ_250_load, 
+  filename = here(
+    "output/figures/main", 
+    "Xie_et_al-2021-Figure5-JAE.png"),
+  device = "png",
+  height = 8, 
+  width = 11
+)
+
+# Figure 6
+ggsave(
+  plot = L_250_load, 
+  filename = here(
+    "output/figures/main", 
+    "Xie_et_al-2021-Figure6-JAE.png"),
+  device = "png",
+  height = 10, 
+  width = 9
+)
+
+# Save to disk: supplementary figures ------------------------------------------
+
+# Figure S8
+ggsave(
+  plot = scree, 
+  filename = here(
+    "output/figures/supp", 
+    "Xie_et_al-2021-FigureS8-JAE.png"),
+  device = "png",
+  height = 5, 
+  width = 7
+)
 
 # Figure S9
 ggsave(
@@ -892,26 +915,15 @@ ggsave(
   width = 8
 )
 
-# Figure S8
+# Figure S11
 ggsave(
-  plot = scree, 
+  plot = RLQ_500_load, 
   filename = here(
     "output/figures/supp", 
-    "Xie_et_al-2021-FigureS8-JAE.png"),
+    "Xie_et_al-2021-FigureS11-JAE.png"),
   device = "png",
-  height = 5, 
-  width = 7
-)
-
-# Figure 6
-ggsave(
-  plot = L_250_load, 
-  filename = here(
-    "output/figures/supp", 
-    "Xie_et_al-2021-Figure6-JAE.png"),
-  device = "png",
-  height = 10, 
-  width = 9
+  height = 8, 
+  width = 11
 )
 
 # Figure S12
@@ -923,26 +935,4 @@ ggsave(
   device = "png",
   height = 10, 
   width = 9
-)
-
-# Figure 6
-ggsave(
-  plot = RLQ_250_load, 
-  filename = here(
-    "output/figures/supp", 
-    "Xie_et_al-2021-Figure6-JAE.png"),
-  device = "png",
-  height = 8, 
-  width = 11
-)
-
-# Figure S11
-ggsave(
-  plot = RLQ_500_load, 
-  filename = here(
-    "output/figures/supp", 
-    "Xie_et_al-2021-FigureS11-JAE.png"),
-  device = "png",
-  height = 8, 
-  width = 11
 )
