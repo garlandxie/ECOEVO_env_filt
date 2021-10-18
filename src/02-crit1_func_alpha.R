@@ -42,10 +42,8 @@ comm <- read.csv(
   row.names = 1
   )
 
-trait <- readRDS(
-  here("data/final", 
-       "traits_no_volt.rds"
-       )
+trait <- read.csv(
+  here("output", "tables", "traits_tidy.csv")
   )
 
 site <- readxl::read_excel(
