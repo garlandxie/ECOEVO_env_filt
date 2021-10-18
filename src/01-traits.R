@@ -59,6 +59,9 @@ traits_tidy <- traits %>%
     species == "Megachile pugnata"         ~ "Multi",          
     species == "Dipogon sayi"              ~ "Multi", 
     
+    # species that secrete should have no nesting materials
+    nesting_material == "Secretions"       ~ "None",
+    
     # every other species has a single nesting material
     TRUE ~ "Single")
   ) 
