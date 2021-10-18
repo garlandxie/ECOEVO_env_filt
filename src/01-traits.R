@@ -135,6 +135,10 @@ traits_tidy3 <- traits_tidy2 %>%
   
   select(-bee_wasp, -authority, -family)
 
+# check packaging --------------------------------------------------------------
+
+glimpse(traits_tidy3)
+
 # save to disk -----------------------------------------------------------------
 
 write.csv(
