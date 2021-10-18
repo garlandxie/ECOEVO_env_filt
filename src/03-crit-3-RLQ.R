@@ -584,13 +584,13 @@ R_500_load <- RLQ_500$l1 %>%
     taxon = case_when(
       
       # Nesting material preference
-      traits == "nesti.Secretions"              ~ "Bees", 
+      traits == "nesti.Secretions"              ~ "Both", 
       traits == "nesti.Nest.tube.scrapings"     ~ "Bees",
-      traits == "nesti.Resin"                   ~ "Bees",
+      traits == "nesti.Resin"                   ~ "Both",
       traits == "nesti.Mud"                     ~ "Bees",
       traits == "nesti.Leaf.cut"                ~ "Bees",
       traits == "nesti.Leaf.hair"               ~ "Bees", 
-      traits == "nesti.Grass"                   ~ "Bees",
+      traits == "nesti.Grass"                   ~ "Wasps",
       traits == "nesti.Leaf.pulp"               ~ "Bees",
       
       # Body size
@@ -604,7 +604,7 @@ R_500_load <- RLQ_500$l1 %>%
       traits == "prima.Aphids"                  ~ "Wasps",
       traits == "prima.Beetle.larva"            ~ "Wasps",
       traits == "prima.Caterpillars"            ~ "Wasps",
-      traits == "prima.Pollen"                  ~ "Wasps",
+      traits == "prima.Pollen"                  ~ "Bees",
       traits == "prima.Single.Spider"           ~ "Wasps",
       traits == "prima.Spiders"                 ~ "Wasps",
       traits == "prima.Tree.crickets"           ~ "Wasps",
@@ -636,7 +636,7 @@ R_500_load <- RLQ_500$l1 %>%
           traits == "nesti.Leaf.cut"                ~ "Nest (Leaf cut)",
           traits == "nesti.Leaf.hair"               ~ "Nest (Leaf hair)", 
           traits == "nesti.Grass"                   ~ "Nest (Grass)",
-          traits == "nesti.Leaf.pulp"               ~ "Nest (pulp)",
+          traits == "nesti.Leaf.pulp"               ~ "Nest (Pulp)",
           
           # Body size
           traits == "body_size"                     ~ "Body Size (ITD)",
@@ -646,11 +646,11 @@ R_500_load <- RLQ_500$l1 %>%
           traits == "nativ.Non.Native"              ~ "Exotic Status",
 
           # Diet
-          traits == "prima.Aphids"                  ~ "Diet (Alphids)",
+          traits == "prima.Aphids"                  ~ "Diet (Aphids)",
           traits == "prima.Beetle.larva"            ~ "Diet (Beetle larvae)",
           traits == "prima.Caterpillars"            ~ "Diet (Caterpillars)",
           traits == "prima.Pollen"                  ~ "Diet (Pollen)",
-          traits == "prima.Single.Spider"           ~ 'Diet (Single Spider', 
+          traits == "prima.Single.Spider"           ~ 'Diet (Single Spider)', 
           traits == "prima.Spiders"                 ~ "Diet (Spiders)",
           traits == "prima.Tree.crickets"           ~ "Diet (Tree crickets)",
           
@@ -665,9 +665,9 @@ R_500_load <- RLQ_500$l1 %>%
           traits == "troph.Third"                   ~ "Trophic Rank (Third)",
           
           # Number of nesting materials
-          traits == "num_n.Single"                 ~ "Single Nesting Material",
-          traits == "num_n.Multi"                  ~ "Multiple Nesting Materials", 
-          traits == "num_n.None"                   ~ "No Nesting Material",
+          traits == "num_n.Single"                 ~ "Nesting Material Type Collected (Single)",
+          traits == "num_n.Multi"                  ~ "Nesting Material Type Collected (Multiple)", 
+          traits == "num_n.None"                   ~ "Nesting Material Type Collected (None)",
   
        
           TRUE ~ traits)
@@ -735,13 +735,13 @@ R_500_load <- RLQ_500$l1 %>%
      taxon = case_when(
        
        # Nesting material preference
-       traits == "nesti.Secretions"              ~ "Bees", 
+       traits == "nesti.Secretions"              ~ "Both", 
        traits == "nesti.Nest.tube.scrapings"     ~ "Bees",
-       traits == "nesti.Resin"                   ~ "Bees",
+       traits == "nesti.Resin"                   ~ "Both",
        traits == "nesti.Mud"                     ~ "Bees",
        traits == "nesti.Leaf.cut"                ~ "Bees",
        traits == "nesti.Leaf.hair"               ~ "Bees", 
-       traits == "nesti.Grass"                   ~ "Bees",
+       traits == "nesti.Grass"                   ~ "Wasps",
        traits == "nesti.Leaf.pulp"               ~ "Bees",
        
        # Body size
@@ -755,7 +755,7 @@ R_500_load <- RLQ_500$l1 %>%
        traits == "prima.Aphids"                  ~ "Wasps",
        traits == "prima.Beetle.larva"            ~ "Wasps",
        traits == "prima.Caterpillars"            ~ "Wasps",
-       traits == "prima.Pollen"                  ~ "Wasps",
+       traits == "prima.Pollen"                  ~ "Bees",
        traits == "prima.Single.Spider"           ~ "Wasps",
        traits == "prima.Spiders"                 ~ "Wasps",
        traits == "prima.Tree.crickets"           ~ "Wasps",
@@ -787,7 +787,7 @@ R_500_load <- RLQ_500$l1 %>%
      traits == "nesti.Leaf.cut"                ~ "Nest (Leaf cut)",
      traits == "nesti.Leaf.hair"               ~ "Nest (Leaf hair)", 
      traits == "nesti.Grass"                   ~ "Nest (Grass)",
-     traits == "nesti.Leaf.pulp"               ~ "Nest (pulp)",
+     traits == "nesti.Leaf.pulp"               ~ "Nest (Pulp)",
      
      # Body size
      traits == "body_size"                     ~ "Body Size (ITD)",
@@ -797,11 +797,11 @@ R_500_load <- RLQ_500$l1 %>%
      traits == "nativ.Non.Native"              ~ "Exotic Status",
      
      # Diet
-     traits == "prima.Aphids"                  ~ "Diet (Alphids)",
+     traits == "prima.Aphids"                  ~ "Diet (Aphids)",
      traits == "prima.Beetle.larva"            ~ "Diet (Beetle larvae)",
      traits == "prima.Caterpillars"            ~ "Diet (Caterpillars)",
      traits == "prima.Pollen"                  ~ "Diet (Pollen)",
-     traits == "prima.Single.Spider"           ~ 'Diet (Single Spider', 
+     traits == "prima.Single.Spider"           ~ 'Diet (Single Spider)', 
      traits == "prima.Spiders"                 ~ "Diet (Spiders)",
      traits == "prima.Tree.crickets"           ~ "Diet (Tree crickets)",
      
@@ -816,9 +816,9 @@ R_500_load <- RLQ_500$l1 %>%
      traits == "troph.Third"                   ~ "Trophic Rank (Third)",
      
      # Number of nesting materials
-     traits == "num_n.Single"                 ~ "Single Nesting Material",
-     traits == "num_n.Multi"                  ~ "Multiple Nesting Materials", 
-     traits == "num_n.None"                   ~ "No Nesting Material",
+     traits == "num_n.Single"                 ~ "Nesting Material Type Collected (Single)",
+     traits == "num_n.Multi"                  ~ "Nesting Material Type Collected (Multiple)", 
+     traits == "num_n.None"                   ~ "Nesting Material Type Collected (None)",
      
      
      TRUE ~ traits)
