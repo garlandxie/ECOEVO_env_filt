@@ -91,25 +91,27 @@ traits_tidy2 <- traits_tidy %>%
     species == "Auplopus mellipes" ~ "Single Spider", 
     species == "Dipogon sayi"      ~ "Spiders", 
     TRUE ~ primary_diet)
-  ) %>%
+  ) 
+
+# data cleaning: data types for each trait -------------------------------------
+
+traits_tidy3 <- traits_tidy2 %>%
   
   # insert missing values
   mutate(body_size = na_if(body_size, "NA")) %>% 
   
   # remove some variables 
-  select(-origin) %>%
+  select(-origin, - voltinism) %>%
   
   # coerce into factor variables
   mutate(
     
-    native_status = factor(native_status),
-    
-    # uses most common material
-    nesting_material = factor(nesting_material), 
-    primary_diet = factor(primary_diet),
-    voltinism = factor(voltinism), 
-    specialization = factor(specialization),
-    trophic_rank = factor(trophic_rank)
+    native_status     = factor(native_status),
+    nesting_material  = factor(nesting_material), # common nesting material
+    primary_diet      = factor(primary_diet),
+    specialization    = factor(specialization),
+    trophic_rank      = factor(trophic_rank),
+    num_nest_mat      = factor(num_nest_mat) 
     
     ) %>%
   
