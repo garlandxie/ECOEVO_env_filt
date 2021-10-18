@@ -129,13 +129,6 @@ traits_tidy3 <- traits_tidy2 %>%
   
   select(-bee_wasp, -authority, -family)
 
-# data cleaning: trait matrix without voltinism -------------------------------
-
-# remove volitinism (as requested by JSM)
-# remember to re-run the data pipeline with this dataset!
-traits_no_volt <- traits_tidy %>%
-  select(-voltinism)
-
 # save to disk -----------------------------------------------------------------
 
 saveRDS(
