@@ -70,6 +70,13 @@ traits <- readr::read_csv(
   
 )
 
+# cheack packaging -------------------------------------------------------------
+
+glimpse(comm)
+glimpse(env_250)
+glimpse(env_500)
+glimpse(traits)
+
 # RLQ: 250 ---------------------------------------------------------------------
 
 # some prep
