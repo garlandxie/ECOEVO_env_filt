@@ -131,26 +131,13 @@ traits_tidy3 <- traits_tidy2 %>%
 
 # save to disk -----------------------------------------------------------------
 
-saveRDS(
-  traits_tidy, 
-  file = here(
-    "data/final", 
-    "traits_with_volt.rds")
-  )
-
 write.csv(
-  x = traits_no_volt,
-  file = here("output", "tables", "traits_no_volt.csv"), 
+  x = traits_tidy3,
+  file = here("output", "tables", "traits_tidy.csv"), 
   row.names = FALSE
 )
 
-saveRDS(
-  traits_no_volt, 
-  file = here(
-    "data/final",
-    "traits_no_volt.RDS"
-  )
-)
+
 
 
 
