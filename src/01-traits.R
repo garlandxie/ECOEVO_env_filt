@@ -36,44 +36,11 @@ traits <- read_excel(
     "bee_wasp_traits_aug10.xlsx")
   )
 
-# data cleaning: trait matrix with voltinism -----------------------------------
+# data cleaning: create new traits ---------------------------------------------
 
 traits_tidy <- traits %>%
   janitor::clean_names() %>%
-  
-  # insert missing values
-  mutate(body_size = na_if(body_size, "NA")) %>% 
-  
-  # change primary diet 
-  mutate(primary_diet = case_when(
-    species == "Auplopus mellipes" ~ "Single Spider", 
-    species == "Dipogon sayi"      ~ "Spiders", 
-    TRUE ~ primary_diet)
-  ) %>%
-  
-  # change specialization
-   mutate(specialization = case_when(
-     
-     # genus
-     specialization == "Genus (Campanula)" ~ "Family", 
-     
-     # order 
-     specialization == "Order (Lepidoptera)" ~ "Order", 
-     specialization == "Order (Araneae)" ~ "Order", 
-     specialization == "Order (Orthoptera)" ~ "Order", 
-     specialization == "Multi-Order (Coleoptera, Lepidoptera)" ~ "Multi-Order", 
-     
-     # family
-     specialization == "Family (Campanulaceae)" ~ "Family",
-     specialization == "Family (Asteraceae)" ~ "Family",
-     specialization == "Family (Chrysomelidae)" ~ "Family", 
-     specialization == "Family (Aphididae)" ~ "Family", 
-     
-     # use the original trait states 
-     TRUE ~ specialization)
-     
-     ) %>%
-     
+
   # create native status
   mutate(native_status = case_when(
     origin == "Palearctic"   ~ "Non-Native", 
@@ -90,7 +57,44 @@ traits_tidy <- traits %>%
     species == "Megachile pugnata"         ~ "Multi",          
     species == "Dipogon sayi"              ~ "Multi", 
     TRUE ~ "Single")
+  ) 
+  
+# data cleaning: edit existing traits ------------------------------------------
+
+traits_tidy2 <- traits_tidy %>%
+  
+  # change specialization
+  mutate(specialization = case_when(
+    
+    # genus
+    specialization == "Genus (Campanula)"                     ~ "Family", 
+    
+    # order 
+    specialization == "Order (Lepidoptera)"                   ~ "Order", 
+    specialization == "Order (Araneae)"                       ~ "Order", 
+    specialization == "Order (Orthoptera)"                    ~ "Order", 
+    specialization == "Multi-Order (Coleoptera, Lepidoptera)" ~ "Multi-Order", 
+    
+    # family
+    specialization == "Family (Campanulaceae)"                ~ "Family",
+    specialization == "Family (Asteraceae)"                   ~ "Family",
+    specialization == "Family (Chrysomelidae)"                ~ "Family", 
+    specialization == "Family (Aphididae)"                    ~ "Family", 
+    
+    # use the original trait states 
+    TRUE ~ specialization)
+    
   ) %>%
+  
+  # change primary diet 
+  mutate(primary_diet = case_when(
+    species == "Auplopus mellipes" ~ "Single Spider", 
+    species == "Dipogon sayi"      ~ "Spiders", 
+    TRUE ~ primary_diet)
+  ) %>%
+  
+  # insert missing values
+  mutate(body_size = na_if(body_size, "NA")) %>% 
   
   # remove some variables 
   select(-origin) %>%
