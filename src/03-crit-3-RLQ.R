@@ -30,6 +30,7 @@ library(here)
 library(tidyverse)
 library(patchwork)
 library(grid)
+library(readr)
 
 # Import files -----------------------------------------------------------------
 
@@ -54,9 +55,19 @@ comm <- read.csv(
 
 
 # Q table - traits
-traits <- readRDS(
-  here("data/final", 
-       "traits_no_volt.rds")
+traits <- readr::read_csv(
+  here("output", "tables", "traits_tidy.csv"), 
+  col_types = cols(
+    species          = col_character(),
+    body_size        = col_double(), 
+    nesting_material = col_factor(), 
+    primary_diet     = col_factor(), 
+    specialization   = col_factor(), 
+    trophic_rank     = col_factor(), 
+    native_status    = col_factor(), 
+    num_nest_mat     = col_factor()
+  ) 
+  
 )
 
 # RLQ: 250 ---------------------------------------------------------------------
