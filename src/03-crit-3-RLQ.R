@@ -756,6 +756,7 @@ R_500_load <- RLQ_500$l1 %>%
        traits == "prima.Beetle.larva"            ~ "Wasps",
        traits == "prima.Caterpillars"            ~ "Wasps",
        traits == "prima.Pollen"                  ~ "Wasps",
+       traits == "prima.Single.Spider"           ~ "Wasps",
        traits == "prima.Spiders"                 ~ "Wasps",
        traits == "prima.Tree.crickets"           ~ "Wasps",
        
@@ -768,6 +769,11 @@ R_500_load <- RLQ_500$l1 %>%
        traits == "troph.First"                  ~ "Bees",
        traits == "troph.Second"                 ~ "Wasps",
        traits == "troph.Third"                  ~ "Wasps",
+       
+       # Number of nesting materials
+       traits == "num_n.Single"                 ~ "Both",
+       traits == "num_n.Multi"                  ~ "Both", 
+       traits == "num_n.None"                   ~ "Both",
        
        TRUE ~ traits)
    ) %>%
@@ -795,6 +801,7 @@ R_500_load <- RLQ_500$l1 %>%
      traits == "prima.Beetle.larva"            ~ "Diet (Beetle larvae)",
      traits == "prima.Caterpillars"            ~ "Diet (Caterpillars)",
      traits == "prima.Pollen"                  ~ "Diet (Pollen)",
+     traits == "prima.Single.Spider"           ~ 'Diet (Single Spider', 
      traits == "prima.Spiders"                 ~ "Diet (Spiders)",
      traits == "prima.Tree.crickets"           ~ "Diet (Tree crickets)",
      
@@ -807,6 +814,12 @@ R_500_load <- RLQ_500$l1 %>%
      traits == "troph.First"                   ~ "Trophic Rank (First)",
      traits == "troph.Second"                  ~ "Trophic Rank (Second)",
      traits == "troph.Third"                   ~ "Trophic Rank (Third)",
+     
+     # Number of nesting materials
+     traits == "num_n.Single"                 ~ "Single Nesting Material",
+     traits == "num_n.Multi"                  ~ "Multiple Nesting Materials", 
+     traits == "num_n.None"                   ~ "No Nesting Material",
+     
      
      TRUE ~ traits)
    ) %>%  
