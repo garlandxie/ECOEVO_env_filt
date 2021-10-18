@@ -49,7 +49,7 @@ traits_tidy <- traits %>%
     species == "Auplopus mellipes" ~ "Single Spider", 
     species == "Dipogon sayi"      ~ "Spiders", 
     TRUE ~ primary_diet)
-  )
+  ) %>%
   
   # change specialization
    mutate(specialization = case_when(
@@ -81,6 +81,16 @@ traits_tidy <- traits %>%
     origin == "Holarctic"    ~ "Native", 
     TRUE ~ origin)
     ) %>%
+     
+  # create number of nesting material
+  mutate(num_nest_mat = case_when(
+    species == "Heriades variolosa"        ~ "Multi",        
+    species == "Hoplitis producta"         ~ "Multi",
+    species == "Hoplitis spoliata"         ~ "Multi",           
+    species == "Megachile pugnata"         ~ "Multi",          
+    species == "Dipogon sayi"              ~ "Multi", 
+    TRUE ~ "Single")
+  ) %>%
   
   # remove some variables 
   select(-origin) %>%
