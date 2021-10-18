@@ -67,6 +67,7 @@ comm_rel <- comm %>%
   
 trait_tidy <- trait %>%
   as.data.frame() %>% 
+  filter(species != "Hylaeus_punctatus") %>%
   column_to_rownames(var = "species") %>%
   filter(!is.na(body_size)) 
 
