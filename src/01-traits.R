@@ -51,11 +51,15 @@ traits_tidy <- traits %>%
      
   # create number of nesting material
   mutate(num_nest_mat = case_when(
+    
+    # species listed below has multiple nesting materials 
     species == "Heriades variolosa"        ~ "Multi",        
     species == "Hoplitis producta"         ~ "Multi",
     species == "Hoplitis spoliata"         ~ "Multi",           
     species == "Megachile pugnata"         ~ "Multi",          
     species == "Dipogon sayi"              ~ "Multi", 
+    
+    # every other species has a single nesting material
     TRUE ~ "Single")
   ) 
   
@@ -89,7 +93,9 @@ traits_tidy2 <- traits_tidy %>%
   # change primary diet 
   mutate(primary_diet = case_when(
     species == "Auplopus mellipes" ~ "Single Spider", 
-    species == "Dipogon sayi"      ~ "Spiders", 
+    species == "Dipogon sayi"      ~ "Single Spider",
+    
+    # keep original trait states
     TRUE ~ primary_diet)
   ) 
 
