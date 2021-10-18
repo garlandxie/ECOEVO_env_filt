@@ -44,6 +44,13 @@ traits_tidy <- traits %>%
   # insert missing values
   mutate(body_size = na_if(body_size, "NA")) %>% 
   
+  # change primary diet 
+  mutate(primary_diet = case_when(
+    species == "Auplopus mellipes" ~ "Single Spider", 
+    species == "Dipogon sayi"      ~ "Spiders", 
+    TRUE ~ primary_diet)
+  )
+  
   # change specialization
    mutate(specialization = case_when(
      
@@ -66,13 +73,12 @@ traits_tidy <- traits %>%
      TRUE ~ specialization)
      
      ) %>%
-
-  
-  # native status
+     
+  # create native status
   mutate(native_status = case_when(
-    origin == "Palearctic" ~ "Non-Native", 
-    origin == "Nearctic" ~ "Native", 
-    origin == "Holarctic" ~ "Native", 
+    origin == "Palearctic"   ~ "Non-Native", 
+    origin == "Nearctic"     ~ "Native", 
+    origin == "Holarctic"    ~ "Native", 
     TRUE ~ origin)
     ) %>%
   
