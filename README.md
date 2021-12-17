@@ -1,6 +1,6 @@
 # D99_env_filt 
 
-he following documentation of this README file follows the TIER 4.0 Protocol (https://www.projecttier.org/tier-protocol/protocol-4-0/root/)
+The following documentation of this README file follows the TIER 4.0 Protocol (https://www.projecttier.org/tier-protocol/protocol-4-0/root/)
 
 ## Software and version
 
