@@ -21,7 +21,7 @@
 #   (2) Department of Ecology and Evolutionary Biology,
 #       University of Colorado Boulder,
 #
-# Purpose of this R script: to clean data for the community matrix
+# Purpose of this R script: to reproduce Figure S4
 
 # libraries --------------------------------------------------------------------
 library(here)      # for creating relative file-paths
@@ -39,7 +39,7 @@ int_raw <- read_excel(
 
 # site data
 site <- read_excel(
-    here("data/input_data", "site_jsm_edits_Aug10_2021.xlsx")
+  here("data/input_data", "site_jsm_edits_Aug10_2021.xlsx")
 )
 
 # data cleaning: sites ---------------------------------------------------------
@@ -76,34 +76,74 @@ all_years <- site %>%
   
   pull(ID)
 
-# data cleaning: bees ----------------------------------------------------------
+# Figure S4: histograms for species richness -----------------------------------
 
-# community data matrix
-# proxy of abundance: number of brood cells
-# aggregrated across all years (2011-2013)
-broods <- int_tidy %>%
-  filter(id %in% all_years) %>%
-  group_by(id, lower_species) %>%
-  summarize(total_alive = sum(no_broodcells)) %>%
-  ungroup() %>%
-  pivot_wider(names_from = lower_species, values_from = total_alive) %>%
-  mutate(across(everything(), ~replace_na(., 0))) %>%
-  column_to_rownames(var = "id")
-   
+(hist_sr_bees <- int_tidy %>%
+   filter(taxa_ls == "Bee", id %in% all_years) %>%
+   group_by(year, id) %>%
+   summarize(species_richness = length(unique(lower_species))) %>%
+   ggplot(aes(x = species_richness)) + 
+   geom_histogram(bins = 5, binwidth = 1) + 
+   ylim(0, 200) + 
+   facet_wrap(~year) + 
+   scale_x_continuous(
+     breaks = c(2,4,6,8)
+   ) +
+   labs(
+     title = "A)",
+     x = "Speciess richness (bees)",
+     y = NULL
+   ) + 
+   theme_bw()
+)
+
+(hist_sr_wasps <- int_tidy %>%
+    filter(taxa_ls == "Wasp", id %in% all_years) %>%
+    group_by(id, year) %>%
+    summarize(species_richness = length(unique(lower_species))) %>%
+    ggplot(aes(x = species_richness)) + 
+    geom_histogram(bins = 5, binwidth = 1) + 
+    ylim(0, 200) + 
+    facet_wrap(~year) + 
+    scale_x_continuous(
+      breaks = c(2,4,6,8)
+    ) + 
+    labs(
+      title = "B)",
+      x = "Speciess richness (wasps)",
+      y = NULL
+    ) + 
+    theme_bw()
+)
+
+(hist_sr_total <- int_tidy %>%
+    filter(id %in% all_years) %>%
+    group_by(id, year) %>%
+    summarize(species_richness = length(unique(lower_species))) %>%
+    ggplot(aes(x = species_richness)) + 
+    geom_histogram(bins =5, binwidth = 1) + 
+    ylim(0, 200) + 
+    facet_wrap(~year) +
+    scale_x_continuous(
+      breaks = c(2,4,6,8)
+    ) + 
+    labs(
+      title = "C)",
+      x = "Speciess richness (bees and wasps)",
+      y = NULL
+    ) + 
+    theme_bw()
+)
+
+# multi-panel figure
+(hist_SR <- hist_sr_bees / hist_sr_wasps / hist_sr_total)
+
 # save to disk -----------------------------------------------------------------
-
-write.csv(
-  broods, 
-  file = here(
-    "data/final", 
-    "comm_matrix_B.csv"
-    )
-  )
 
 ggsave(
   plot = hist_SR, 
   filename = here(
-    "output/figures/supp", 
+    "output/data_appendix_output", 
     "Xie_et_al-2021-FigureS4-JAE.png"
   ),
   device = "png", 
