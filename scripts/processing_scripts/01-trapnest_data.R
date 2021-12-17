@@ -163,17 +163,6 @@ write.csv(
   )
 
 ggsave(
-  plot = hist_ab, 
-  filename = here(
-    "output/figures/supp", 
-    "Xie_et_al-2021-FigureS3-JAE.png"
-  ),
-  device = "png", 
-  height = 5, 
-  width  = 5
-)
-
-ggsave(
   plot = hist_SR, 
   filename = here(
     "output/figures/supp", 
