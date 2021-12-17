@@ -4,7 +4,7 @@ The following documentation of this README file follows the TIER 4.0 Protocol (h
 
 ## Manuscript 
 
-Ecological traits, not level of urbanization, structure cavity-nesting bee and wasp diversity in the city.
+Title: Ecological traits, not level of urbanization, structure cavity-nesting bee and wasp diversity in the city.
 
 Authors: Garland Xie, Nicholas Sookhan, Kelly A. Carscadden, and Scott MacIvor
 
