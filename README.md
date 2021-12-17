@@ -1,6 +1,6 @@
 # Bees and wasps in the city  
 
-The following documentation of this README file follows the TIER 4.0 Protocol (https://www.projecttier.org/tier-protocol/protocol-4-0/root/)
+The following documentation follows the TIER 4.0 Protocol (https://www.projecttier.org/tier-protocol/protocol-4-0/root/)
 
 ## Manuscript 
 
