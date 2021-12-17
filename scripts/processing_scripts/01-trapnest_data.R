@@ -76,57 +76,6 @@ all_years <- site %>%
   
   pull(ID)
 
-# Figure S3: histograms for abundance -----------------------------------------------
-
-(hist_bees_ab <- int_tidy %>%
-  filter(taxa_ls == "Bee", id %in% all_years) %>%
-  group_by(id, year) %>%
-  summarize(sum_broods = sum(no_broodcells)) %>%
-  ggplot(aes(x = sum_broods)) + 
-  geom_histogram(binwidth = 1) + 
-  ylim(0, 10) + 
-  facet_wrap(~year) + 
-  labs(
-    title = "A)",
-    x = "Number of completed brood cells (bees)",
-    y = NULL
-  ) + 
-  theme_bw() 
-)
-
-(hist_wasp_ab <- int_tidy %>%
-  filter(taxa_ls == "Wasp", id %in% all_years) %>%
-  group_by(id, year) %>%
-  summarize(sum_broods = sum(no_broodcells)) %>%
-  ggplot(aes(x = sum_broods)) + 
-  geom_histogram(binwidth = 1) + 
-  facet_wrap(~year) + 
-  ylim(0, 10) + 
-  labs(
-    title = "B)",
-    x = "Number of completed brood cells (wasps)",
-    y = NULL) + 
-  theme_bw() 
-)
-
-(hist_total_ab <- int_tidy %>%
-    filter(id %in% all_years) %>%
-    group_by(id, year) %>%
-    summarize(sum_broods = sum(no_broodcells)) %>%
-    ggplot(aes(x = sum_broods)) + 
-    geom_histogram(binwidth = 1) + 
-    facet_wrap(~year) + 
-    ylim(0, 10) + 
-    labs(
-      title = "C)",
-      x = "Number of completed brood cells",
-      y = NULL) + 
-    theme_bw() 
-)
-
-# multi-panel histograms
-(hist_ab <- hist_bees_ab / hist_wasp_ab / hist_total_ab)
-
 # Figure S4: histograms for species richness ----------------------------------------
 
 (hist_sr_bees <- int_tidy %>%
