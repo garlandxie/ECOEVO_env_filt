@@ -42,6 +42,7 @@ comm <- read.csv(
   row.names = 1
   )
 
+
 trait <- read.csv(
   here("output", "tables", "traits_tidy.csv")
   )
