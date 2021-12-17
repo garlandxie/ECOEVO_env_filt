@@ -2,6 +2,19 @@
 
 The following documentation of this README file follows the TIER 4.0 Protocol (https://www.projecttier.org/tier-protocol/protocol-4-0/root/)
 
+## Abstract
+
+1. Spatial patterns in biodiversity shed light on community assembly and can be used to prioritize conservation and ecosystem management. If urbanization leads to more functionally homogeneous solitary bee and wasp communities, then there should be impacts to critical ecosystem services, and in turn, urban food production and stability of remnant native vegetation. 
+
+2. The ‘environmental filtering’ of communities along urbanization gradients has been used to explain biodiversity patterns. However, demonstrating environmental filtering requires precise statistical tests to link suboptimal environments at one end of a gradient to lower population sizes via ecological traits. 
+
+3. Here, we employ a rigorous three-part framework to test I) for clustering by comparing standardized effect sizes of trait diversity to null expectations, II) if trait clustering is correlated to the urbanization gradient, and III) if species’ traits relate to environmental conditions. If all criteria are met, then there is evidence that urbanization is filtering communities based on their traits. We use a community of 51 solitary cavity-nesting bee and wasp species sampled across a large metropolitan city over three years to test for environmental filtering by urbanization. 
+
+4. None of the criteria were met, so we did not have evidence for environmental filtering. We do however demonstrate that certain ecological traits influence which species perform well in the extreme ends of the urbanization gradient. Cellophane bees (Hylaeus: Colletidae) secrete their own nesting material and were overrepresented in urban areas, while native leafcutting bees (Megachile: Megachilidae), which line nests with cut or chewed plant material, were most common in more tree canopied (less urban) areas. For wasps, prey preference was important, with aphid-collecting (Psenulus and Passaloecus: Crabronidae) and generalist spider-collecting (Trypoxylon: Crabronidae) wasps overrepresented in urban areas and caterpillar- and beetle-collecting wasps (Euodynerus and Symmorphus: Vespidae, respectively) overrepresented towards greener areas. Non-native species were positively associated with urban areas. 
+
+5. We emphasize that changes in the prevalence of different traits across urban gradients, without corresponding changes in trait diversity with urbanization, do not constitute environmental filtering. Nonetheless, ecological traits offer novel and practical insights into the relationship between urbanization and biodiversity.
+
+
 ## Software and version
 
 Code to reproducible the analysis and figures is written in the R programming language (version 4.1.1). 
