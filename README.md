@@ -2,6 +2,13 @@
 
 The following documentation of this README file follows the TIER 4.0 Protocol (https://www.projecttier.org/tier-protocol/protocol-4-0/root/)
 
+## Manuscript 
+
+Ecological traits, not level of urbanization, structure cavity-nesting bee and wasp diversity in the city.
+Authors: Garland Xie, Nicholas Sookhan, Kelly A. Carscadden, and Scott MacIvor
+
+Submitted to Journal of Animal Ecology (In Review)
+
 ## Abstract
 
 1. Spatial patterns in biodiversity shed light on community assembly and can be used to prioritize conservation and ecosystem management. If urbanization leads to more functionally homogeneous solitary bee and wasp communities, then there should be impacts to critical ecosystem services, and in turn, urban food production and stability of remnant native vegetation. 
