@@ -95,18 +95,7 @@ broods <- int_tidy %>%
 write.csv(
   broods, 
   file = here(
-    "data/final", 
+    "data/analysis_data", 
     "comm_matrix_B.csv"
     )
   )
-
-ggsave(
-  plot = hist_SR, 
-  filename = here(
-    "output/figures/supp", 
-    "Xie_et_al-2021-FigureS4-JAE.png"
-  ),
-  device = "png", 
-  height = 5, 
-  width  = 5
-)
