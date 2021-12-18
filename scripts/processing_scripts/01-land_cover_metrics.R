@@ -41,17 +41,17 @@ library(readxl)            # for reading excel files
 
 # land cover data
 lc <- raster(
-  here("data/original", 
+  here("data", "input_data", 
        "toronto_2007_landcover.img")
 )
 
 # abundance per site 
 site <- read_excel(
-  here("data/original", "site_jsm_edits_Aug10_2021.xlsx")
+  here("data", "input_data", "site_jsm_edits_Aug10_2021.xlsx")
 )
 
 # functions
-source(here("src", "functions.R"))
+source(here("scripts", "processing_scripts", "functions.R"))
 
 # data clean -------------------------------------------------------------------
 
