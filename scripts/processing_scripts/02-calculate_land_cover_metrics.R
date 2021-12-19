@@ -195,12 +195,12 @@ l_500 <- lw_500 %>%
 # save to disk -----------------------------------------------------------------
 write.csv(l_250, 
           file = here(
-            "data/working",
+            "data", "intermediate_data",
             "land_use_250.csv")
           )
 
 write.csv(l_500,
           file = here(
-            "data/working", 
+            "data", "intermediate_data", 
             "land_use_500.csv")
           )
