@@ -8,7 +8,7 @@ Title: Ecological traits, not level of urbanization, structure cavity-nesting be
 
 Authors: Garland Xie, Nicholas Sookhan, Kelly A. Carscadden, and Scott MacIvor
 
-Submitted to Journal of Animal Ecology (In Review)
+Submitted to Ecology and Evolution (pending minor revisions)
 
 ## Abstract
 
