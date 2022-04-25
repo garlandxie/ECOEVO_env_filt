@@ -30,7 +30,6 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
 
 ## Folder structure 
 
-- Report
 - Data
   - [InputData](data/input_data): all raw data 
     - [Metadata](data/input_data/metadata): containing information about the sources and contents of InputData files
