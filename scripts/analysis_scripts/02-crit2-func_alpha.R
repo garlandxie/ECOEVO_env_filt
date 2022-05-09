@@ -464,13 +464,14 @@ ggsave(filename =
        height = 4
 )
 
-## |-reg mdf 250 ----
+## |- reg mfd 250 ----
 write.csv(x = reg_250,
           file = here(
             "data/final",
             "reg_mfd_250.csv")
           )
 
+## |- reg mfd 500 ----
 write.csv(x = reg_500, 
           file = here(
             "data/final",
