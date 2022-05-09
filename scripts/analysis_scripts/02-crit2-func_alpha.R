@@ -32,7 +32,7 @@ library(GGally)      # for visualizing pairwise distance matrices
 library(car)         # for calculating variance inflation factors
 library(sp)          # for geospatial analyses 
 library(spdep)       # for analyzing spatial autocorrelation  
-library(patchwork)   # fpr making multi-panel plots
+library(patchwork)   # for making multi-panel plots
 library(gghighlight) # for highlighting ggplot features
 library(tibble)      # for creating tibbles 
 
