@@ -38,7 +38,7 @@ library(tibble)
 
 # import -----------------------------------------------------------------------
 
-# site info
+## |- site ----
 site <- readxl::read_excel(
   here(
     "data", "input_data",
@@ -47,13 +47,13 @@ site <- readxl::read_excel(
   sheet = 1
 )
 
-# ses mfd
+## |- ses mfd ----
 ses_mfd <- readRDS(
   here("data/working",
        "ses_mfd.rds")
   )
 
-# land cover
+## |- land cover -----
 l_250 <- read.csv(
   here("data/working", 
        "land_use_250.csv")
@@ -66,7 +66,7 @@ l_500 <- read.csv(
 
 # data cleaning ----------------------------------------------------------------
 
-# 250m 
+## |- 250m scale ----
 reg_250 <-  ses_mfd %>%
   full_join(l_250, by = c("site_id" = "site")) %>%
   full_join(site, by = c("site_id" = "ID")) %>%
@@ -96,6 +96,7 @@ reg_250 <-  ses_mfd %>%
   
   mutate(Habitat_type = factor(Habitat_type))
 
+## |- 500m scale ----
 reg_500 <- ses_mfd %>%
   full_join(l_500, by = c("site_id" = "site")) %>%
   full_join(site, by = c("site_id" = "ID")) %>%
@@ -125,7 +126,9 @@ reg_500 <- ses_mfd %>%
   
     mutate(Habitat_type = factor(Habitat_type))
 
-# exploratory data analysis: relationships between X and Y variables -----------
+# exploratory data analysis ----
+
+## |- relationships between X and Y variables -----------
 
 # check for clear patterns between response and explanatory relationships
 # use a LOESS smoother to aid visual interpretation
@@ -175,7 +178,7 @@ reg_500 %>%
   labs(x = "Percent grass cover (500m)",
        y = "ses MFD")
 
-# exploratory data analysis: independent observations for Y variable -----------
+## |- independent observations for Y variable ----
 
 reg_250 %>%
   ggplot(aes(x = longs, y = lats, col = ses_mfd)) + 
@@ -207,7 +210,9 @@ pairs_500 <- reg_500 %>%
   ggpairs() + 
   labs(title = "500m spatial scale")
 
-# hypothesis testing: multiple regression (250m) -------------------------------
+# hypothesis testing ----
+
+## |- multiple regression (250m) ----
 
 # first fit
 lm_250_v1 <- lm(ses_mfd ~ 
@@ -228,7 +233,7 @@ plot(lm_250_v2, which = c(2))
 plot(lm_250_v2, which = c(3))
 plot(lm_250_v2, which = c(5))
 
-# hypothesis testing: multiple regression (500m) -------------------------------
+## |- multiple regression (500m) ---- 
 
 # first fit
 lm_500_v1 <- lm(ses_mfd ~ 
@@ -249,9 +254,9 @@ plot(lm_500_v2, which = c(2))
 plot(lm_500_v2, which = c(3))
 plot(lm_500_v2, which = c(5))
 
-# spatial autocorrelaton tests -------------------------------------------------
+# spatial autocorrelaton tests ----
 
-# 250m 
+## |- 250m----
 coords_250 <- reg_250 %>%
   select(site, longs, lats) 
 
@@ -271,7 +276,7 @@ lm.morantest(lm_250_v2,
                )
              )
 
-# 500m 
+## |- 500m ----
 coords_500 <- reg_500 %>%
   select(site, longs, lats) 
 
@@ -355,7 +360,7 @@ rq_lab_500 <- bquote("Adj-R"^2: .(format(rq_500, digits = 2)))
 
 # additional analyses ----------------------------------------------------------
 
-## 250 m scale -----
+## |- 250 m scale -----
 
 reg_250 %>%
   ggplot(aes(x = Habitat_type, y = ses_mfd)) + 
@@ -382,7 +387,7 @@ reg_250 %>%
     y = "SES.MFD") + 
   theme_bw()
 
-## 500 m scale -----
+## |- 500 m scale -----
 
 table(reg_500$Habitat_type)
 
@@ -415,7 +420,7 @@ pairs(emm_500)
 
 # save to disk -----------------------------------------------------------------
 
-# Figure 4
+## |- figure 4 ----
 ggsave(filename = 
          here("output/figures/main", 
               "Xie_et_al-2021-Figure4-JAE.png"
@@ -426,7 +431,7 @@ ggsave(filename =
        height = 4
        )
 
-# Figure S7
+## |- figure S7 ----
 ggsave(filename = 
          here("output/figures/supp", 
               "Xie_et_al-2021-FigureS7-JAE.png"
@@ -437,7 +442,7 @@ ggsave(filename =
        height = 4
 )
 
-# Figure S4
+## |- figure S4 ----
 ggsave(filename = 
          here("output/figures/supp", 
               "Xie_et_al-2021-FigureS5-JAE.png"
@@ -448,7 +453,7 @@ ggsave(filename =
        height = 4
 )
 
-# Figure S6
+## |- figure S6 ----
 ggsave(filename = 
          here("output/figures/supp", 
               "Xie_et_al-2021-FigureS6-JAE.png"
@@ -459,6 +464,7 @@ ggsave(filename =
        height = 4
 )
 
+## |-reg mdf 250 ----
 write.csv(x = reg_250,
           file = here(
             "data/final",
