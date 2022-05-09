@@ -41,7 +41,7 @@ library(tibble)
 # site info
 site <- readxl::read_excel(
   here(
-    "data/original", 
+    "data", "input_data",
     "site_jsm_edits_Aug10_2021.xlsx"
   ), 
   sheet = 1
@@ -92,7 +92,9 @@ reg_250 <-  ses_mfd %>%
     !is.na(perc_tree_250)  &
     !is.na(perc_grass_250) & 
     !is.na(perc_urb_250)  
-  )
+  ) %>%
+  
+  mutate(Habitat_type = factor(Habitat_type))
 
 reg_500 <- ses_mfd %>%
   full_join(l_500, by = c("site_id" = "site")) %>%
@@ -119,7 +121,9 @@ reg_500 <- ses_mfd %>%
     !is.na(perc_tree_500)  &
     !is.na(perc_grass_500) & 
     !is.na(perc_urb_500)  
-    )
+    ) %>%
+  
+    mutate(Habitat_type = factor(Habitat_type))
 
 # exploratory data analysis: relationships between X and Y variables -----------
 
@@ -206,7 +210,8 @@ pairs_500 <- reg_500 %>%
 # hypothesis testing: multiple regression (250m) -------------------------------
 
 # first fit
-lm_250_v1 <- lm(ses_mfd ~ perc_grass_250 + perc_tree_250 + perc_urb_250, 
+lm_250_v1 <- lm(ses_mfd ~ 
+                  perc_grass_250 + perc_tree_250 + perc_urb_250 + Habitat_type, 
              data = reg_250)
 vif(lm_250_v1)
 
@@ -231,7 +236,8 @@ plot(lm_250_v2, which = c(5))
 # hypothesis testing: multiple regression (500m) -------------------------------
 
 # first fit
-lm_500_v1 <- lm(ses_mfd ~ perc_grass_500 + perc_tree_500 + perc_urb_500, 
+lm_500_v1 <- lm(ses_mfd ~ 
+                  perc_grass_500 + perc_tree_500 + perc_urb_500 + Habitat_type, 
              data = reg_500)
 vif(lm_500_v1)
 
@@ -356,6 +362,66 @@ rq_lab_500 <- bquote("Adj-R"^2: .(format(rq_500, digits = 2)))
        x = "% Impervious surface (500m spatial scale)") + 
   theme_bw()
 )
+
+# additional analyses ----------------------------------------------------------
+
+## 250 m scale -----
+
+reg_250 %>%
+  ggplot(aes(x = Habitat_type, y = ses_mfd)) + 
+  geom_boxplot() + 
+  geom_point(alpha = 0.1) + 
+  labs(
+    x = "Urban Green Space Type", 
+    y = "SES.MFD") + 
+  theme_bw()
+
+reg_250 %>%
+  ggplot(aes(x = perc_urb_250)) + 
+  geom_histogram() + 
+  labs(x = "Percent Impervious Surface (in 250m scale)") + 
+  facet_wrap(~Habitat_type) +
+  theme_bw()
+
+reg_250 %>%
+  ggplot(aes(x = perc_urb_250, y = ses_mfd)) + 
+  geom_point() + 
+  facet_wrap(~Habitat_type) + 
+  labs(
+    x = "Percent Impervious Surface (in 250m scale)", 
+    y = "SES.MFD") + 
+  theme_bw()
+
+## 500 m scale -----
+
+table(reg_500$Habitat_type)
+
+reg_500 %>%
+  ggplot(aes(x = perc_urb_500)) + 
+  geom_histogram() + 
+  labs(x = "Percent Impervious Surface (in 500m scale)") + 
+  facet_wrap(~Habitat_type) +
+  theme_bw()
+
+reg_500 %>%
+  ggplot(aes(x = perc_urb_500, y = ses_mfd)) + 
+  geom_point() + 
+  facet_wrap(~Habitat_type) + 
+  labs(
+    x = "Percent Impervious Surface (in 500m scale)", 
+    y = "SES.MFD") + 
+  theme_bw()
+
+library(emmeans)
+
+emm_250 <- emmeans(lm_250_v2, specs = "Habitat_type")
+emm_500 <- emmeans(lm_500_v2, specs = "Habitat_type")
+
+ref_grid(lm_250_v2)
+ref_grid(lm_500_v2)
+
+pairs(emm_250)
+pairs(emm_500)
 
 # save to disk -----------------------------------------------------------------
 
