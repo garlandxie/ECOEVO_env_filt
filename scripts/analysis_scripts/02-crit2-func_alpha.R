@@ -25,16 +25,16 @@
 # Purpose of this R script: to conduct statistical analyses for CT criteria II 
 
 # libraries --------------------------------------------------------------------
-library(here)    # for creating relative file-paths
-library(dplyr)
-library(ggplot2)
-library(GGally)
-library(car)
-library(sp)
-library(spdep)
-library(patchwork)
-library(gghighlight)
-library(tibble)
+library(here)        # for creating relative file-paths
+library(dplyr)       # for manipulating data
+library(ggplot2)     # for visualizing data
+library(GGally)      # for visualizing pairwise distance matrices
+library(car)         # for calculating variance inflation factors
+library(sp)          # for geospatial analyses 
+library(spdep)       # for analyzing spatial autocorrelation  
+library(patchwork)   # fpr making multi-panel plots
+library(gghighlight) # for highlighting ggplot features
+library(tibble)      # for creating tibbles 
 
 # import -----------------------------------------------------------------------
 
