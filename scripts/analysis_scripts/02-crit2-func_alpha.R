@@ -422,7 +422,7 @@ pairs(emm_500)
 
 ## |- figure 4 ----
 ggsave(filename = 
-         here("output/figures/main", 
+         here("output", "results", 
               "Xie_et_al-2021-Figure4-JAE.png"
               ),
        plot = part_urb_250, 
@@ -433,7 +433,7 @@ ggsave(filename =
 
 ## |- figure S7 ----
 ggsave(filename = 
-         here("output/figures/supp", 
+         here("output/data_appendix_output", 
               "Xie_et_al-2021-FigureS7-JAE.png"
          ),
        plot = part_urb_500, 
