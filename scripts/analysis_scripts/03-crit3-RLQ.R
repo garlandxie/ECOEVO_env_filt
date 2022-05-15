@@ -576,23 +576,46 @@ R_500_load <- RLQ_500$l1 %>%
 
 # Figure 5: Trait scores (250 m) -----------------------------------------------
 
-(RLQ_250_load <- RLQ_250$c1 %>%
+RLQ_250_load <- RLQ_250$c1 %>%
   rownames_to_column(var = "traits") %>%
   select(traits, CS1) %>%
+   
+  # obtain "trait" category 
+  # i.e., nesting material, primary diet, specialization, trophic level
+  # i.e., numbering of nesting materials, native status
   mutate(
-    traits = as.character(traits), 
+    nest_cat = case_when(
+      str_detect(traits, pattern = "body")   ~ "Body", 
+      str_detect(traits, pattern = "nesti.") ~ "Nesti",
+      str_detect(traits, pattern = "prima.") ~ "Prima", 
+      str_detect(traits, pattern = "speci.") ~ "Speci",
+      str_detect(traits, pattern = "troph.") ~ "Troph", 
+      str_detect(traits, pattern = "nativ.") ~ "Native", 
+      str_detect(traits, pattern = "num.n.") ~ "Num",
+      TRUE ~ traits
+    )
+  ) %>%
+   
+  # group into sections by trait category 
+  # then order by important score within each group
+  # (instead of all results being globally ordered by important score)
+  group_by(nest_cat) %>%
+  arrange(nest_cat, CS1) %>%
+   
+  mutate(
+    trait = as.character(traits), 
     taxon = case_when(
       
       # Nesting material preference
-      traits == "nesti.Secretions"              ~ "Both", 
       traits == "nesti.Nest.tube.scrapings"     ~ "Bees",
-      traits == "nesti.Resin"                   ~ "Both",
-      traits == "nesti.Mud"                     ~ "Bees",
-      traits == "nesti.Leaf.cut"                ~ "Bees",
       traits == "nesti.Leaf.hair"               ~ "Bees", 
-      traits == "nesti.Grass"                   ~ "Wasps",
+      traits == "nesti.Mud"                     ~ "Bees",
+      traits == "nesti.Resin"                   ~ "Both",
       traits == "nesti.Leaf.pulp"               ~ "Bees",
-      
+      traits == "nesti.Leaf.cut"                ~ "Bees",
+      traits == "nesti.Secretions"              ~ "Both", 
+      traits == "nesti.Grass"                   ~ "Wasps",
+
       # Body size
       traits == "body_size"                     ~ "Both",
       
@@ -625,58 +648,60 @@ R_500_load <- RLQ_500$l1 %>%
       traits == "num_n.None"                   ~ "Both",
       
       TRUE ~ traits)
+    
   ) %>%
-    mutate(traits = case_when(
-           
-          # Nesting material preference
-          traits == "nesti.Secretions"              ~ "Nest (Secretions)", 
-          traits == "nesti.Nest.tube.scrapings"     ~ "Nest (Scrapings)",
-          traits == "nesti.Resin"                   ~ "Nest (Resin)",
-          traits == "nesti.Mud"                     ~ "Nest (Mud)",
-          traits == "nesti.Leaf.cut"                ~ "Nest (Leaf cut)",
-          traits == "nesti.Leaf.hair"               ~ "Nest (Leaf hair)", 
-          traits == "nesti.Grass"                   ~ "Nest (Grass)",
-          traits == "nesti.Leaf.pulp"               ~ "Nest (Pulp)",
-          
-          # Body size
-          traits == "body_size"                     ~ "Body Size (ITD)",
-           
-          # Origin
-          traits == "nativ.Native"                  ~ "Native Status",
-          traits == "nativ.Non.Native"              ~ "Exotic Status",
+   
+  mutate(traits = case_when(
+     
+     # Nesting material preference
+     traits == "nesti.Nest.tube.scrapings"     ~ "Nest (Scrapings)",
+     traits == "nesti.Leaf.hair"               ~ "Nest (Leaf hair)", 
+     traits == "nesti.Mud"                     ~ "Nest (Mud)",
+     traits == "nesti.Resin"                   ~ "Nest (Resin)",
+     traits == "nesti.Leaf.pulp"               ~ "Nest (Pulp)",
+     traits == "nesti.Leaf.cut"                ~ "Nest (Leaf cut)",
+     traits == "nesti.Secretions"              ~ "Nest (Secretions)", 
+     traits == "nesti.Grass"                   ~ "Nest (Grass)",
 
-          # Diet
-          traits == "prima.Aphids"                  ~ "Diet (Aphids)",
-          traits == "prima.Beetle.larva"            ~ "Diet (Beetle larvae)",
-          traits == "prima.Caterpillars"            ~ "Diet (Caterpillars)",
-          traits == "prima.Pollen"                  ~ "Diet (Pollen)",
-          traits == "prima.Single.Spider"           ~ 'Diet (Single Spider)', 
-          traits == "prima.Spiders"                 ~ "Diet (Spiders)",
-          traits == "prima.Tree.crickets"           ~ "Diet (Tree crickets)",
-          
-          # Specialization
-          traits == "speci.Family"                  ~ "Specialization (Family)",
-          traits == "speci.Order"                   ~ "Specialization (Order)",
-          traits == "speci.Multi.Order"             ~ "Specialization (Multi-Order)",
-          
-          # Trophic level
-          traits == "troph.First"                   ~ "Trophic Rank (First)",
-          traits == "troph.Second"                  ~ "Trophic Rank (Second)",
-          traits == "troph.Third"                   ~ "Trophic Rank (Third)",
-          
-          # Number of nesting materials
-          traits == "num_n.Single"                 ~ "Nesting Material Type Collected (Single)",
-          traits == "num_n.Multi"                  ~ "Nesting Material Type Collected (Multiple)", 
-          traits == "num_n.None"                   ~ "Nesting Material Type Collected (None)",
-  
-       
-          TRUE ~ traits)
-          ) %>%  
-  ggplot(aes(
-    x = CS1,
-    y = traits %>% fct_reorder(CS1)) 
-    ) + 
-  geom_point(aes(shape = taxon), size = 2) +
+     # Body size
+     traits == "body_size"                     ~ "Body Size (ITD)",
+     
+     # Origin
+     traits == "nativ.Native"                  ~ "Native Status",
+     traits == "nativ.Non.Native"              ~ "Exotic Status",
+     
+     # Diet
+     traits == "prima.Pollen"                  ~ "Diet (Pollen)",
+     traits == "prima.Caterpillars"            ~ "Diet (Caterpillars)",
+     traits == "prima.Beetle.larva"            ~ "Diet (Beetle larvae)",
+     traits == "prima.Single.Spider"           ~ "Diet (Single Spider)", 
+     traits == "prima.Tree.crickets"           ~ "Diet (Tree crickets)",
+     traits == "prima.Aphids"                  ~ "Diet (Aphids)",
+     traits == "prima.Spiders"                 ~ "Diet (Spiders)",
+
+     # Specialization
+     traits == "speci.Multi.Order"             ~ "Specialization (Multi-Order)",
+     traits == "speci.Family"                  ~ "Specialization (Family)",
+     traits == "speci.Order"                   ~ "Specialization (Order)",
+
+     # Trophic level
+     traits == "troph.Second"                  ~ "Trophic Rank (Second)",
+     traits == "troph.Third"                   ~ "Trophic Rank (Third)",
+     traits == "troph.First"                   ~ "Trophic Rank (First)",
+
+     # Number of nesting materials
+     traits == "num_n.Single"                 ~ "Nesting Material Type Collected (Single)",
+     traits == "num_n.Multi"                  ~ "Nesting Material Type Collected (Multiple)", 
+     traits == "num_n.None"                   ~ "Nesting Material Type Collected (None)",
+     
+     TRUE ~ traits)
+     ) 
+ 
+level_order <- factor(RLQ_250_load$traits, levels = RLQ_250_load$traits)
+
+RLQ_250_plot <- RLQ_250_load %>%
+  ggplot(aes(x = CS1, y = factor(traits, levels = level_order))) + 
+  #geom_point(aes(shape = taxon), size = 2) +
   geom_segment(
     aes(
       y    = traits, 
