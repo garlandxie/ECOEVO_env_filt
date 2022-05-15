@@ -84,7 +84,7 @@ all_years <- site %>%
    summarize(species_richness = length(unique(lower_species))) %>%
    ggplot(aes(x = species_richness)) + 
    geom_histogram(bins = 5, binwidth = 1) + 
-   ylim(0, 200) + 
+   ylim(0, 75) + 
    facet_wrap(~year) + 
    scale_x_continuous(
      breaks = c(2,4,6,8)
@@ -103,7 +103,7 @@ all_years <- site %>%
     summarize(species_richness = length(unique(lower_species))) %>%
     ggplot(aes(x = species_richness)) + 
     geom_histogram(bins = 5, binwidth = 1) + 
-    ylim(0, 200) + 
+    ylim(0, 75) + 
     facet_wrap(~year) + 
     scale_x_continuous(
       breaks = c(2,4,6,8)
@@ -122,7 +122,7 @@ all_years <- site %>%
     summarize(species_richness = length(unique(lower_species))) %>%
     ggplot(aes(x = species_richness)) + 
     geom_histogram(bins =5, binwidth = 1) + 
-    ylim(0, 200) + 
+    ylim(0, 75) + 
     facet_wrap(~year) +
     scale_x_continuous(
       breaks = c(2,4,6,8)
