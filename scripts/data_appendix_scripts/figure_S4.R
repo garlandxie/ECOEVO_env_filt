@@ -91,7 +91,7 @@ all_years <- site %>%
    ) +
    labs(
      title = "A)",
-     x = "Speciess richness (bees)",
+     x = "Species richness (bees)",
      y = NULL
    ) + 
    theme_bw()
@@ -110,7 +110,7 @@ all_years <- site %>%
     ) + 
     labs(
       title = "B)",
-      x = "Speciess richness (wasps)",
+      x = "Species richness (wasps)",
       y = NULL
     ) + 
     theme_bw()
@@ -129,7 +129,7 @@ all_years <- site %>%
     ) + 
     labs(
       title = "C)",
-      x = "Speciess richness (bees and wasps)",
+      x = "Species richness (bees and wasps)",
       y = NULL
     ) + 
     theme_bw()
