@@ -585,15 +585,18 @@ RLQ_250_load <- RLQ_250$c1 %>%
   # i.e., numbering of nesting materials, native status
   mutate(
     nest_cat = case_when(
-      str_detect(traits, pattern = "body")   ~ "Body", 
-      str_detect(traits, pattern = "nesti.") ~ "Nesti",
-      str_detect(traits, pattern = "prima.") ~ "Prima", 
-      str_detect(traits, pattern = "speci.") ~ "Speci",
-      str_detect(traits, pattern = "troph.") ~ "Troph", 
-      str_detect(traits, pattern = "nativ.") ~ "Native", 
-      str_detect(traits, pattern = "num.n.") ~ "Num",
+      str_detect(traits, pattern = "body")   ~ "Body Size", 
+      str_detect(traits, pattern = "nesti.") ~ "Nesting Material",
+      str_detect(traits, pattern = "prima.") ~ "Diet", 
+      str_detect(traits, pattern = "speci.") ~ "Speciialization",
+      str_detect(traits, pattern = "troph.") ~ "Trophic Rank", 
+      str_detect(traits, pattern = "nativ.") ~ "Status", 
+      str_detect(traits, pattern = "num.n.") ~ "Number of Nesting Matierials Collected",
       TRUE ~ traits
-    )
+    ), 
+    
+    nest_cat = str_wrap(nest_cat, width = 10)
+    
   ) %>%
    
   # group into sections by trait category 
@@ -654,54 +657,57 @@ RLQ_250_load <- RLQ_250$c1 %>%
   mutate(traits = case_when(
      
      # Nesting material preference
-     traits == "nesti.Nest.tube.scrapings"     ~ "Nest (Scrapings)",
-     traits == "nesti.Leaf.hair"               ~ "Nest (Leaf hair)", 
-     traits == "nesti.Mud"                     ~ "Nest (Mud)",
-     traits == "nesti.Resin"                   ~ "Nest (Resin)",
-     traits == "nesti.Leaf.pulp"               ~ "Nest (Pulp)",
-     traits == "nesti.Leaf.cut"                ~ "Nest (Leaf cut)",
-     traits == "nesti.Secretions"              ~ "Nest (Secretions)", 
-     traits == "nesti.Grass"                   ~ "Nest (Grass)",
+     traits == "nesti.Nest.tube.scrapings"     ~ "Scrapings",
+     traits == "nesti.Leaf.hair"               ~ "Leaf hair", 
+     traits == "nesti.Mud"                     ~ "Mud",
+     traits == "nesti.Resin"                   ~ "Resin",
+     traits == "nesti.Leaf.pulp"               ~ "Pulp",
+     traits == "nesti.Leaf.cut"                ~ "Leaf cut",
+     traits == "nesti.Secretions"              ~ "Secretions", 
+     traits == "nesti.Grass"                   ~ "Grass",
 
      # Body size
-     traits == "body_size"                     ~ "Body Size (ITD)",
+     traits == "body_size"                     ~ "ITD",
      
      # Origin
-     traits == "nativ.Native"                  ~ "Native Status",
-     traits == "nativ.Non.Native"              ~ "Exotic Status",
+     traits == "nativ.Native"                  ~ "Native",
+     traits == "nativ.Non.Native"              ~ "Exotic",
      
      # Diet
-     traits == "prima.Pollen"                  ~ "Diet (Pollen)",
-     traits == "prima.Caterpillars"            ~ "Diet (Caterpillars)",
-     traits == "prima.Beetle.larva"            ~ "Diet (Beetle larvae)",
-     traits == "prima.Single.Spider"           ~ "Diet (Single Spider)", 
-     traits == "prima.Tree.crickets"           ~ "Diet (Tree crickets)",
-     traits == "prima.Aphids"                  ~ "Diet (Aphids)",
-     traits == "prima.Spiders"                 ~ "Diet (Spiders)",
+     traits == "prima.Pollen"                  ~ "Pollen",
+     traits == "prima.Caterpillars"            ~ "Caterpillars",
+     traits == "prima.Beetle.larva"            ~ "Beetle larvae",
+     traits == "prima.Single.Spider"           ~ "Single Spider", 
+     traits == "prima.Tree.crickets"           ~ "Tree crickets",
+     traits == "prima.Aphids"                  ~ "Aphids",
+     traits == "prima.Spiders"                 ~ "Spiders",
 
      # Specialization
-     traits == "speci.Multi.Order"             ~ "Specialization (Multi-Order)",
-     traits == "speci.Family"                  ~ "Specialization (Family)",
-     traits == "speci.Order"                   ~ "Specialization (Order)",
+     traits == "speci.Multi.Order"             ~ "Multi-Order",
+     traits == "speci.Family"                  ~ "Family",
+     traits == "speci.Order"                   ~ "Order",
 
      # Trophic level
-     traits == "troph.Second"                  ~ "Trophic Rank (Second)",
-     traits == "troph.Third"                   ~ "Trophic Rank (Third)",
-     traits == "troph.First"                   ~ "Trophic Rank (First)",
+     traits == "troph.Second"                  ~ "Second",
+     traits == "troph.Third"                   ~ "Third",
+     traits == "troph.First"                   ~ "First",
 
      # Number of nesting materials
-     traits == "num_n.Single"                 ~ "Nesting Material Type Collected (Single)",
-     traits == "num_n.Multi"                  ~ "Nesting Material Type Collected (Multiple)", 
-     traits == "num_n.None"                   ~ "Nesting Material Type Collected (None)",
+     traits == "num_n.Single"                 ~ "Single",
+     traits == "num_n.Multi"                  ~ "Multiple", 
+     traits == "num_n.None"                   ~ "None",
      
      TRUE ~ traits)
      ) 
  
-level_order <- factor(RLQ_250_load$traits, levels = RLQ_250_load$traits)
+level_order <- RLQ_250_load$traits
 
 RLQ_250_plot <- RLQ_250_load %>%
   ggplot(aes(x = CS1, y = factor(traits, levels = level_order))) + 
-  #geom_point(aes(shape = taxon), size = 2) +
+  geom_point(
+    aes(shape = factor(taxon, levels = c("Bees", "Wasps", "Both"))), 
+    size = 2
+    ) +
   geom_segment(
     aes(
       y    = traits, 
@@ -710,45 +716,22 @@ RLQ_250_plot <- RLQ_250_load %>%
       xend = CS1
     ), 
     alpha = 0.5) + 
-  xlim(-4, 4) + 
+  xlim(-3, 3) + 
   geom_vline(xintercept = 0, linetype = "dashed") + 
+  scale_shape_discrete(name = "Taxon") + 
+  facet_wrap(~nest_cat, 
+             ncol = 1, nrow = 7, 
+             scales = "free", 
+             strip.position = "left"
+             ) +
   labs(title = "250 m spatial scale",
        y = NULL,
        x = "Relative importance in trait scores") + 
   theme_bw() + 
-  theme(plot.margin  = unit(c(5, 5, 5, 5), "lines"),
-        axis.text    = element_text(size = 13),
-        axis.title.x = element_text(size = 13)) + 
-  annotation_custom(
-    more_urb,
-    ymin = -3,
-    ymax = -3,
-    xmin = 3.5,
-    xmax = 3.5
-  ) + 
-  annotation_custom(
-    less_urb,
-    ymin = -3,
-    ymax = -3,
-    xmin = -3.5,
-    xmax = -3.5
-  ) + 
-   annotation_custom(
-     less_urb_arrow,
-     ymin = -3,
-     ymax = -3,
-     xmin = -1.5,
-     xmax = 0
-   ) +
-   annotation_custom(
-     more_urb_arrow,
-     ymin = -3,
-     ymax = -3,
-     xmin = 2,
-     xmax = 0
-   ) + 
-  coord_cartesian(clip = "off") 
-)
+  theme(
+    strip.background = element_blank(), 
+    strip.placement = "outside"
+  )
 
 # Figure S11: Trait scores (500m scale) ----------------------------------------
 
@@ -962,14 +945,14 @@ ggsave(
 
 # Figure S9
 ggsave(
-  plot = R_250_load, 
+  plot = RLQ_250_plot, 
   filename = here(
     "output/figures/supp", 
     "Xie_et_al-2021-FigureS9-JAE.png"
     ),
   device = "png",
-  height = 5, 
-  width = 8
+  height = 8, 
+  width = 5
 )
 
 # Figure S10
