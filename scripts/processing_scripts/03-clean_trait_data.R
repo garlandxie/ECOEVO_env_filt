@@ -26,6 +26,7 @@
 # libraries --------------------------------------------------------------------
 library(here)     # for creating relative file-paths
 library(dplyr)    # for manipulating data 
+library(janitor)  # for cleaning column names
 
 # import -----------------------------------------------------------------------
 
@@ -33,96 +34,29 @@ traits <- read.csv(
   here("data/input_data", "traits.csv"),
   stringsAsFactors = FALSE)
 
-# data cleaning: create new traits ---------------------------------------------
-
-traits_tidy <- traits %>%
-  janitor::clean_names() %>%
-
-  # create native status
-  mutate(native_status = case_when(
-    origin == "Palearctic"   ~ "Non-Native", 
-    origin == "Nearctic"     ~ "Native", 
-    origin == "Holarctic"    ~ "Native", 
-    TRUE ~ origin)
-    ) %>%
-     
-  # create number of nesting material
-  mutate(num_nest_mat = case_when(
-    
-    # species listed below has multiple nesting materials 
-    species == "Heriades variolosa"        ~ "Multi",        
-    species == "Hoplitis producta"         ~ "Multi",
-    species == "Hoplitis spoliata"         ~ "Multi",           
-    species == "Megachile pugnata"         ~ "Multi",          
-    species == "Dipogon sayi"              ~ "Multi", 
-    
-    # species that secrete should have no nesting materials
-    nesting_material == "Secretions"       ~ "None",
-    
-    # every other species has a single nesting material
-    TRUE ~ "Single")
-  ) 
-  
 # data cleaning: edit existing traits ------------------------------------------
 
-traits_tidy2 <- traits_tidy %>%
+traits_tidy <- traits %>%
   
-  # change specialization
-  mutate(specialization = case_when(
-    
-    # genus
-    specialization == "Genus (Campanula)"                     ~ "Family", 
-    
-    # order 
-    specialization == "Order (Lepidoptera)"                   ~ "Order", 
-    specialization == "Order (Araneae)"                       ~ "Order", 
-    specialization == "Order (Orthoptera)"                    ~ "Order", 
-    specialization == "Multi-Order (Coleoptera, Lepidoptera)" ~ "Multi-Order", 
-    
-    # family
-    specialization == "Family (Campanulaceae)"                ~ "Family",
-    specialization == "Family (Asteraceae)"                   ~ "Family",
-    specialization == "Family (Chrysomelidae)"                ~ "Family", 
-    specialization == "Family (Aphididae)"                    ~ "Family", 
-    
-    # use the original trait states 
-    TRUE ~ specialization)
-    
-  ) %>%
-  
-  # change primary diet 
-  mutate(primary_diet = case_when(
-    species == "Auplopus mellipes" ~ "Single Spider", 
-    species == "Dipogon sayi"      ~ "Single Spider",
-    
-    # keep original trait states
-    TRUE ~ primary_diet)
-  ) 
+  janitor::clean_names() %>%
 
-# data cleaning: data types for each trait -------------------------------------
-
-traits_tidy3 <- traits_tidy2 %>%
-  
   # insert missing values
-  mutate(body_size = na_if(body_size, "NA")) %>% 
-  
-  # remove some variables 
-  select(-origin, - voltinism) %>%
+  mutate(its = na_if(its, "-")) %>% 
   
   # coerce into factor variables
   mutate(
     
-    native_status     = factor(native_status),
-    nesting_material  = factor(nesting_material), # common nesting material
-    primary_diet      = factor(primary_diet),
-    specialization    = factor(specialization),
-    trophic_rank      = factor(trophic_rank),
-    num_nest_mat      = factor(num_nest_mat) 
+    origin              = factor(origin),
+    nest_mat_type       = factor(nest_mat_type), 
+    num_nest_mat_type   = factor(diet),
+    diet                = factor(diet),
+    specialization      = factor(specialization),
+    rank                = factor(rank)
     
     ) %>%
   
   # change to numeric values
-  mutate(body_size = as.numeric(body_size)) %>%
+  mutate(its = as.numeric(its)) %>%
   
   # change species names so it is consistent 
   # with the community matrix dataset
@@ -137,13 +71,13 @@ traits_tidy3 <- traits_tidy2 %>%
 
 # check packaging --------------------------------------------------------------
 
-glimpse(traits_tidy3)
+glimpse(traits_tidy)
 
 # save to disk -----------------------------------------------------------------
 
 write.csv(
-  x = traits_tidy3,
-  file = here("output", "tables", "traits_tidy.csv"), 
+  x = traits_tidy,
+  file = here("data", "analysis_data", "traits_tidy.csv"), 
   row.names = FALSE
 )
 
