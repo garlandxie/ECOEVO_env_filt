@@ -26,15 +26,12 @@
 # libraries --------------------------------------------------------------------
 library(here)     # for creating relative file-paths
 library(dplyr)    # for manipulating data 
-library(readxl)   # for reading excel files
 
 # import -----------------------------------------------------------------------
 
-traits <- read_excel(
-  here(
-    "data/original", 
-    "bee_wasp_traits_aug10.xlsx")
-  )
+traits <- read.csv(
+  here("data/input_data", "traits.csv"),
+  stringsAsFactors = FALSE)
 
 # data cleaning: create new traits ---------------------------------------------
 
