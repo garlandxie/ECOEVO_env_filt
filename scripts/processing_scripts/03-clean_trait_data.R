@@ -64,14 +64,8 @@ traits_tidy <- traits %>%
     species = stringr::str_replace(
       species, 
       pattern = " ", 
-      replacement = "_"), 
-    
-    speces = stringr::str_replace(
-      species, 
-      pattern = " ", 
-      replacement = "")
-    ) %>%
-  
+      replacement = "_")
+  ) %>%
   select(-bee_wasp, -authority, -family)
 
 # check packaging --------------------------------------------------------------
