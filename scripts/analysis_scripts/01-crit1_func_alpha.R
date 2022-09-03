@@ -36,7 +36,7 @@ library(gghighlight) # for visualising data
 
 comm <- read.csv(
   here(
-    "data/final", 
+    "data", "analysis_data", 
     "comm_matrix_B.csv"
     ),
   row.names = 1
@@ -44,21 +44,24 @@ comm <- read.csv(
 
 
 trait <- read.csv(
-  here("output", "tables", "traits_tidy.csv")
+  here(
+    "data", 
+    "analysis_data", 
+    "traits_tidy.csv"
+    )
   )
 
-site <- readxl::read_excel(
+site <- read.csv(
   here(
     "data", "input_data", 
-    "site_jsm_edits_Aug10_2021.xlsx"
-    ), 
-  sheet = 1
+    "site_data.csv"
+    )
 )
 
 # functional distance matrix  --------------------------------------------------
 
 keep_spp <- trait %>%
-  filter(!is.na(body_size)) %>%
+  filter(!is.na(its)) %>%
   filter(species != "Hylaeus_punctatus") %>%
   pull(species)
 
