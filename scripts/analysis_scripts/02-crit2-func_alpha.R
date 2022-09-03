@@ -35,6 +35,7 @@ library(spdep)       # for analyzing spatial autocorrelation
 library(patchwork)   # for making multi-panel plots
 library(gghighlight) # for highlighting ggplot features
 library(tibble)      # for creating tibbles 
+library(emmeans)     # for doing pairwise comparisons
 
 # import -----------------------------------------------------------------------
 
@@ -343,8 +344,6 @@ reg_500 %>%
     y = "SES.MFD") + 
   theme_bw()
 
-library(emmeans)
-
 emm_250 <- emmeans(lm_250_v2, specs = "Habitat_type")
 emm_500 <- emmeans(lm_500_v2, specs = "Habitat_type")
 
@@ -380,7 +379,7 @@ ggsave(filename =
 
 ## |- figure S4 ----
 ggsave(filename = 
-         here("output/figures/supp", 
+         here("output", "data_appendix_output", 
               "Xie_et_al-2021-FigureS5-JAE.png"
          ),
        plot = pairs_250, 
@@ -391,7 +390,7 @@ ggsave(filename =
 
 ## |- figure S6 ----
 ggsave(filename = 
-         here("output/figures/supp", 
+         here("output", "data_appendix_output", 
               "Xie_et_al-2021-FigureS6-JAE.png"
          ),
        plot = pairs_500, 
@@ -403,14 +402,14 @@ ggsave(filename =
 ## |- reg mfd 250 ----
 write.csv(x = reg_250,
           file = here(
-            "data/final",
+            "data", "analysis_data",
             "reg_mfd_250.csv")
           )
 
 ## |- reg mfd 500 ----
 write.csv(x = reg_500, 
           file = here(
-            "data/final",
+            "data", "analysis_data",
             "reg_mfd_500.csv")
           )
 
