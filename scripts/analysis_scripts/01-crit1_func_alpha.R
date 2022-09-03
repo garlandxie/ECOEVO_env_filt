@@ -73,7 +73,7 @@ trait_tidy <- trait %>%
   as.data.frame() %>% 
   filter(species != "Hylaeus_punctatus") %>%
   column_to_rownames(var = "species") %>%
-  filter(!is.na(body_size)) 
+  filter(!is.na(its)) 
 
 trait_dist <- gower.dist(trait_tidy)
 colnames(trait_dist) <- rownames(trait_tidy)
@@ -218,14 +218,14 @@ ses_mfd_habitat <- ses_mfd_tidy %>%
 # mfd
 saveRDS(
   ses_mfd_tidy, 
-  here("data/working",
+  here("data/intermediate_data",
        "ses_mfd.rds"
   )
 )
 
 write.csv(
   ses_mfd_tidy, 
-  here("output/tables/supp",
+  here("output/data_appendix_output",
        "ses_mfd.csv"
        )
 )
@@ -233,7 +233,7 @@ write.csv(
 # plots
 ggsave(filename = 
          here(
-           "output/figures/main",
+           "output/results",
            "Xie_et_al-2021-Figure3-JAE.png"
          ),
        plot = ses_mfd_ugs,
