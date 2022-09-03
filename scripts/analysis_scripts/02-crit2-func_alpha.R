@@ -124,68 +124,6 @@ reg_500 <- ses_mfd %>%
   
     mutate(Habitat_type = factor(Habitat_type))
 
-# exploratory data analysis ----
-
-## |- relationships between X and Y variables -----------
-
-# check for clear patterns between response and explanatory relationships
-# use a LOESS smoother to aid visual interpretation
-# remove 95% CI's since we're still exploring data
-
-# 250 m
-reg_250 %>%
-  ggplot(aes(x = perc_urb_250, y = ses_mfd)) + 
-  geom_smooth(method = "loess", se = FALSE) + 
-  geom_point() + 
-  labs(x = "Percent impervious surface (250m)",
-       y = "ses MFD")
-
-reg_250 %>%
-  ggplot(aes(x = perc_tree_250, y = ses_mfd)) + 
-  geom_smooth(method = "loess", se = FALSE) + 
-  geom_point() + 
-  labs(x = "Percent tree cover (250m)",
-       y = "ses MFD")
-
-reg_250 %>%
-  ggplot(aes(x = perc_grass_250, y = ses_mfd)) + 
-  geom_smooth(method = "loess", se = FALSE) + 
-  geom_point() + 
-  labs(x = "Percent grass cover (250m)",
-       y = "ses MFD")
-
-# 500m
-reg_500 %>%
-  ggplot(aes(x = perc_urb_500, y = ses_mfd)) + 
-  geom_smooth(method = "loess", se = FALSE) + 
-  geom_point() + 
-  labs(x = "Percent impervious surface (500m)",
-       y = "ses MFD")
-
-reg_500 %>%
-  ggplot(aes(x = perc_tree_500, y = ses_mfd)) + 
-  geom_smooth(method = "loess", se = FALSE) + 
-  geom_point() + 
-  labs(x = "Percent tree cover (500m)",
-       y = "ses MFD")
-
-reg_500 %>%
-  ggplot(aes(x = perc_grass_500, y = ses_mfd)) + 
-  geom_smooth(method = "loess", se = FALSE) + 
-  geom_point() + 
-  labs(x = "Percent grass cover (500m)",
-       y = "ses MFD")
-
-## |- independent observations for Y variable ----
-
-reg_250 %>%
-  ggplot(aes(x = longs, y = lats, col = ses_mfd)) + 
-  geom_point() + 
-  labs(x = "Longitude", 
-       y = "Latitude") + 
-  scale_colour_gradientn(colours = terrain.colors(10)) + 
-  theme_minimal()
-
 # Figure S5: correlation matrix ------------------------------------------------
 
 # Pearson's correlation matrix for 250m
