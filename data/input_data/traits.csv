@@ -1,0 +1,52 @@
+﻿Bee_wasp,Family,Species,Authority,ITS,Origin,Nest_Mat_Type,Num_Nest_Mat_Types,Diet,Specialization,Rank
+Bee,Apidae,Anthophora terminalis,Cresson,3.05,Native,Nest tube scrapings,Single,Pollen,Multi-Order,1st 
+Bee,Megachilidae,Anthidium manicatum, (Linnaeus),3.44,Non-native,Leaf hair,Single,Pollen,Multi-Order,1st
+Bee,Megachilidae,Chelostoma rapunculi, (Lepeletier),1.66,Non-native,Mud,Single,Pollen,Family (Campanulaceae),1st
+Bee,Megachilidae,Chelostoma campanularum ,(Kirby),1.11,Non-native,Mud,Single,Pollen,Family (Campanulaceae),1st
+Bee,Megachilidae,Heriades carinata,Cresson,1.58,Native,Resin,Single,Pollen,Multi-Order,1st
+Bee,Megachilidae,Heriades variolosa ,(Cresson),-,Native,Resin + Mud,Multi,Pollen,Multi-Order,1st 
+Bee,Megachilidae,Hoplitis producta , (Cresson),2.1,Native,Leaf pulp + Sand,Multi,Pollen,Multi-Order,1st
+Bee,Megachilidae,Hoplitis spoliata, (Provancher),2.62,Native,Leaf pulp + Pebbles,Multi,Pollen,Multi-Order,1st
+Bee,Megachilidae,Hoplitis truncata ,(Cresson),-,Native,Leaf pulp,Single,Pollen,Multi-Order,1st
+Bee,Megachilidae,Megachile brevis,Say,2.93,Native,Leaf cut,Single,Pollen,Multi-Order,1st
+Bee,Megachilidae,Megachile campanulae ,(Robertson),2.42,Native,Resin,Single,Pollen,Multi-Order,1st 
+Bee,Megachilidae,Megachile centuncularis, (Linnaeus),3.05,Non-native,Leaf cut,Single,Pollen,Multi-Order,1st
+Bee,Megachilidae,Megachile frigida, Smith,3.41,Native,Leaf cut,Single,Pollen,Multi-Order,1st
+Bee,Megachilidae,Megachile inermis ,Provancher,4.58,Native,Leaf cut,Single,Pollen,Multi-Order,1st
+Bee,Megachilidae,Megachile mendica, Cresson,3.4,Native,Leaf cut,Single,Pollen,Multi-Order,1st
+Bee,Megachilidae,Megachile pugnata ,Say,3.45,Native,Leaf cut + Pulp + Mud,Multi,Pollen,Family (Asteraceae),1st 
+Bee,Megachilidae,Megachile relativa ,Cresson,3.03,Native,Leaf cut,Single,Pollen,Multi-Order,1st
+Bee,Megachilidae,Megachile rotundata ,Fabricius,2.48,Non-native,Leaf cut,Single,Pollen,Multi-Order,1st
+Bee,Megachilidae,Megachile sculpturalis ,Smith,4.05,Non-native,Resin,Single,Pollen,Multi-Order,1st
+Bee,Megachilidae,Osmia atriventris, Cresson,2.33,Native,Leaf pulp,Single,Pollen,Multi-Order,1st
+Bee,Megachilidae,Osmia caerulescens ,(Linnaeus),2.56,Non-native,Leaf pulp,Single,Pollen,Multi-Order,1st 
+Bee,Megachilidae,Osmia lignaria ,Say,3.65,Native,Mud,Single,Pollen,Multi-Order,1st
+Bee,Megachilidae,Osmia pumila, Cresson,1.95,Native,Leaf pulp,Single,Pollen,Multi-Order,1st
+Bee,Colletidae,Hylaeus affinis, (Smith),1.33,Native,Secretions,None,Pollen,Multi-Order,1st
+Bee,Colletidae,Hylaeus annulatus, (Linnaeus),1.23,Native,Secretions,None,Pollen,Multi-Order,1st
+Bee,Colletidae,Hylaeus hyalinatus ,Smith,1.71,Non-native,Secretions,None,Pollen,Multi-Order,1st 
+Bee,Colletidae,Hylaeus leptocephalus ,(Morawitz),1.11,Non-native,Secretions,None,Pollen,Multi-Order,1st 
+Bee,Colletidae,Hylaeus mesillae, (Cockerell),1.6,Native,Secretions,None,Pollen,Multi-Order,1st
+Bee,Colletidae,Hylaeus modestus, Say,1.53,Native,Secretions,None,Pollen,Multi-Order,1st
+Bee,Colletidae,Hylaeus punctatus, (Brullé),1.23,Non-native,Secretions,None,Pollen,Multi-Order,1st
+Bee,Colletidae,Hylaeus verticalis ,(Cresson),1.3,Native,Secretions,None,Pollen,Multi-Order,1st
+Wasp,Vespidae,Ancistrocerus adiabatus, (Saussure),2.05,Native,Mud,Single,Caterpillars,Order (Lepidoptera),2nd 
+Wasp,Vespidae,Ancistrocerus antilope ,Panzer,2.62,Native,Mud,Single,Caterpillars,Order (Lepidoptera),2nd
+Wasp,Vespidae,Ancistrocerus gazella, (Panzer),2.12,Non-native,Mud,Single,Caterpillars,Order (Lepidoptera),2nd
+Wasp,Vespidae,Euodynerus foraminatus, (Saussure),2.75,Native,Mud,Single,Caterpillars,Order (Lepidoptera),2nd
+Wasp,Vespidae,Euodynerus pantitarsis ,(Bohart),3.02,Native,Mud,Single,Caterpillars,Order (Lepidoptera),2nd
+Wasp,Vespidae,Monobia quadridrens ,(Linnaeus),2.9,Native,Mud,Single,Caterpillars,Order (Lepidoptera),2nd
+Wasp,Vespidae,Symmorphus albomarginatus ,(Saussure),1.5,Native,Mud,Single,Beetle larva,Family (Chrysomelidae),2nd
+Wasp,Vespidae,Symmorphus bifasciatus ,(Linnaeus),-,Non-native,Mud,Single,Beetle larva,Family (Chrysomelidae),2nd
+Wasp,Vespidae,Symmorphus canadensis ,(Saussure),1.42,Native,Mud,Single,Beetle larva+ Caterpillars,"Multi-Order (Coleoptera, Lepidoptera)",2nd
+Wasp,Vespidae,Symmorphus cristatus ,(Saussure),1.63,Native,Mud,Single,Beetle larva,Family (Chrysomelidae),2nd
+Wasp,Pompilidae,Auplopus mellipes, (Say),1.4,Native,Mud,Single,Single spider,Order (Araneae),3rd
+Wasp,Pompilidae,Dipogon sayi ,Banks,1.31,Native,Mud + Leaf pulp,Multi,Single spider,Order (Araneae),3rd
+Wasp,Sphecidae,Isodontia mexicana, (Saussure),2.56,Native,Grass,Single,Tree crickets,Order (Araneae),2nd
+Wasp,Crabronidae,Passaloecus cuspidatus ,F. Smith,1.15,Native,Resin,Single,Aphids,Family (Aphididae),2nd
+Wasp,Crabronidae,Passaloecus gracilis ,(Curtis),1.11,Non-native,Resin,Single,Aphids,Family (Aphididae),2nd
+Wasp,Crabronidae,Passaloecus monilicornis ,Dahlbom,-,Native,Resin,Single,Aphids,Family (Aphididae),2nd
+Wasp,Crabronidae,Psenulus pallipes ,(Panzer),1.03,Non-native,Secretions,None,Aphids,Family (Aphididae),2nd
+Wasp,Crabronidae,Trypoxylon collinum, F. Smith,1.87,Native,Mud,Single,Spiders,Order (Araneae),3rd
+Wasp,Crabronidae,Trypoxylon frigidum ,F. Smith,1.03,Native,Mud,Single,Spiders,Order (Araneae),3rd
+Wasp,Crabronidae,Trypoxylon lactitarse ,Saussure,3.3,Native,Mud,Single,Spiders,Order (Araneae),3rd
