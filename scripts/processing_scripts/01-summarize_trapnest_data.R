@@ -34,7 +34,7 @@ library(janitor)   # for cleaning column names
 
 # abundance per site 
 int_raw <- read_excel(
-  here("data/input_data", "trap_nest_jsm_Aug10_2021.xlsx")
+  here("data/input_data", "trap_nest.csv")
 )
 
 # site data
