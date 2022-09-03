@@ -25,7 +25,9 @@
 
 # libraries --------------------------------------------------------------------
 library(here)      # for creating relative file-paths
-library(tidyverse) 
+library(dplyr)     # for manipulating data
+library(ggplot2)   # for visualizing data
+library(tidyr)     # for making wide tables
 library(patchwork) # for creating multi-panel figures
 library(janitor)   # for cleaning column names
 
