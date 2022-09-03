@@ -30,12 +30,10 @@
 library(here)              # for creating relative file-paths
 library(raster)            # for manipulating raster datasets
 library(sf)                # for manipulating GIS data
-library(readxl)            # for importing excel files
 library(landscapemetrics)  # for calculating landscape composition metrics
 library(dplyr)             # for manipulating data frames
 library(tidyr)             # for pivoting tables from long to wide format
 library(rgdal)
-library(readxl)            # for reading excel files 
 
 # import -----------------------------------------------------------------------
 
@@ -46,8 +44,8 @@ lc <- raster(
 )
 
 # abundance per site 
-site <- read_excel(
-  here("data", "input_data", "site_jsm_edits_Aug10_2021.xlsx")
+site <- read.csv(
+  here("data", "input_data", "site_data.csv")
 )
 
 # functions
