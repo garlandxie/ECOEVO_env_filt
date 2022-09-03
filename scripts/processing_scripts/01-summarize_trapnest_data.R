@@ -27,13 +27,12 @@
 library(here)      # for creating relative file-paths
 library(tidyverse) 
 library(patchwork) # for creating multi-panel figures
-library(readxl)    # for reading excel files
 library(janitor)   # for cleaning column names
 
 # import -----------------------------------------------------------------------
 
 # abundance per site 
-int_raw <- read_excel(
+int_raw <- read.csv(
   here("data/input_data", "trap_nest.csv")
 )
 
