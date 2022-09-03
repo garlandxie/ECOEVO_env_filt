@@ -36,18 +36,18 @@ library(readr)
 
 # R tables - environmental data
 env_250 <- read.csv(
-  here("data/working", 
+  here("data", "intermediate_data", 
        "land_use_250.csv")
 )
 
 env_500 <- read.csv(
-  here("data/working", 
+  here("data", "intermediate_data", 
        "land_use_500.csv")
 )
 
 # L table - species abundance
 comm <- read.csv(
-  here("data/final",
+  here("data", "analysis_data",
        "comm_matrix_B.csv"
        ),
   row.names = 1
@@ -56,18 +56,17 @@ comm <- read.csv(
 
 # Q table - traits
 traits <- readr::read_csv(
-  here("output", "tables", "traits_tidy.csv"), 
+  here("data", "analysis_data", "traits_tidy.csv"), 
   col_types = cols(
-    species          = col_character(),
-    body_size        = col_double(), 
-    nesting_material = col_factor(), 
-    primary_diet     = col_factor(), 
-    specialization   = col_factor(), 
-    trophic_rank     = col_factor(), 
-    native_status    = col_factor(), 
-    num_nest_mat     = col_factor()
+    species            = col_character(),
+    its                = col_double(), 
+    origin             = col_factor(),
+    nest_mat_type      = col_factor(), 
+    num_nest_mat_types = col_factor(), 
+    diet               = col_factor(), 
+    specialization     = col_factor(), 
+    rank               = col_factor()
   ) 
-  
 )
 
 # cheack packaging -------------------------------------------------------------
