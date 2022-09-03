@@ -38,6 +38,11 @@ library(rgdal)
 # import -----------------------------------------------------------------------
 
 # land cover data
+# NOTE: the file size for toronto_2007_landcover.ige is 3.5GB
+# which may be too big for some storage options (i.e., GitHub, 1GB limit)
+# in that case, please download the raster files manually from 
+# https://open.toronto.ca/dataset/forest-and-land-cover/ 
+# see: 2008 tree canopy study
 lc <- raster(
   here("data", "input_data", 
        "toronto_2007_landcover.img")
@@ -49,7 +54,9 @@ site <- read.csv(
 )
 
 # functions
-source(here("scripts", "processing_scripts", "functions.R"))
+source(
+  here("scripts", "processing_scripts", "functions.R")
+  )
 
 # data clean -------------------------------------------------------------------
 
