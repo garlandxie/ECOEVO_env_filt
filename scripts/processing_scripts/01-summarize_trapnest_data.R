@@ -78,6 +78,15 @@ all_years <- site %>%
 
 # data cleaning: bees ----------------------------------------------------------
 
+# compare number of brood cells (including parasitized) and number of alive cells
+int_raw %>%
+  ggplot() + 
+  geom_histogram(aes(x = No_broodcells), fill = 'red',alpha = 0.5) + 
+  geom_histogram(aes(x = No_alive), fill = 'blue', alpha = 0.5) +
+  labs(x = NULL) + 
+  facet_wrap(~Year) + 
+  theme_bw()
+
 # community data matrix
 # proxy of abundance: number of brood cells
 # aggregrated across all years (2011-2013)
