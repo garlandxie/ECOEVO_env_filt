@@ -39,28 +39,26 @@ library(tibble)      # for creating tibbles
 # import -----------------------------------------------------------------------
 
 ## |- site ----
-site <- readxl::read_excel(
+site <- read.csv(
   here(
     "data", "input_data",
-    "site_jsm_edits_Aug10_2021.xlsx"
-  ), 
-  sheet = 1
+    "site_data.csv")
 )
 
 ## |- ses mfd ----
 ses_mfd <- readRDS(
-  here("data/working",
+  here("data", "intermediate_data",
        "ses_mfd.rds")
   )
 
 ## |- land cover -----
 l_250 <- read.csv(
-  here("data/working", 
+  here("data", "intermediate_data", 
        "land_use_250.csv")
   )
 
 l_500 <- read.csv(
-  here("data/working", 
+  here("data", "intermediate_data", 
        "land_use_500.csv")
   )
 
