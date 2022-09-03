@@ -64,7 +64,12 @@ traits_tidy <- traits %>%
     species = stringr::str_replace(
       species, 
       pattern = " ", 
-      replacement = "_")
+      replacement = "_"), 
+    
+    speces = stringr::str_replace(
+      species, 
+      pattern = " ", 
+      replacement = "")
     ) %>%
   
   select(-bee_wasp, -authority, -family)
