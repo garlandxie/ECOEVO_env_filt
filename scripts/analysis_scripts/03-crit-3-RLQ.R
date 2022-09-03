@@ -80,7 +80,7 @@ glimpse(traits)
 
 # some prep
 keep_spp <- traits %>%
-  filter(!is.na(body_size)) %>%
+  filter(!is.na(its)) %>%
   filter(species != "Hylaeus_punctatus") %>%
   pull(species)
 
@@ -125,7 +125,7 @@ dudiR_250 <-
 Q_250 <- traits %>%
   filter(species != "Hylaeus_punctatus") %>%
   column_to_rownames(var = "species") %>%
-  filter(!is.na(body_size)) %>%
+  filter(!is.na(its)) %>%
   as.data.frame()
 
 dudiQ_250 <- 
@@ -195,7 +195,7 @@ dudiR_500 <-
 Q_500 <- traits %>%
   filter(species != "Hylaeus_punctatus") %>%
   column_to_rownames(var = "species") %>%
-  filter(!is.na(body_size)) %>%
+  filter(!is.na(its)) %>%
   as.data.frame()
 
 dudiQ_500 <- 
