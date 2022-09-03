@@ -49,7 +49,7 @@ trait <- read.csv(
 
 site <- readxl::read_excel(
   here(
-    "data/original", 
+    "data", "input_data", 
     "site_jsm_edits_Aug10_2021.xlsx"
     ), 
   sheet = 1
