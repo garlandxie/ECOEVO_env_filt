@@ -43,12 +43,21 @@ traits_tidy <- traits %>%
   # insert missing values
   mutate(its = na_if(its, "-")) %>% 
   
+  mutate(nest_mat_type = case_when(
+    nest_mat_type == "Resin + Mud" ~ "Resin",
+    nest_mat_type == "Leaf pulp + Sand" ~ "Leaf pulp",
+    nest_mat_type == "Leaf pulp + Pebbles" ~ "Leaf pulp",
+    nest_mat_type == "Leaf cut + Pulp + Mud" ~ "Leaf pulp",
+    nest_mat_type == "Mud + Leaf pulp" ~ "Mud", 
+    TRUE ~ nest_mat_type)
+    ) %>%
+  
   # coerce into factor variables
   mutate(
     
     origin              = factor(origin),
     nest_mat_type       = factor(nest_mat_type), 
-    num_nest_mat_types   = factor(num_nest_mat_types),
+    num_nest_mat_types  = factor(num_nest_mat_types),
     diet                = factor(diet),
     specialization      = factor(specialization),
     rank                = factor(rank)

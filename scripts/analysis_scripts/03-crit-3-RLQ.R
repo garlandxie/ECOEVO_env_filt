@@ -578,52 +578,27 @@ R_500_load <- RLQ_500$l1 %>%
 RLQ_250_load <- RLQ_250$c1 %>%
   rownames_to_column(var = "traits") %>%
   select(traits, CS1) %>%
-   
-  # obtain "trait" category 
-  # i.e., nesting material, primary diet, specialization, trophic level
-  # i.e., numbering of nesting materials, native status
-  mutate(
-    nest_cat = case_when(
-      str_detect(traits, pattern = "body")   ~ "Body Size", 
-      str_detect(traits, pattern = "nesti.") ~ "Nesting Material",
-      str_detect(traits, pattern = "prima.") ~ "Diet", 
-      str_detect(traits, pattern = "speci.") ~ "Speciialization",
-      str_detect(traits, pattern = "troph.") ~ "Trophic Rank", 
-      str_detect(traits, pattern = "nativ.") ~ "Status", 
-      str_detect(traits, pattern = "num.n.") ~ "Number of Nesting Matierials Collected",
-      TRUE ~ traits
-    ), 
-    
-    nest_cat = str_wrap(nest_cat, width = 10)
-    
-  ) %>%
-   
-  # group into sections by trait category 
-  # then order by important score within each group
-  # (instead of all results being globally ordered by important score)
-  group_by(nest_cat) %>%
-  arrange(nest_cat, CS1) %>%
-   
+  
   mutate(
     trait = as.character(traits), 
     taxon = case_when(
       
       # Nesting material preference
-      traits == "nesti.Nest.tube.scrapings"     ~ "Bees",
-      traits == "nesti.Leaf.hair"               ~ "Bees", 
-      traits == "nesti.Mud"                     ~ "Bees",
-      traits == "nesti.Resin"                   ~ "Both",
-      traits == "nesti.Leaf.pulp"               ~ "Bees",
+      traits == "nest_.Nest.tube.scrapings"     ~ "Bees",
+      traits == "nest_.Leaf.hair"               ~ "Bees", 
+      traits == "nest_.Mud"                     ~ "Bees",
+      traits == "nest_.Resin"                   ~ "Both",
+      traits == "nest_.Leaf.pulp...Sand"               ~ "Bees",
       traits == "nesti.Leaf.cut"                ~ "Bees",
       traits == "nesti.Secretions"              ~ "Both", 
       traits == "nesti.Grass"                   ~ "Wasps",
 
       # Body size
-      traits == "body_size"                     ~ "Both",
+      traits == "its "                          ~ "Both",
       
       # Origin
-      traits == "nativ.Native"                  ~ "Both",
-      traits == "nativ.Non.Native"              ~ "Both",
+      traits == "origi.Native"                  ~ "Both",
+      traits == "origi.Non.native"              ~ "Both",
 
       # Diet
       traits == "prima.Aphids"                  ~ "Wasps",
@@ -640,9 +615,9 @@ RLQ_250_load <- RLQ_250$c1 %>%
       traits == "speci.Multi.Order"            ~ "Both",
     
       # Trophic level
-      traits == "troph.First"                  ~ "Bees",
-      traits == "troph.Second"                 ~ "Wasps",
-      traits == "troph.Third"                  ~ "Wasps",
+      traits == "rank.1st"                     ~ "Bees",
+      traits == "rank.2nd"                     ~ "Wasps",
+      traits == "rank.3rd"                     ~ "Wasps",
       
       # Number of nesting materials
       traits == "num_n.Single"                 ~ "Both",
@@ -687,9 +662,9 @@ RLQ_250_load <- RLQ_250$c1 %>%
      traits == "speci.Order"                   ~ "Order",
 
      # Trophic level
-     traits == "troph.Second"                  ~ "Second",
-     traits == "troph.Third"                   ~ "Third",
-     traits == "troph.First"                   ~ "First",
+     traits == "rank.2nd"                     ~ "Second",
+     traits == "rank.3rd"                     ~ "Third",
+     traits == "rank.1st"                     ~ "First",
 
      # Number of nesting materials
      traits == "num_n.Single"                 ~ "Single",
@@ -699,10 +674,8 @@ RLQ_250_load <- RLQ_250$c1 %>%
      TRUE ~ traits)
      ) 
  
-level_order_250 <- RLQ_250_load$traits
-
 RLQ_250_plot <- RLQ_250_load %>%
-  ggplot(aes(x = CS1, y = factor(traits, levels = level_order_250))) + 
+  ggplot(aes(x = CS1, y = traits)) + 
   geom_point(
     aes(shape = factor(taxon, levels = c("Bees", "Wasps", "Both"))), 
     size = 2
@@ -718,11 +691,6 @@ RLQ_250_plot <- RLQ_250_load %>%
   xlim(-3, 3) + 
   geom_vline(xintercept = 0, linetype = "dashed") + 
   scale_shape_discrete(name = "Taxon") + 
-  facet_wrap(~nest_cat, 
-             ncol = 1, nrow = 7, 
-             scales = "free", 
-             strip.position = "left"
-             ) +
   labs(title = "250 m spatial scale",
        y = NULL,
        x = "Relative importance in trait scores") + 
