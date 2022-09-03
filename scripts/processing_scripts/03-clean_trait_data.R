@@ -48,7 +48,7 @@ traits_tidy <- traits %>%
     
     origin              = factor(origin),
     nest_mat_type       = factor(nest_mat_type), 
-    num_nest_mat_type   = factor(diet),
+    num_nest_mat_types   = factor(num_nest_mat_types),
     diet                = factor(diet),
     specialization      = factor(specialization),
     rank                = factor(rank)
