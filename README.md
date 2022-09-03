@@ -4,11 +4,11 @@ The following documentation follows the [TIER 4.0 Protocol](https://www.projectt
 
 ## Manuscript 
 
-Title: Ecological traits, not level of urbanization, structure cavity-nesting bee and wasp diversity in the city.
+Title: No evidence of environmental filtering of cavity-nesting solitary bees and wasps by urbanization using trap nests
 
 Authors: Garland Xie, Nicholas Sookhan, Kelly A. Carscadden, and Scott MacIvor
 
-Submitted to Ecology and Evolution (pending minor revisions)
+Accepted in Ecology and Evolution (ECE-2022-02-00197.R1)
 
 ## Abstract
 
