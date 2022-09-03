@@ -38,8 +38,8 @@ int_raw <- read_excel(
 )
 
 # site data
-site <- read_excel(
-    here("data/input_data", "site_jsm_edits_Aug10_2021.xlsx")
+site <- read.csv(
+    here("data/input_data", "site_data.csv")
 )
 
 # data cleaning: sites ---------------------------------------------------------
