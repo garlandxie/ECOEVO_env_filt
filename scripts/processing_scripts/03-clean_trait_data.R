@@ -52,6 +52,11 @@ traits_tidy <- traits %>%
     TRUE ~ nest_mat_type)
     ) %>%
   
+  mutate(diet == case_when(
+    diet == "Beetle larva + Caterpillars" ~ "Beetle larve",
+    TRUE ~ diet)
+  ) %>%
+  
   # coerce into factor variables
   mutate(
     
