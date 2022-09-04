@@ -919,7 +919,7 @@ RLQ_500_plot <- RLQ_500_load %>%
 ggsave(
   plot = RLQ_250_load, 
   filename = here(
-    "output/figures/main", 
+    "output", "results",
     "Xie_et_al-2021-Figure5-JAE.png"),
   device = "png",
   height = 8, 
@@ -930,7 +930,7 @@ ggsave(
 ggsave(
   plot = L_250_load, 
   filename = here(
-    "output/figures/main", 
+    "output", "results", 
     "Xie_et_al-2021-Figure6-JAE.png"),
   device = "png",
   height = 10, 
@@ -943,7 +943,7 @@ ggsave(
 ggsave(
   plot = scree, 
   filename = here(
-    "output/figures/supp", 
+    "output", "data_appendix_output", 
     "Xie_et_al-2021-FigureS8-JAE.png"),
   device = "png",
   height = 5, 
@@ -954,7 +954,7 @@ ggsave(
 ggsave(
   plot = RLQ_250_plot, 
   filename = here(
-    "output/figures/supp", 
+    "output", "data_appendix_output", 
     "Xie_et_al-2021-FigureS9-JAE.png"
     ),
   device = "png",
@@ -966,7 +966,7 @@ ggsave(
 ggsave(
   plot = R_500_load, 
   filename = here(
-    "output/figures/supp", 
+    "output", "data_appendix_output",  
     "Xie_et_al-2021-FigureS10-JAE.png"
   ),
   device = "png",
@@ -978,7 +978,7 @@ ggsave(
 ggsave(
   plot = RLQ_500_plot, 
   filename = here(
-    "output/figures/supp", 
+    "output", "data_appendix_output",  
     "Xie_et_al-2021-FigureS11-JAE.png"),
   device = "png",
   height = 8, 
@@ -989,7 +989,7 @@ ggsave(
 ggsave(
   plot = L_500_load, 
   filename = here(
-    "output/figures/supp", 
+    "output", "data_appendix_output", 
     "Xie_et_al-2021-FigureS12-JAE.png"),
   device = "png",
   height = 10, 
