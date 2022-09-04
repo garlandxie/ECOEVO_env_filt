@@ -40,6 +40,8 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
 
 ## Instructions for reproducing the results
 
+**Important note:** one of our datasets (i.e., site information) contains sensitive information regarding the latitude and longitude of private households. For this reason, we have not made this dataset available for public use. In addition, this data is of minimal importance for reproducing most of statistical analyses (with the exception of reproducing the spatial autocorrelation tests and maps). If necessary, please contact the corresponding author, Garland Xie (garlandxie@gmail.com) to access this particular dataset. 
+
 To use the code in this repository to reproduce the manuscript's results,
 please follow the following steps:
 1. `git clone` this repository or download it as a zip folder
