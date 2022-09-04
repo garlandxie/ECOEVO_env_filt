@@ -735,134 +735,109 @@ RLQ_250_plot <- RLQ_250_load %>%
 RLQ_500_load <- RLQ_500$c1 %>%
   rownames_to_column(var = "traits")%>%
   select(traits, CS1) %>%
-   # obtain "trait" category 
-   # i.e., nesting material, primary diet, specialization, trophic level
-   # i.e., numbering of nesting materials, native status
-   mutate(
-     nest_cat = case_when(
-       str_detect(traits, pattern = "body")   ~ "Body Size", 
-       str_detect(traits, pattern = "nesti.") ~ "Nesting Material",
-       str_detect(traits, pattern = "prima.") ~ "Diet", 
-       str_detect(traits, pattern = "speci.") ~ "Speciialization",
-       str_detect(traits, pattern = "troph.") ~ "Trophic Rank", 
-       str_detect(traits, pattern = "nativ.") ~ "Status", 
-       str_detect(traits, pattern = "num.n.") ~ "Number of Nesting Matierials Collected",
-       TRUE ~ traits
-     ), 
-     
-     nest_cat = str_wrap(nest_cat, width = 10)
-     
-   ) %>%
-   
-   # group into sections by trait category 
-   # then order by important score within each group
-   # (instead of all results being globally ordered by important score)
-   group_by(nest_cat) %>%
-   arrange(nest_cat, CS1) %>%
-   
-   mutate(
-     trait = as.character(traits), 
-     taxon = case_when(
-       
-       # Nesting material preference
-       traits == "nesti.Nest.tube.scrapings"     ~ "Bees",
-       traits == "nesti.Leaf.hair"               ~ "Bees", 
-       traits == "nesti.Mud"                     ~ "Bees",
-       traits == "nesti.Resin"                   ~ "Both",
-       traits == "nesti.Leaf.pulp"               ~ "Bees",
-       traits == "nesti.Leaf.cut"                ~ "Bees",
-       traits == "nesti.Secretions"              ~ "Both", 
-       traits == "nesti.Grass"                   ~ "Wasps",
-       
-       # Body size
-       traits == "body_size"                     ~ "Both",
-       
-       # Origin
-       traits == "nativ.Native"                  ~ "Both",
-       traits == "nativ.Non.Native"              ~ "Both",
-       
-       # Diet
-       traits == "prima.Aphids"                  ~ "Wasps",
-       traits == "prima.Beetle.larva"            ~ "Wasps",
-       traits == "prima.Caterpillars"            ~ "Wasps",
-       traits == "prima.Pollen"                  ~ "Bees",
-       traits == "prima.Single.Spider"           ~ "Wasps",
-       traits == "prima.Spiders"                 ~ "Wasps",
-       traits == "prima.Tree.crickets"           ~ "Wasps",
-       
-       # Specialization
-       traits == "speci.Family"                 ~ "Both",
-       traits == "speci.Order"                  ~ "Both",
-       traits == "speci.Multi.Order"            ~ "Both",
-       
-       # Trophic level
-       traits == "troph.First"                  ~ "Bees",
-       traits == "troph.Second"                 ~ "Wasps",
-       traits == "troph.Third"                  ~ "Wasps",
-       
-       # Number of nesting materials
-       traits == "num_n.Single"                 ~ "Both",
-       traits == "num_n.Multi"                  ~ "Both", 
-       traits == "num_n.None"                   ~ "Both",
-       
-       TRUE ~ traits)
-     
-   ) %>%
-   
-   mutate(traits = case_when(
-     
-     # Nesting material preference
-     traits == "nesti.Nest.tube.scrapings"     ~ "Scrapings",
-     traits == "nesti.Leaf.hair"               ~ "Leaf hair", 
-     traits == "nesti.Mud"                     ~ "Mud",
-     traits == "nesti.Resin"                   ~ "Resin",
-     traits == "nesti.Leaf.pulp"               ~ "Pulp",
-     traits == "nesti.Leaf.cut"                ~ "Leaf cut",
-     traits == "nesti.Secretions"              ~ "Secretions", 
-     traits == "nesti.Grass"                   ~ "Grass",
-     
-     # Body size
-     traits == "body_size"                     ~ "ITD",
-     
-     # Origin
-     traits == "nativ.Native"                  ~ "Native",
-     traits == "nativ.Non.Native"              ~ "Exotic",
-     
-     # Diet
-     traits == "prima.Pollen"                  ~ "Pollen",
-     traits == "prima.Caterpillars"            ~ "Caterpillars",
-     traits == "prima.Beetle.larva"            ~ "Beetle larvae",
-     traits == "prima.Single.Spider"           ~ "Single Spider", 
-     traits == "prima.Tree.crickets"           ~ "Tree crickets",
-     traits == "prima.Aphids"                  ~ "Aphids",
-     traits == "prima.Spiders"                 ~ "Spiders",
-     
-     # Specialization
-     traits == "speci.Multi.Order"             ~ "Multi-Order",
-     traits == "speci.Family"                  ~ "Family",
-     traits == "speci.Order"                   ~ "Order",
-     
-     # Trophic level
-     traits == "troph.Second"                  ~ "Second",
-     traits == "troph.Third"                   ~ "Third",
-     traits == "troph.First"                   ~ "First",
-     
-     # Number of nesting materials
-     traits == "num_n.Single"                 ~ "Single",
-     traits == "num_n.Multi"                  ~ "Multiple", 
-     traits == "num_n.None"                   ~ "None",
-     
-     TRUE ~ traits)
-   ) 
+  
+  mutate(
+    traits = as.character(traits), 
+    taxon = case_when(
+      
+      # Nesting material preference
+      traits == "nest_.Nest.tube.scrapings"     ~ "Bees",
+      traits == "nest_.Leaf.hair"               ~ "Bees", 
+      traits == "nest_.Mud"                     ~ "Bees",
+      traits == "nest_.Resin"                   ~ "Both",
+      traits == "nest_.Leaf.pulp"               ~ "Bees",
+      traits == "nest_.Leaf.cut"                ~ "Bees",
+      traits == "nest_.Secretions"              ~ "Both", 
+      traits == "nest_.Grass"                   ~ "Wasps",
+      
+      # Body size
+      traits == "its"                           ~ "Both",
+      
+      # Origin
+      traits == "origi.Native"                  ~ "Both",
+      traits == "origi.Non.native"              ~ "Both",
+      
+      # Diet
+      traits == "diet.Aphids"                  ~ "Wasps",
+      traits == "diet.Beetle.larva"            ~ "Wasps",
+      traits == "diet.Caterpillars"            ~ "Wasps",
+      traits == "diet.Pollen"                  ~ "Bees",
+      traits == "diet.Single.spider"           ~ "Wasps",
+      traits == "diet.Spiders"                 ~ "Wasps",
+      traits == "diet.Tree.crickets"           ~ "Wasps",
+      
+      # Specialization
+      traits == "speci.Family"                 ~ "Both",
+      traits == "speci.Order"                  ~ "Both",
+      traits == "speci.Multi.Order"            ~ "Both",
+      
+      # Trophic level
+      traits == "rank.1st"                     ~ "Bees",
+      traits == "rank.2nd"                     ~ "Wasps",
+      traits == "rank.3rd"                     ~ "Wasps",
+      
+      # Number of nesting materials
+      traits == "num_n.Single"                 ~ "Both",
+      traits == "num_n.Multi"                  ~ "Both", 
+      traits == "num_n.None"                   ~ "Both",
+      
+      TRUE ~ traits)
+    
+  ) %>%
+  
+  mutate(traits = case_when(
+    
+    # Nesting material preference
+    traits == "nest_.Nest.tube.scrapings"     ~ "Nest (Scrapings)",
+    traits == "nest_.Leaf.hair"               ~ "Nest (Leaf hair)", 
+    traits == "nest_.Mud"                     ~ "Nest (Mud)",
+    traits == "nest_.Resin"                   ~ "Nest (Resin)",
+    traits == "nest_.Leaf.pulp"               ~ "Nest (Pulp)",
+    traits == "nest_.Leaf.cut"                ~ "Nest (Leaf cut)",
+    traits == "nest_.Secretions"              ~ "Nest (Secretions)", 
+    traits == "nest_.Grass"                   ~ "Nest (Grass)",
+    
+    # Body size
+    traits == "its"                           ~ "Body size (ITD)",
+    
+    # Origin
+    traits == "origi.Native"                  ~ "Native Status",
+    traits == "origi.Non.native"              ~ "Exotic Status",
+    
+    # Diet
+    traits == "diet.Pollen"                  ~ "Diet (Pollen)",
+    traits == "diet.Caterpillars"            ~ "Diet (Caterpillars)",
+    traits == "diet.Beetle.larva"            ~ "Diet (Beetle larvae)",
+    traits == "diet.Single.spider"           ~ "Diet (Single Spider)", 
+    traits == "diet.Tree.crickets"           ~ "Diet (Tree crickets)",
+    traits == "diet.Aphids"                  ~ "Diet (Aphids)",
+    traits == "diet.Spiders"                 ~ "Diet (Spiders)",
+    
+    # Specialization
+    traits == "speci.Multi.Order"             ~ "Specialization (Multi-Order)",
+    traits == "speci.Family"                  ~ "Specialization (Family)",
+    traits == "speci.Order"                   ~ "Specialization (Order)",
+    
+    # Trophic level
+    traits == "rank.2nd"                     ~ "Trophic Rank (Second)",
+    traits == "rank.3rd"                     ~ "Trophic Rank (Third)",
+    traits == "rank.1st"                     ~ "Trophic Rank (First)",
+    
+    # Number of nesting materials
+    traits == "num_n.Single"                 ~ "Nesting Material Type Collected (Single)",
+    traits == "num_n.Multi"                  ~ "Nesting Material Type (Multiple)", 
+    traits == "num_n.None"                   ~ "Nesting Material Type (None)",
+    
+    TRUE ~ traits)
+  ) 
 
-level_order_500 <- RLQ_500_load$traits
 
 RLQ_500_plot <- RLQ_500_load %>%
-  ggplot(aes(x = CS1, y = factor(traits, levels = level_order_500))) + 
+  ggplot(aes(x = CS1, y = traits %>% fct_reorder(CS1))) + 
   geom_point(
     aes(shape = factor(taxon, levels = c("Bees", "Wasps", "Both"))), 
-    size = 2.5
-    ) +
+    size = 2
+  ) +
   geom_segment(
     aes(
       y    = traits, 
@@ -871,28 +846,49 @@ RLQ_500_plot <- RLQ_500_load %>%
       xend = CS1
     ), 
     alpha = 0.5) + 
+  xlim(-6, 6) + 
   geom_vline(xintercept = 0, linetype = "dashed") + 
-  
-  xlim(-7, 7) +   
-  labs(title = "500 m spatial scale",
-       y = NULL,
-       x = "Relative importance in trait scores") + 
   scale_shape_discrete(name = "Taxon") + 
-  facet_wrap(~nest_cat, 
-             ncol = 1, nrow = 7, 
-             scales = "free", 
-             strip.position = "left"
-  ) +
   labs(title = "500 m spatial scale",
        y = NULL,
        x = "Relative importance in trait scores") + 
   theme_bw() + 
   theme(
     strip.background = element_blank(), 
-    strip.placement = "outside"
-  )
+    strip.placement = "outside",
+    plot.margin = unit(c(5, 5, 5, 5), "lines")
+  ) + 
+  annotation_custom(
+    more_urb,
+    ymin = -3,
+    ymax = -3,
+    xmin = 3,
+    xmax = 3
+  ) + 
+  annotation_custom(
+    less_urb,
+    ymin = -3,
+    ymax = -3,
+    xmin = -3,
+    xmax = -3
+  ) + 
+  annotation_custom(
+    less_urb_arrow,
+    ymin = -3,
+    ymax = -3,
+    xmin = -2,
+    xmax = 0
+  ) +
+  annotation_custom(
+    more_urb_arrow,
+    ymin = -3,
+    ymax = -3,
+    xmin = 2,
+    xmax = 0
+  ) + 
+  coord_cartesian(clip = "off") 
 
- 
+
 # Other analyses ---------------------------------------------------------------
 
 # 250 m spatial scale
