@@ -52,6 +52,24 @@ traits_tidy <- traits %>%
     TRUE ~ nest_mat_type)
     ) %>%
   
+  mutate(specialization = case_when(
+    
+    # family
+    specialization == "Family (Asteraceae)"          ~ "Family", 
+    specialization == "Family (Chrysomelidae)"       ~ "Family",
+    specialization == "Family (Aphididae)"           ~ "Family",
+    specialization == "Family (Campanulaceae)"       ~ "Family",
+    specialization == "Family (Aphididae)"           ~ "Family", 
+    
+    # order 
+    
+    specialization == "Order (Lepidoptera)" ~ "Order",
+    specialization == "Order (Araneae)" ~ "Order",
+    specialization == "Multi-Order (Coleoptera, Lepidoptera)" ~ "Multi-Order",
+    
+    TRUE ~ specialization)
+    ) %>%
+   
   # coerce into factor variables
   mutate(
     
@@ -63,6 +81,7 @@ traits_tidy <- traits %>%
     rank                = factor(rank)
     
     ) %>%
+  
   
   # change to numeric values
   mutate(its = as.numeric(its)) %>%
