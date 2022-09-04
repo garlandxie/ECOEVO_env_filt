@@ -36,27 +36,27 @@ library(opendatatoronto) # for reading the TO boudnary shp file
 library(readxl)          # for reading excel files
 
 # site -------------------------------------------------------------------------
-site <- read_excel(
-  here("data/original", 
-        "site_jsm_edits_Aug10_2021.xlsx"
+site <- read.csv(
+  here("data", "input_data", 
+        "site_data.csv"
        )
   )
 
 # ses mfd
 comm <- read.csv(
-  here("data/final", 
+  here("data", "analysis_data", 
        "comm_matrix_B.csv"),
   row.names = 1
   )
 
 # land use 
 l_250 <- read.csv(
-  here("data/working", 
+  here("data", "intermediate_data",
        "land_use_250.csv")
   )
 
 l_500 <- read.csv(
-  here("data/working", 
+  here("data", "intermediate_data", 
        "land_use_500.csv")
   )
 
@@ -311,7 +311,7 @@ tidy_500 <- tidy_500 %>%
 ggsave(
   plot = lc_map_250, 
   here(
-  "output/figures/main", 
+  "output", "results", 
   "Xie_et_al-2021-Figure2-JAE.png"
   ),
   device = "png",
@@ -322,7 +322,7 @@ ggsave(
 ggsave(
   plot = lc_map_500, 
   here(
-    "output/figures/supp", 
+    "output", "data_appendix_output", 
     "Xie_et_al-2021-FigureS2-JAE.png"
   ),
   device = "png",
@@ -333,7 +333,7 @@ ggsave(
 ggsave(
   plot = ugs_map_250, 
   here(
-    "output/figures/supp", 
+    "output", "data_appendix_output",
     "Xie_et_al-2021-FigureS1-JAE.png"
   ),
   device = "png",
