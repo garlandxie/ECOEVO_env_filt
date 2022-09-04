@@ -99,13 +99,75 @@ broods <- int_tidy %>%
   pivot_wider(names_from = lower_species, values_from = total_alive) %>%
   mutate(across(everything(), ~replace_na(., 0))) %>%
   column_to_rownames(var = "id")
-   
+
+# Figure S3: histograms for abundance -----------------------------------------------
+
+(hist_bees_ab <- int_tidy %>%
+   filter(taxa_ls == "Bee", id %in% all_years) %>%
+   group_by(id, year) %>%
+   summarize(sum_broods = sum(no_broodcells)) %>%
+   ggplot(aes(x = sum_broods)) + 
+   geom_histogram(binwidth = 1) + 
+   ylim(0, 10) + 
+   facet_wrap(~year) + 
+   labs(
+     title = "A)",
+     x = "Number of completed brood cells (bees)",
+     y = NULL
+   ) + 
+   theme_bw() 
+)
+
+(hist_wasp_ab <- int_tidy %>%
+    filter(taxa_ls == "Wasp", id %in% all_years) %>%
+    group_by(id, year) %>%
+    summarize(sum_broods = sum(no_broodcells)) %>%
+    ggplot(aes(x = sum_broods)) + 
+    geom_histogram(binwidth = 1) + 
+    facet_wrap(~year) + 
+    ylim(0, 10) + 
+    labs(
+      title = "B)",
+      x = "Number of completed brood cells (wasps)",
+      y = NULL) + 
+    theme_bw() 
+)
+
+(hist_total_ab <- int_tidy %>%
+    filter(id %in% all_years) %>%
+    group_by(id, year) %>%
+    summarize(sum_broods = sum(no_broodcells)) %>%
+    ggplot(aes(x = sum_broods)) + 
+    geom_histogram(binwidth = 1) + 
+    facet_wrap(~year) + 
+    ylim(0, 10) + 
+    labs(
+      title = "C)",
+      x = "Number of completed brood cells",
+      y = NULL) + 
+    theme_bw() 
+)
+
+# multi-panel histograms
+(hist_ab <- hist_bees_ab / hist_wasp_ab / hist_total_ab)
+
 # save to disk -----------------------------------------------------------------
+
+ggsave(
+  plot = hist_ab, 
+  filename = here(
+    "output", "data_appendix_output", 
+    "Xie_et_al-2021-FigureS3-JAE.png"
+  ),
+  device = "png", 
+  height = 5, 
+  width  = 5
+)
 
 write.csv(
   broods, 
   file = here(
-    "data/analysis_data", 
+    "data", "analysis_data", 
     "comm_matrix_B.csv"
     )
   )
