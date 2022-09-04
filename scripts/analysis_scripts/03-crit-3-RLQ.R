@@ -917,7 +917,7 @@ RLQ_500_plot <- RLQ_500_load %>%
 
 # Figure 5
 ggsave(
-  plot = RLQ_250_load, 
+  plot = RLQ_250_plot, 
   filename = here(
     "output", "results",
     "Xie_et_al-2021-Figure5-JAE.png"),
@@ -928,7 +928,7 @@ ggsave(
 
 # Figure 6
 ggsave(
-  plot = L_250_load, 
+  plot = L_250_plot, 
   filename = here(
     "output", "results", 
     "Xie_et_al-2021-Figure6-JAE.png"),
@@ -952,14 +952,14 @@ ggsave(
 
 # Figure S9
 ggsave(
-  plot = RLQ_250_plot, 
+  plot = R_250_load, 
   filename = here(
     "output", "data_appendix_output", 
     "Xie_et_al-2021-FigureS9-JAE.png"
     ),
   device = "png",
-  height = 8, 
-  width = 5
+  height = 5, 
+  width = 8
 )
 
 # Figure S10
@@ -982,7 +982,7 @@ ggsave(
     "Xie_et_al-2021-FigureS11-JAE.png"),
   device = "png",
   height = 8, 
-  width = 5
+  width = 8
 )
 
 # Figure S12
