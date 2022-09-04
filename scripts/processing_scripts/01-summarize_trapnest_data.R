@@ -151,7 +151,80 @@ broods <- int_tidy %>%
 # multi-panel histograms
 (hist_ab <- hist_bees_ab / hist_wasp_ab / hist_total_ab)
 
+# Figure S4: histograms for species richness -----------------------------------
+
+(hist_sr_bees <- int_tidy %>%
+   filter(taxa_ls == "Bee", id %in% all_years) %>%
+   group_by(year, id) %>%
+   summarize(species_richness = length(unique(lower_species))) %>%
+   ggplot(aes(x = species_richness)) + 
+   geom_histogram(bins = 5, binwidth = 1) + 
+   ylim(0, 75) + 
+   facet_wrap(~year) + 
+   scale_x_continuous(
+     breaks = c(2,4,6,8)
+   ) +
+   labs(
+     title = "A)",
+     x = "Species richness (bees)",
+     y = NULL
+   ) + 
+   theme_bw()
+)
+
+(hist_sr_wasps <- int_tidy %>%
+    filter(taxa_ls == "Wasp", id %in% all_years) %>%
+    group_by(id, year) %>%
+    summarize(species_richness = length(unique(lower_species))) %>%
+    ggplot(aes(x = species_richness)) + 
+    geom_histogram(bins = 5, binwidth = 1) + 
+    ylim(0, 75) + 
+    facet_wrap(~year) + 
+    scale_x_continuous(
+      breaks = c(2,4,6,8)
+    ) + 
+    labs(
+      title = "B)",
+      x = "Species richness (wasps)",
+      y = NULL
+    ) + 
+    theme_bw()
+)
+
+(hist_sr_total <- int_tidy %>%
+    filter(id %in% all_years) %>%
+    group_by(id, year) %>%
+    summarize(species_richness = length(unique(lower_species))) %>%
+    ggplot(aes(x = species_richness)) + 
+    geom_histogram(bins =5, binwidth = 1) + 
+    ylim(0, 75) + 
+    facet_wrap(~year) +
+    scale_x_continuous(
+      breaks = c(2,4,6,8)
+    ) + 
+    labs(
+      title = "C)",
+      x = "Species richness (bees and wasps)",
+      y = NULL
+    ) + 
+    theme_bw()
+)
+
+# multi-panel figure
+(hist_SR <- hist_sr_bees / hist_sr_wasps / hist_sr_total)
+
 # save to disk -----------------------------------------------------------------
+
+ggsave(
+  plot = hist_SR, 
+  filename = here(
+    "output", "data_appendix_output", 
+    "Xie_et_al-2021-FigureS4-JAE.png"
+  ),
+  device = "png", 
+  height = 5, 
+  width  = 5
+)
 
 ggsave(
   plot = hist_ab, 
