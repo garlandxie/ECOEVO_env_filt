@@ -10,12 +10,4 @@ source(here("scripts", "processing_scripts", "03-clean_trait_data.R"))
 source(here("scripts", "analysis_scripts", "01-crit1_func_alpha.R"))
 source(here("scripts", "analysis_scripts", "02-crit2_func_alpha.R"))
 source(here("scripts", "analysis_scripts", "03-crit3_RLQ.R"))
-
-# data appendix scripts ----
-source(here("scripts", "data_appendix_scripts", "figure_S1_and_S2.R"))
-source(here("scripts", "data_appendix_scripts", "figure_S3.R"))
-source(here("scripts", "data_appendix_scripts", "figure_S4.R"))
-
-
-
-
+source(here("scripts", "analysis_scripts", "04_create_figure_S1_and_S2.R"))
