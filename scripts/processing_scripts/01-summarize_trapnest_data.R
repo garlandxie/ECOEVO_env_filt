@@ -51,7 +51,7 @@ int_tidy <- int_raw %>%
   filter(!is.na(id)) %>%
   
   # keep only species-level analyses
-  filter(lower_species != "Hylaeus_sp")
+  filter(species != "Hylaeus_sp")
 
 # get sites that outside the TO boundary
 outside_TO <- c(
@@ -93,10 +93,10 @@ int_raw %>%
 # aggregrated across all years (2011-2013)
 broods <- int_tidy %>%
   filter(id %in% all_years) %>%
-  group_by(id, lower_species) %>%
+  group_by(id, species) %>%
   summarize(total_alive = sum(no_broodcells)) %>%
   ungroup() %>%
-  pivot_wider(names_from = lower_species, values_from = total_alive) %>%
+  pivot_wider(names_from = species, values_from = total_alive) %>%
   mutate(across(everything(), ~replace_na(., 0))) %>%
   column_to_rownames(var = "id")
 
@@ -156,7 +156,7 @@ broods <- int_tidy %>%
 (hist_sr_bees <- int_tidy %>%
    filter(taxa_ls == "Bee", id %in% all_years) %>%
    group_by(year, id) %>%
-   summarize(species_richness = length(unique(lower_species))) %>%
+   summarize(species_richness = length(unique(species))) %>%
    ggplot(aes(x = species_richness)) + 
    geom_histogram(bins = 5, binwidth = 1) + 
    ylim(0, 75) + 
@@ -175,7 +175,7 @@ broods <- int_tidy %>%
 (hist_sr_wasps <- int_tidy %>%
     filter(taxa_ls == "Wasp", id %in% all_years) %>%
     group_by(id, year) %>%
-    summarize(species_richness = length(unique(lower_species))) %>%
+    summarize(species_richness = length(unique(species))) %>%
     ggplot(aes(x = species_richness)) + 
     geom_histogram(bins = 5, binwidth = 1) + 
     ylim(0, 75) + 
@@ -194,7 +194,7 @@ broods <- int_tidy %>%
 (hist_sr_total <- int_tidy %>%
     filter(id %in% all_years) %>%
     group_by(id, year) %>%
-    summarize(species_richness = length(unique(lower_species))) %>%
+    summarize(species_richness = length(unique(species))) %>%
     ggplot(aes(x = species_richness)) + 
     geom_histogram(bins =5, binwidth = 1) + 
     ylim(0, 75) + 
