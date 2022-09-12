@@ -48,7 +48,12 @@ lc <- raster(
        "toronto_2007_landcover.img")
 )
 
-# abundance per site 
+# site data
+# this version of the site data requires latitude and longitude 
+# due to sensitive information, latitude and longitude are
+# not available for public use 
+# please contact the corresponding author (Garland Xie) to request this data
+# in order to run this R script
 site <- read.csv(
   here("data", "input_data", "site_data.csv")
 )
