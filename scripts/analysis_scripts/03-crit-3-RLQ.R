@@ -928,7 +928,7 @@ ggsave(
 
 # Figure 6
 ggsave(
-  plot = L_250_plot, 
+  plot = L_250_load, 
   filename = here(
     "output", "results", 
     "Xie_et_al-2021-Figure6-JAE.png"),
