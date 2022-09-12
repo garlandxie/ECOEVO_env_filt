@@ -40,6 +40,13 @@ library(emmeans)     # for doing pairwise comparisons
 # import -----------------------------------------------------------------------
 
 ## |- site ----
+# this version of the site data requires latitude and longitude 
+# for reproducing the spatial autocorrelation tests (see subheadings)
+
+# due to sensitive information, latitude and longitude are
+# not available for public use 
+# please contact the corresponding author (Garland Xie) to request this data
+# in order to run this R script
 site <- read.csv(
   here(
     "data", "input_data",
