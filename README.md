@@ -23,18 +23,18 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
 ## Folder structure 
 
 - Data
-  - [InputData](data/input_data): all raw data 
+  - [Input data](data/input_data): all raw data 
     - [Metadata](data/input_data/metadata): containing information about the sources and contents of InputData files
-  - [AnalysisData](data/analysis_data): data that is in a format suitable for the analysis   
-  - [IntermediateData](data/intermediate_data): partially processed data to use in subsequent data analyses
+  - [Analysis data](data/analysis_data): data that is in a format suitable for the analysis   
+  - [Intermediate data](data/intermediate_data): partially processed data to use in subsequent data analyses
   
 - Scripts
-  - [ProcessingScripts](scripts/processing_scripts): The commands in these scripts transform Input Data Files into Analysis Data Files
-  - [AnalysisScripts](scripts/analysis_scripts): The commands in these scripts generate main results in the manuscript
-  - [MasterScript](scripts/master_script.R): script that reproduces the Results of your project by executing all the other scripts, in the correct order
+  - [Processing scripts](scripts/processing_scripts): The commands in these scripts transform Input Data Files into Analysis Data Files
+  - [Analysis scripts](scripts/analysis_scripts): The commands in these scripts generate main results in the manuscript
+  - [Master script](scripts/master_script.R): script that reproduces the Results of your project by executing all the other scripts, in the correct order
 
 - Output
-  -  [DataAppendixOutput](output/data_appendix_output): contains files with figures, tables and other output presented in the Data Appendix
+  -  [Data appendix output](output/data_appendix_output): contains files with figures, tables and other output presented in the Data Appendix
   -  [Results](output/results): contains files with figures, tables, and other output presented in your report
 
 ## Instructions for reproducing the results
