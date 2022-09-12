@@ -704,15 +704,15 @@ RLQ_250_plot <- RLQ_250_load %>%
     more_urb,
     ymin = -3,
     ymax = -3,
-    xmin = 3,
-    xmax = 3
+    xmin = 4,
+    xmax = 4
   ) + 
   annotation_custom(
     less_urb,
     ymin = -3,
     ymax = -3,
-    xmin = -3,
-    xmax = -3
+    xmin = -4,
+    xmax = -4
   ) + 
   annotation_custom(
     less_urb_arrow,
@@ -862,28 +862,28 @@ RLQ_500_plot <- RLQ_500_load %>%
     more_urb,
     ymin = -3,
     ymax = -3,
-    xmin = 3,
-    xmax = 3
+    xmin = 4,
+    xmax = 4
   ) + 
   annotation_custom(
     less_urb,
     ymin = -3,
     ymax = -3,
-    xmin = -3,
-    xmax = -3
+    xmin = -4,
+    xmax = -4
   ) + 
   annotation_custom(
     less_urb_arrow,
     ymin = -3,
     ymax = -3,
-    xmin = -2,
+    xmin = -3,
     xmax = 0
   ) +
   annotation_custom(
     more_urb_arrow,
     ymin = -3,
     ymax = -3,
-    xmin = 2,
+    xmin = 3,
     xmax = 0
   ) + 
   coord_cartesian(clip = "off") 
@@ -982,7 +982,7 @@ ggsave(
     "Xie_et_al-2021-FigureS11-JAE.png"),
   device = "png",
   height = 8, 
-  width = 8
+  width = 12
 )
 
 # Figure S12
