@@ -36,6 +36,14 @@ library(opendatatoronto) # for reading the TO boudnary shp file
 library(readxl)          # for reading excel files
 
 # site -------------------------------------------------------------------------
+
+# this version of the site data requires latitude and longitude 
+# for creating Figures S1 and S2
+
+# due to sensitive information, latitude and longitude are
+# not available for public use 
+# please contact the corresponding author (Garland Xie) to request this data
+# in order to run this R script
 site <- read.csv(
   here("data", "input_data", 
         "site_data.csv"
