@@ -30,7 +30,6 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
   
 - Scripts
   - [ProcessingScripts](scripts/processing_scripts): The commands in these scripts transform Input Data Files into Analysis Data Files
-  - [DataAppendixScripts](scripts/data_appendix_scripts): The commands in theses scripts produce the figures, tables, and descriptive statistics in the Data Appendix
   - [AnalysisScripts](scripts/analysis_scripts): The commands in these scripts generate main results in the manuscript
   - [MasterScript](scripts/master_script.R): script that reproduces the Results of your project by executing all the other scripts, in the correct order
 
