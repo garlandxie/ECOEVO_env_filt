@@ -24,9 +24,9 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
 
 - Data
   - [Input data](data/input_data): all raw data 
-    - [site.csv](data/input_data/site_data.csv): raw data of site information (i.e., survey years and urban green space type). Geographic coordinates were removed for this version of the dataset due to sensitivity regarding private households. 
-    - [traits.csv](data/input_data/traits.csv): raw data of seven different ecological traits for a given wasp or bee taxa. 
-    - [trap_nest.csv](data/input_data/trap_nest.csv): raw data of completed, dead, or alive brood cells for each species within a given tube across three sampled years (2011, 2012, 2013)
+    - [site.csv](data/input_data/site_data.csv): site information (i.e., survey years and urban green space type). Geographic coordinates were removed for this version of the dataset due to sensitivity regarding private households. 
+    - [traits.csv](data/input_data/traits.csv): trait matrix of seven different ecological traits for a given wasp or bee taxa. 
+    - [trap_nest.csv](data/input_data/trap_nest.csv): data on completed, dead, or alive brood cells for each species within a given tube across three sampled years (2011, 2012, 2013)
     - [Metadata](data/input_data/metadata): containing information about the sources and contents of input data files
   - [Analysis data](data/analysis_data): data that is in a format suitable for the analysis   
   - [Intermediate data](data/intermediate_data): partially processed data to use in subsequent data analyses
