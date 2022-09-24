@@ -29,8 +29,14 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
     - [trap_nest.csv](data/input_data/trap_nest.csv): data on completed, dead, or alive brood cells for each species within a given tube across three sampled years (2011, 2012, 2013)
     - [metadata](data/input_data/metadata): containing information about the sources and contents of input data files
   - [Analysis data](data/analysis_data): data that is in a format suitable for the analysis   
+    - [comm_matrix_B.csv](data/analysis_data/comm_matrix_B.csv)
+    - [reg_mfd_250.csv](data/analysis_data/reg_mfd_250.csv)
+    - [reg_mfd_500.csv](data/analysis_data/reg_mfd_500.csv)
   - [Intermediate data](data/intermediate_data): partially processed data to use in subsequent data analyses
-  
+    - [land_use_250.csv](data/intermediate_data/land_use_250.csv)
+    - [land_use_500.csv](data/intermediate_data/land_use_500.csv)
+    - [ses_mdf.csv](data/intermediate_data/ses_mfd.csv)
+   
 - Scripts
   - [Processing scripts](scripts/processing_scripts): The commands in these scripts transform Input Data Files into Analysis Data Files
   - [Analysis scripts](scripts/analysis_scripts): The commands in these scripts generate main results in the manuscript
