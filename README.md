@@ -30,14 +30,19 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
     - [metadata](data/input_data/metadata): containing information about the sources and contents of input data files
    
   - [Analysis data](data/analysis_data): data that is in a format suitable for the analysis   
-    - [comm_matrix_B.csv](data/analysis_data/comm_matrix_B.csv)
-    - [reg_mfd_250.csv](data/analysis_data/reg_mfd_250.csv)
-    - [reg_mfd_500.csv](data/analysis_data/reg_mfd_500.csv)
+    - [comm_matrix_B.csv](data/analysis_data/comm_matrix_B.csv): a community data matrix with the rows as sites, columns as species, and cells as the 
+    number of completed brood cells (i.e., a measure of abundance)
+    - [reg_mfd_250.csv](data/analysis_data/reg_mfd_250.csv): a dataset with the independent and response variables at a 250m spatial scale required for a  
+    regression model to determine the second criterion of the Cadotte-Tucker (2017) framework 
+    - [reg_mfd_500.csv](data/analysis_data/reg_mfd_500.csv): a dataset with the independent and response variable at a 500m spatial scale required for a r 
+    regression model to determine the second criterion of the Cadotte-Tucker (2017) framework
    
   - [Intermediate data](data/intermediate_data): partially processed data to use in subsequent data analyses
-    - [land_use_250.csv](data/intermediate_data/land_use_250.csv)
-    - [land_use_500.csv](data/intermediate_data/land_use_500.csv)
-    - [ses_mdf.csv](data/intermediate_data/ses_mfd.csv)
+    - [land_use_250.csv](data/intermediate_data/land_use_250.csv): a dataset with specific landcover classes (e.g., tree, earth, grass, impervious surface) 
+    at a 250m spatial scale 
+    - [land_use_500.csv](data/intermediate_data/land_use_500.csv): a dataset with specific landcover classes (e.g., tree, earth, grass, impervious surface) 
+    at a 500m spatial scale 
+    - [ses_mdf.csv](data/intermediate_data/ses_mfd.csv): a dataset with the calculated standardized mean functional distances for each site 
    
 - Scripts
   - [Processing scripts](scripts/processing_scripts): The commands in these scripts transform Input Data Files into Analysis Data Files
