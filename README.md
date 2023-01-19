@@ -44,7 +44,7 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
     scale 
     - [ses_mdf.csv](data/intermediate_data/ses_mfd.csv): a dataset with the calculated standardized mean functional distances for each site 
     
- - Output
+- Output
   -  [Data appendix output](output/data_appendix_output): contains files with figures, tables and other output presented in the Data Appendix
   -  [Results](output/results): contains files with figures, tables, and other output presented in your report
    
