@@ -22,6 +22,9 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
 
 ## Folder structure 
 
+- Metadata
+  - [metadata.xlsx](metadata/metadata.xlsx): a metadata file on all datasets with listed variables, data type, range, and description
+
 - Data
   - [Input data](data/input_data): all raw data 
     - [site.csv](data/input_data/site_data.csv): site information (i.e., survey years and urban green space type). Geographic coordinates were removed for 
@@ -29,7 +32,6 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
     - [traits.csv](data/input_data/traits.csv): trait matrix of seven different ecological traits for a given wasp or bee taxa. 
     - [trap_nest.csv](data/input_data/trap_nest.csv): data on completed, dead, or alive brood cells for each species within a given tube across three 
       sampled years (2011, 2012, 2013)
-    - [metadata](data/input_data/metadata): containing information about the sources and contents of input data files
    
   - [Analysis data](data/analysis_data): data that is in a format suitable for the analysis   
     - [comm_matrix_B.csv](data/analysis_data/comm_matrix_B.csv): a community data matrix with the rows as sites, columns as species, and cells as the 
@@ -51,7 +53,14 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
    
 - Scripts
   - [Processing scripts](scripts/processing_scripts): The commands in these scripts transform Input Data Files into Analysis Data Files
+    - [01-summarize_trapnest_data.R](scripts/01-summarize_trapnest_data.R): a script to summarize the raw trap nest data 
+    - [02-calculate_land_cover_metrics.R](scripts/02-calculate_land_cover_metrics.R): a script to calculate land cover metrics
+    - [03-clean_trait_data.R](scripts/03-clean_trait_data.R): a script to clean trait data
   - [Analysis scripts](scripts/analysis_scripts): The commands in these scripts generate main results in the manuscript
+    - [01-crit1_func_alpha.R](scripts/analysis_scripts/01-crit1_func_alpha.R): a script to calculate statistics required for the first criterion of the Cadotte-Tucker   (2017) framework 
+    - [02-crit2_func_alpha.R](scripts/analysis_scripts/02-crit2_func_alpha.R): a script to calculate statistics required for the second criterion of the Cadotte-Tucker   (2017) framework 
+    - [03-crit-3-RLQ.R](scripts/analysis_scripts/03-crit-3-RLQ.R): a script to calculate statistics required for the second criterion of the Cadotte-Tucker   (2017) framework 
+    - [04_create_figure_S1_and_S2.R](scripts/analysis_scripts/04_create_figure_S1_and_S2.R): a script to create figures S1 and S2
   - [Master script](scripts/master_script.R): script that reproduces the Results of your project by executing all the other scripts, in the correct order
   
 - Renv
