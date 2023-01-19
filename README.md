@@ -22,6 +22,9 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
 
 ## Folder structure 
 
+- Metadata
+  - [metadata.xlsx](metadata/metadata.xlsx): a metadata file on all datasets with listed variables, data type, range, and description
+
 - Data
   - [Input data](data/input_data): all raw data 
     - [site.csv](data/input_data/site_data.csv): site information (i.e., survey years and urban green space type). Geographic coordinates were removed for 
@@ -29,7 +32,6 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
     - [traits.csv](data/input_data/traits.csv): trait matrix of seven different ecological traits for a given wasp or bee taxa. 
     - [trap_nest.csv](data/input_data/trap_nest.csv): data on completed, dead, or alive brood cells for each species within a given tube across three 
       sampled years (2011, 2012, 2013)
-    - [metadata](data/input_data/metadata): containing information about the sources and contents of input data files
    
   - [Analysis data](data/analysis_data): data that is in a format suitable for the analysis   
     - [comm_matrix_B.csv](data/analysis_data/comm_matrix_B.csv): a community data matrix with the rows as sites, columns as species, and cells as the 
