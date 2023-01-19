@@ -38,10 +38,10 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
     regression model to determine the second criterion of the Cadotte-Tucker (2017) framework
    
   - [Intermediate data](data/intermediate_data): partially processed data to use in subsequent data analyses
-    - [land_use_250.csv](data/intermediate_data/land_use_250.csv): a dataset with specific landcover classes (e.g., tree, earth, grass, impervious surface) 
-    at a 250m spatial scale 
-    - [land_use_500.csv](data/intermediate_data/land_use_500.csv): a dataset with specific landcover classes (e.g., tree, earth, grass, impervious surface) 
-    at a 500m spatial scale 
+    - [land_use_250.csv](data/intermediate_data/land_use_250.csv): a dataset with specific landcover classes (e.g.,impervious surface at a 250m spatial 
+    scale 
+    - [land_use_500.csv](data/intermediate_data/land_use_500.csv): a dataset with specific landcover classes (e.g.,impervious surface) at a 500m spatial 
+    scale 
     - [ses_mdf.csv](data/intermediate_data/ses_mfd.csv): a dataset with the calculated standardized mean functional distances for each site 
    
 - Scripts
@@ -52,6 +52,11 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
 - Output
   -  [Data appendix output](output/data_appendix_output): contains files with figures, tables and other output presented in the Data Appendix
   -  [Results](output/results): contains files with figures, tables, and other output presented in your report
+  
+- Renv
+  - [.gitignore](renv/.gitignore)
+  - [activate.R](renv/activate.R)
+  - [settings.dcf](renv/settings.dcf)
 
 ## Instructions for reproducing the results
 
