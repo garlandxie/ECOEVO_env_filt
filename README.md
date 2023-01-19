@@ -24,9 +24,11 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
 
 - Data
   - [Input data](data/input_data): all raw data 
-    - [site.csv](data/input_data/site_data.csv): site information (i.e., survey years and urban green space type). Geographic coordinates were removed for this version of the dataset due to sensitivity regarding private households. 
+    - [site.csv](data/input_data/site_data.csv): site information (i.e., survey years and urban green space type). Geographic coordinates were removed for 
+     this version of the dataset due to sensitivity regarding private households. 
     - [traits.csv](data/input_data/traits.csv): trait matrix of seven different ecological traits for a given wasp or bee taxa. 
-    - [trap_nest.csv](data/input_data/trap_nest.csv): data on completed, dead, or alive brood cells for each species within a given tube across three sampled years (2011, 2012, 2013)
+    - [trap_nest.csv](data/input_data/trap_nest.csv): data on completed, dead, or alive brood cells for each species within a given tube across three 
+      sampled years (2011, 2012, 2013)
     - [metadata](data/input_data/metadata): containing information about the sources and contents of input data files
    
   - [Analysis data](data/analysis_data): data that is in a format suitable for the analysis   
@@ -36,7 +38,6 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
     regression model to determine the second criterion of the Cadotte-Tucker (2017) framework 
     - [reg_mfd_500.csv](data/analysis_data/reg_mfd_500.csv): a dataset with the independent and response variable at a 500m spatial scale required for a r 
     regression model to determine the second criterion of the Cadotte-Tucker (2017) framework
-    - [traitstidy.csv](data/analysis_data/traitstidy.csv): a dataset with all seven ecological traits used in the study for each species 
    
   - [Intermediate data](data/intermediate_data): partially processed data to use in subsequent data analyses
     - [land_use_250.csv](data/intermediate_data/land_use_250.csv): a dataset with specific landcover classes (e.g.,impervious surface at a 250m spatial 
