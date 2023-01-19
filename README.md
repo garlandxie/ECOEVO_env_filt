@@ -38,9 +38,8 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
     number of completed brood cells (i.e., a measure of abundance)
     - [reg_mfd_250.csv](data/analysis_data/reg_mfd_250.csv): a dataset with the independent and response variables at a 250m spatial scale required for a  
     regression model to determine the second criterion of the Cadotte-Tucker (2017) framework 
-    - [reg_mfd_500.csv](data/analysis_data/reg_mfd_500.csv): a dataset with the independent and response variable at a 500m spatial scale required for a r 
+    - [reg_mfd_500.csv](data/analysis_data/reg_mfd_500.csv): a dataset with the independent and response variable at a 500m spatial scale required for a
     regression model to determine the second criterion of the Cadotte-Tucker (2017) framework
-   
   - [Intermediate data](data/intermediate_data): partially processed data to use in subsequent data analyses
     - [land_use_250.csv](data/intermediate_data/land_use_250.csv): a dataset with specific landcover classes (e.g.,impervious surface at a 250m spatial 
     scale 
@@ -57,8 +56,10 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
     - [02-calculate_land_cover_metrics.R](scripts/02-calculate_land_cover_metrics.R): a script to calculate land cover metrics
     - [03-clean_trait_data.R](scripts/03-clean_trait_data.R): a script to clean trait data
   - [Analysis scripts](scripts/analysis_scripts): The commands in these scripts generate main results in the manuscript
-    - [01-crit1_func_alpha.R](scripts/analysis_scripts/01-crit1_func_alpha.R): a script to calculate statistics required for the first criterion of the Cadotte-Tucker   (2017) framework 
-    - [02-crit2_func_alpha.R](scripts/analysis_scripts/02-crit2_func_alpha.R): a script to calculate statistics required for the second criterion of the Cadotte-Tucker   (2017) framework 
+    - [01-crit1_func_alpha.R](scripts/analysis_scripts/01-crit1_func_alpha.R): a script to calculate statistics required for the first criterion of the 
+    Cadotte-Tucker (2017) framework 
+    - [02-crit2_func_alpha.R](scripts/analysis_scripts/02-crit2_func_alpha.R): a script to calculate statistics required for the second criterion of the  
+    Cadotte-Tucker (2017) framework 
     - [03-crit-3-RLQ.R](scripts/analysis_scripts/03-crit-3-RLQ.R): a script to calculate statistics required for the second criterion of the Cadotte-Tucker   (2017) framework 
     - [04_create_figure_S1_and_S2.R](scripts/analysis_scripts/04_create_figure_S1_and_S2.R): a script to create figures S1 and S2
   - [Master script](scripts/master_script.R): script that reproduces the Results of your project by executing all the other scripts, in the correct order
