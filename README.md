@@ -8,7 +8,7 @@ Title: No evidence of environmental filtering of cavity-nesting solitary bees an
 
 Authors: Garland Xie, Nicholas Sookhan, Kelly A. Carscadden, and Scott MacIvor
 
-Accepted in Ecology and Evolution (ECE-2022-02-00197.R1)
+Accepted in Ecology and Evolution. DOI: 10.1002/ece3.9360. Link: https://onlinelibrary.wiley.com/doi/full/10.1002/ece3.9360
 
 ## Abstract
 
