@@ -43,15 +43,15 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
     - [land_use_500.csv](data/intermediate_data/land_use_500.csv): a dataset with specific landcover classes (e.g.,impervious surface) at a 500m spatial 
     scale 
     - [ses_mdf.csv](data/intermediate_data/ses_mfd.csv): a dataset with the calculated standardized mean functional distances for each site 
+    
+ - Output
+  -  [Data appendix output](output/data_appendix_output): contains files with figures, tables and other output presented in the Data Appendix
+  -  [Results](output/results): contains files with figures, tables, and other output presented in your report
    
 - Scripts
   - [Processing scripts](scripts/processing_scripts): The commands in these scripts transform Input Data Files into Analysis Data Files
   - [Analysis scripts](scripts/analysis_scripts): The commands in these scripts generate main results in the manuscript
   - [Master script](scripts/master_script.R): script that reproduces the Results of your project by executing all the other scripts, in the correct order
-
-- Output
-  -  [Data appendix output](output/data_appendix_output): contains files with figures, tables and other output presented in the Data Appendix
-  -  [Results](output/results): contains files with figures, tables, and other output presented in your report
   
 - Renv
   - [.gitignore](renv/.gitignore)
