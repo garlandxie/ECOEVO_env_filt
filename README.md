@@ -36,6 +36,7 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
     regression model to determine the second criterion of the Cadotte-Tucker (2017) framework 
     - [reg_mfd_500.csv](data/analysis_data/reg_mfd_500.csv): a dataset with the independent and response variable at a 500m spatial scale required for a r 
     regression model to determine the second criterion of the Cadotte-Tucker (2017) framework
+    - [traitstidy.csv](data/analysis_data/traitstidy.csv): a dataset with all seven ecological traits used in the study for each species 
    
   - [Intermediate data](data/intermediate_data): partially processed data to use in subsequent data analyses
     - [land_use_250.csv](data/intermediate_data/land_use_250.csv): a dataset with specific landcover classes (e.g.,impervious surface at a 250m spatial 
