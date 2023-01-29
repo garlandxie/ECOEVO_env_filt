@@ -45,10 +45,6 @@ The developer (Garland Xie) typically writes and runs the code using macOS Big S
     scale 
     - [land_use_500.csv](data/intermediate_data/land_use_500.csv): a dataset with specific landcover classes (e.g.,impervious surface) at a 500m spatial 
     scale 
-    
-- Output
-  -  [Data appendix output](output/data_appendix_output): contains files with figures, tables and other output presented in the Data Appendix
-  -  [Results](output/results): contains files with figures, tables, and other output presented in your report
    
 - Scripts
   - [Processing scripts](scripts/processing_scripts): The commands in these scripts transform Input Data Files into Analysis Data Files
